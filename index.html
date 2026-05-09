@@ -84,6 +84,9 @@
 
     /* LINE BUTTON */
     .line-btn{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:7px 16px;background:#06C755;border-radius:20px;color:#fff;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+    .line-preview{margin-top:8px;padding:10px 12px;background:var(--surface2);border-radius:12px;}
+    .line-preview-name{font-size:10px;color:var(--text2);margin-bottom:5px;}
+    .line-preview-bubble{display:inline-block;background:#06C755;color:#fff;font-size:13px;line-height:1.55;padding:9px 13px;border-radius:14px 14px 3px 14px;max-width:90%;}
 
     /* CHIP GRID */
     .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px;}
@@ -716,7 +719,11 @@ function renderItem(item,sectionId='',isChip=false){
       <div class="item-main">
         <span class="item-label${item.checked?' chk':''}">${item.text}</span>
         ${item.hint?item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join(''):''}
-        ${item.lineMsg?`<a class="line-btn" href="line://msg/text/${encodeURIComponent(item.lineMsg)}" onclick="event.stopPropagation()">📨 LINEで送る</a>`:''}
+        ${item.lineMsg?`<div class="line-preview" onclick="event.stopPropagation()">
+          <div class="line-preview-name">📨 本部へ送信</div>
+          <div class="line-preview-bubble">${item.lineMsg}</div>
+        </div>
+        <a class="line-btn" href="line://msg/text/${encodeURIComponent(item.lineMsg)}" onclick="event.stopPropagation()">LINE で送る →</a>`:''}
       </div>
       ${del}
     </div>`;
