@@ -730,7 +730,6 @@ function renderItem(item,sectionId='',isChip=false){
         <span class="item-label${item.checked?' chk':''}">${item.icon?item.icon+' ':''}${item.text}</span>
         ${item.hint?item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join(''):''}
         ${item.lineMsg?`<div class="line-preview" onclick="event.stopPropagation()">
-          <div class="line-preview-name">📨 本部へ送信</div>
           <div class="line-preview-bubble">${item.lineMsg}</div>
         </div>
         <a class="line-btn" href="line://msg/text/${encodeURIComponent(item.lineMsg)}" onclick="event.stopPropagation()">LINE で送る →</a>`:''}
