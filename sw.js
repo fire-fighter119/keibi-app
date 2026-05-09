@@ -1,4 +1,4 @@
-const CACHE = 'keibi-v8';
+const CACHE = 'keibi-v9';
 const FILES = ['./index.html', './manifest.json', './icon.png', './icon.svg'];
 
 self.addEventListener('install', e => {
