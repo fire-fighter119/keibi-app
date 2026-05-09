@@ -93,8 +93,9 @@
     .sub.priority-report .sub-title{color:#FFE0A3;border-color:rgba(214,168,79,.36);background:rgba(214,168,79,.11);}
     .sub.stamp-complete{position:relative;border-radius:14px;background:rgba(34,197,94,.045);box-shadow:inset 0 0 0 1px rgba(34,197,94,.14);padding:8px 8px 2px;}
     .sub.stamp-complete::after{content:'完了';position:absolute;right:18px;top:50%;transform:translateY(-50%) rotate(-10deg);padding:8px 18px;border:3px double rgba(255,72,56,.88);border-radius:10px;color:#FF4B3E;background:rgba(55,10,8,.18);font-size:24px;font-weight:950;letter-spacing:4px;line-height:1;pointer-events:none;opacity:.9;box-shadow:0 8px 18px rgba(0,0,0,.18);text-shadow:1px 1px 0 rgba(80,0,0,.14);z-index:1;}
-    .sub-title{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:950;color:#FFE8A6;letter-spacing:0;margin:14px 0 10px;padding:10px 12px;border:1px solid rgba(244,199,106,.48);border-left:5px solid var(--accent2);border-radius:10px;background:linear-gradient(90deg,rgba(244,199,106,.18),rgba(36,56,106,.16));box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+    .sub-title{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:950;color:#FFF1B8;letter-spacing:0;margin:18px 0 12px;padding:12px 13px;border:1px solid rgba(244,199,106,.58);border-left:6px solid var(--accent2);border-radius:10px;background:linear-gradient(90deg,rgba(244,199,106,.24),rgba(36,56,106,.2));box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 8px 18px rgba(0,0,0,.16);}
     .sub-title::before{content:'◆';font-size:10px;color:var(--accent2);line-height:1;flex-shrink:0;}
+    .sub-help{margin:-4px 0 10px;padding:9px 11px;border-radius:9px;background:rgba(244,199,106,.08);border:1px solid rgba(244,199,106,.2);color:#FFE3A3;font-size:11.5px;line-height:1.55;overflow-wrap:anywhere;}
 
     /* ITEM */
     .item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.14);cursor:pointer;}
@@ -158,10 +159,10 @@
     .item.punch .item-label:not(.chk){color:#FF7A6E;font-weight:850;}
 
     /* CHIP GRID */
-    .chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 4px;max-width:100%;}
-    .chip{display:flex;align-items:center;justify-content:flex-start;gap:6px;min-width:0;padding:10px 7px;border-radius:12px;border:1px solid var(--soft-border);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));cursor:default;text-align:left;transition:all .15s;min-height:48px;user-select:none;-webkit-user-select:none;overflow:hidden;}
+    .chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0 4px;max-width:100%;}
+    .chip{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;padding:9px 5px;border-radius:12px;border:1px solid var(--soft-border);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));cursor:default;text-align:center;transition:all .15s;min-height:48px;user-select:none;-webkit-user-select:none;overflow:hidden;}
     .chip-icon{font-size:17px;line-height:1;flex-shrink:0;}
-    .chip-text{min-width:0;font-size:11px;color:var(--text2);line-height:1.35;word-break:break-word;overflow-wrap:anywhere;text-align:left;}
+    .chip-text{min-width:0;font-size:10.5px;color:var(--text2);line-height:1.25;word-break:break-word;overflow-wrap:anywhere;text-align:center;}
     .chip-sub{display:block;margin-top:2px;color:#D6A84F;font-size:10px;font-weight:800;}
     .chip.chk{background:var(--accent);border-color:var(--accent);}
     .chip.chk .chip-text{color:rgba(255,255,255,.85);}
@@ -246,12 +247,10 @@
       .card-title{font-size:14px;}
       .main{padding-left:8px;padding-right:8px;}
       .card-body{padding-left:12px;padding-right:12px;}
-      .chip{gap:4px;padding:9px 6px;}
-      .chip-text{font-size:10.5px;}
+      .sub-title{font-size:14px;padding:11px 12px;margin-top:16px;}
+      .chip{gap:3px;padding:8px 4px;}
+      .chip-text{font-size:10px;}
       .card.complete::after{font-size:25px;padding:9px 20px;letter-spacing:4px;}
-    }
-    @media (min-width:520px){
-      .chips{grid-template-columns:repeat(3,minmax(0,1fr));}
     }
   </style>
 </head>
@@ -524,16 +523,16 @@ const DEFAULT_SECTIONS = [
   {
     id:'patrol1',icon:'🔵',title:'1回目の巡回',time:'18:00',type:'simple',expanded:false,
     subsections:[
-      {id:'p1_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p1b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
-        {id:'p1_pich',text:'ピッチ（装備品）',icon:'phs'},
+      {id:'p1_bag',title:'〔持ち物〕',grid:true,hint:'入口看板：休日は設置済みなら不要。入口U字錠：警備室に回収されているときだけ持参。',items:[
+        {id:'p1b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
+        {id:'p1_pich',text:'ピッチ',icon:'phs',equipment:true},
         {id:'p1b2',text:'打刻機',icon:'⏱️'},
         {id:'p1b3',text:'懐中電灯',icon:'🔦'},
         {id:'p1b4',text:'チェックリスト',icon:'📋'},
         {id:'p1b5',text:'ペン',icon:'✏️'},
         {id:'p1b8',text:'自分の車の鍵',icon:'🚗'},
-        {id:'p1b6',text:'看板（監視カメラ作動中）',icon:'🪧',rare:true},
-        {id:'p1b7',text:'入口のU字ダイヤル錠（警備室に回収されているときのみ）',icon:'u-lock',rare:true},
+        {id:'p1b6',text:'入口看板',icon:'🪧',rare:true},
+        {id:'p1b7',text:'入口U字錠',icon:'u-lock',rare:true},
       ]},
       {id:'p1_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p1d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
@@ -551,8 +550,8 @@ const DEFAULT_SECTIONS = [
     id:'patrol2',icon:'🔵',title:'2回目の巡回',time:'20:00',type:'simple',expanded:false,
     subsections:[
       {id:'p2_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p2b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
-        {id:'p2b_pich',text:'ピッチ（装備品）',icon:'phs'},
+        {id:'p2b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
+        {id:'p2b_pich',text:'ピッチ',icon:'phs',equipment:true},
         {id:'p2b2',text:'打刻機',icon:'⏱️'},
         {id:'p2b3',text:'懐中電灯',icon:'🔦'},
         {id:'p2b4',text:'チェックリスト',icon:'📋'},
@@ -575,8 +574,8 @@ const DEFAULT_SECTIONS = [
     id:'patrol3',icon:'🔵',title:'3回目の巡回',time:'23:00',type:'simple',expanded:false,
     subsections:[
       {id:'p3_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p3b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
-        {id:'p3b_pich',text:'ピッチ（装備品）',icon:'phs'},
+        {id:'p3b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
+        {id:'p3b_pich',text:'ピッチ',icon:'phs',equipment:true},
         {id:'p3b2',text:'打刻機',icon:'⏱️'},
         {id:'p3b3',text:'懐中電灯',icon:'🔦'},
         {id:'p3b4',text:'チェックリスト',icon:'📋'},
@@ -599,8 +598,8 @@ const DEFAULT_SECTIONS = [
     id:'patrol4',icon:'⏰',title:'4回目の巡回',time:'1:30',type:'simple',expanded:false,
     subsections:[
       {id:'p4_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p4b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
-        {id:'p4b_pich',text:'ピッチ（装備品）',icon:'phs'},
+        {id:'p4b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
+        {id:'p4b_pich',text:'ピッチ',icon:'phs',equipment:true},
         {id:'p4b2',text:'打刻機',icon:'⏱️'},
         {id:'p4b3',text:'懐中電灯',icon:'🔦'},
         {id:'p4b4',text:'チェックリスト',icon:'📋'},
@@ -623,8 +622,8 @@ const DEFAULT_SECTIONS = [
     id:'patrol5',icon:'⏰',title:'5回目の巡回',time:'3:30',type:'simple',expanded:false,
     subsections:[
       {id:'p5_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p5b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
-        {id:'p5b_pich',text:'ピッチ（装備品）',icon:'phs'},
+        {id:'p5b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
+        {id:'p5b_pich',text:'ピッチ',icon:'phs',equipment:true},
         {id:'p5b2',text:'打刻機',icon:'⏱️'},
         {id:'p5b3',text:'懐中電灯',icon:'🔦'},
         {id:'p5b4',text:'チェックリスト',icon:'📋'},
@@ -649,8 +648,8 @@ const DEFAULT_SECTIONS = [
     holiday:{
       subsections:[
         {id:'p6h_bag',title:'〔持ち物〕',grid:true,items:[
-          {id:'p6hb1',text:'マスターキー2本（装備品）',icon:'🗝️'},
-          {id:'p6h_pich',text:'ピッチ（装備品）',icon:'phs'},
+          {id:'p6hb1',text:'マスターキー2本',icon:'🗝️',equipment:true},
+          {id:'p6h_pich',text:'ピッチ',icon:'phs',equipment:true},
           {id:'p6hb2',text:'打刻機',icon:'⏱️'},
           {id:'p6hb3',text:'懐中電灯',icon:'🔦'},
           {id:'p6hb4',text:'チェックリスト',icon:'📋'},
@@ -686,8 +685,8 @@ const DEFAULT_SECTIONS = [
     weekday:{
       subsections:[
         {id:'p6w_bag',title:'〔持ち物〕',grid:true,items:[
-          {id:'p6wb1',text:'マスターキー2本（装備品）',icon:'🗝️'},
-          {id:'p6w_pich',text:'ピッチ（装備品）',icon:'phs'},
+          {id:'p6wb1',text:'マスターキー2本',icon:'🗝️',equipment:true},
+          {id:'p6w_pich',text:'ピッチ',icon:'phs',equipment:true},
           {id:'p6wb2',text:'打刻機',icon:'⏱️'},
           {id:'p6wb3',text:'懐中電灯',icon:'🔦'},
           {id:'p6wb4',text:'チェックリスト',icon:'📋'},
@@ -873,7 +872,7 @@ function patchItems(currentItems, defaultItems){
   currentItems.forEach(item=>{
     const def = defaultsById.get(item.id);
     if(!def) return;
-    ['text','icon','hint','lineMsg','sharePhoto','danger','warn','safe','rare','tag','chips'].forEach(k=>{
+    ['text','icon','hint','lineMsg','sharePhoto','danger','warn','safe','rare','equipment','tag','chips'].forEach(k=>{
       if(def[k]!==undefined) item[k]=def[k];
       else delete item[k];
     });
@@ -1032,6 +1031,7 @@ function renderSubs(subs,secId,sectionComplete=false){
   return subs.map(sub=>`
     <div class="sub${isSubComplete(sub,sectionComplete)?' stamp-complete':''}${subClass(sub)}">
       ${sub.title?`<div class="sub-title">${sub.title}</div>`:''}
+      ${sub.hint?`<div class="sub-help">${sub.hint}</div>`:''}
       ${sub.grid
         ?`<div class="chips">${(sub.items||[]).map(i=>renderItem(i,secId,true)).join('')}</div>`
         :(sub.items||[]).map(i=>renderItem(i,secId)).join('')}
@@ -1089,9 +1089,9 @@ function renderBody(sec){
 
 function renderItem(item,sectionId='',isChip=false){
   if(isChip){
-    return `<div class="chip${item.rare?' rare':''}${item.text.includes('（装備品）')?' equipment':''}">
+    return `<div class="chip${item.rare?' rare':''}${(item.equipment||item.text.includes('（装備品）'))?' equipment':''}">
       <div class="chip-icon">${iconHtml(item.icon||'📦')}</div>
-      <div class="chip-text">${formatChipText(item.text)}</div>
+      <div class="chip-text">${formatChipText(item.text)}${item.equipment?'<span class="chip-sub">装備品</span>':''}</div>
     </div>`;
   }
   if(item.type==='label'){
