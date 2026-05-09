@@ -61,7 +61,7 @@
 
     /* SUBSECTION */
     .sub{margin-bottom:10px;}
-    .sub-title{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.4px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+    .sub-title{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.4px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
 
     /* ITEM */
     .item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;}
@@ -70,17 +70,17 @@
     .cb.chk{background:var(--accent);border-color:var(--accent);}
     .cb.chk::after{content:'✓';color:#fff;font-size:14px;font-weight:700;}
     .item-main{flex:1;min-width:0;}
-    .item-label{font-size:14px;line-height:1.4;transition:color .15s;}
+    .item-label{font-size:14px;line-height:1.5;transition:color .15s;}
     .item-label.chk{color:var(--text2);text-decoration:line-through;}
-    .item-hint{font-size:11px;color:var(--orange);padding-top:3px;line-height:1.4;}
+    .item-hint{font-size:12px;color:rgba(245,158,11,.75);padding-top:4px;padding-left:2px;line-height:1.5;}
     .item-note-btn{background:none;border:none;color:var(--text2);font-size:16px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.6;margin-top:-2px;}
     .item-note-btn.has-note{opacity:1;color:var(--orange);}
     .item-del{background:none;border:none;color:var(--red);font-size:20px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.7;margin-top:-3px;line-height:1;}
 
     /* NOTICE ITEM */
-    .item-notice{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:10px 14px;margin:6px 0;cursor:default;}
-    .item-notice-label{font-size:13px;font-weight:600;color:var(--orange);line-height:1.4;}
-    .item-notice-hint{font-size:11px;color:rgba(245,158,11,.8);padding-top:3px;line-height:1.4;}
+    .item-notice{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.35);border-radius:10px;padding:11px 14px;margin:8px 0;cursor:default;}
+    .item-notice-label{font-size:13px;font-weight:700;color:var(--orange);line-height:1.4;}
+    .item-notice-hint{font-size:12px;color:rgba(245,158,11,.75);padding-top:4px;line-height:1.5;}
 
     /* LINE BUTTON */
     .line-btn{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:7px 16px;background:#06C755;border-radius:20px;color:#fff;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
@@ -89,11 +89,14 @@
     .line-preview-bubble{display:inline-block;background:#06C755;color:#fff;font-size:13px;line-height:1.55;padding:9px 13px;border-radius:14px 14px 3px 14px;max-width:90%;}
 
     /* SECTION LABEL (within simple list) */
-    .item-section-label{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.5px;padding:12px 0 5px;border-top:1px solid var(--border);margin-top:4px;}
+    .item-section-label{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.5px;padding:14px 0 6px;border-top:1px solid var(--border);margin-top:8px;}
 
     /* WARN ITEM */
     .item.warn .cb:not(.chk){border-color:var(--orange);background:rgba(245,158,11,.08);}
     .item.warn .item-label:not(.chk){color:var(--orange);font-weight:700;}
+    .item.danger{background:rgba(239,68,68,.05);border-radius:8px;margin:2px -8px;padding:9px 8px;}
+    .item.danger .cb:not(.chk){border-color:var(--red);background:rgba(239,68,68,.1);}
+    .item.danger .item-label:not(.chk){color:var(--red);font-weight:700;}
 
     /* CHIP GRID */
     .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px;}
@@ -238,12 +241,12 @@
 // ═══════════════════════════════════════
 
 const DEFAULT_KICHA = [
-  {id:'ki1',text:'ピッチ転送を解除'},
-  {id:'ki2',text:'FAX転送を解除'},
-  {id:'ki3',text:'打刻機を打刻キーで開ける（2周回す）'},
-  {id:'ki4',text:'打刻記録を取り出しハサミでカット'},
-  {id:'ki5',text:'日報にのりで貼り付け'},
-  {id:'ki6',text:'新しい記録紙をセット・たるみを取る・打刻機を閉める'},
+  {id:'ki1',text:'ピッチ転送を解除',icon:'📞'},
+  {id:'ki2',text:'FAX転送を解除',icon:'📠'},
+  {id:'ki3',text:'打刻機を打刻キーで開ける（2周回す）',icon:'⏱️'},
+  {id:'ki4',text:'打刻記録を取り出しハサミでカット',icon:'✂️'},
+  {id:'ki5',text:'日報にのりで貼り付け',icon:'📄'},
+  {id:'ki6',text:'新しい記録紙をセット・たるみを取る・打刻機を閉める',icon:'🔄'},
 ];
 
 const DEFAULT_PATROL = [
@@ -284,17 +287,17 @@ const DEFAULT_SECTIONS = [
   {
     id:'arrival',icon:'🏁',title:'着替え・出勤準備',time:'17:15〜',type:'simple',expanded:false,
     items:[
-      {id:'ar1',text:'上番報告',hint:'本部にLINEで「恵下埋立地、服部です。上番します。よろしくお願いします。」と報告',lineMsg:'恵下埋立地、服部です。上番します。よろしくお願いします。'},
+      {id:'ar1',text:'上番報告',icon:'📱',hint:'本部にLINEで「恵下埋立地、服部です。上番します。よろしくお願いします。」と報告',lineMsg:'恵下埋立地、服部です。上番します。よろしくお願いします。'},
       {id:'ar2',text:'鍵・日報を受け取る',icon:'📥',hint:'制帽と名札を付ける\nノック＋「失礼します。警備につきます。」\n鍵2本あるか確認'},
       {id:'ar3',text:'前日までの日報を確認',icon:'🔍'},
       {id:'ar4',text:'月報記入',icon:'✏️'},
       {id:'ar5',text:'チェックリスト記入',icon:'✏️'},
       {id:'ar6',text:'日報（警備報告書）記入',icon:'✏️',hint:'天気を忘れない\n三井開発の来所・退所時刻を記入'},
-      {id:'ar8',text:'打刻機の準備',hint:'時刻を確認する\n大幅にずれていたら時刻調整・電池交換'},
-      {id:'ar9',text:'マスターキーを打刻機から外す',warn:true,hint:'必ず外すこと！打刻機に付けたまま巡回しない'},
-      {id:'ar10',text:'クマ鈴を打刻機から外す（任意）'},
-      {id:'ar11',text:'ピッチを携帯する',hint:'電源「入」にする\nロックをする'},
-      {id:'ar12',text:'備品の在庫確認',hint:'残りが少なくなっていれば本部へ報告'},
+      {id:'ar8',text:'打刻機の準備',icon:'⏱️',hint:'時刻を確認する\n大幅にずれていたら時刻調整・電池交換'},
+      {id:'ar9',text:'マスターキーを打刻機から外す',icon:'🗝️',danger:true,hint:'必ず外すこと！打刻機に付けたまま巡回しない'},
+      {id:'ar10',text:'クマ鈴を打刻機から外す（任意）',icon:'🔔'},
+      {id:'ar11',text:'ピッチを携帯する',icon:'📻',hint:'電源「入」にする\nロックをする'},
+      {id:'ar12',text:'備品の在庫確認',icon:'📦',hint:'残りが少なくなっていれば本部へ報告'},
       {id:'ar_key',type:'notice',text:'🔑 入口の鍵の場所を確認',hint:'警備室にある場合：退所後の最初の巡回で持って出て施錠'},
     ]
   },
@@ -322,7 +325,7 @@ const DEFAULT_SECTIONS = [
   },
   {
     id:'patrol1',icon:'🔵',title:'1回目の巡回',time:'18:00',type:'pattern',expanded:false,
-    selectedPattern:'holiday',
+    selectedPattern:'weekday',
     holiday:{
       subsections:[
         {id:'p1h_bag',title:'〔持ち物〕',grid:true,items:[
@@ -336,10 +339,10 @@ const DEFAULT_SECTIONS = [
           {id:'p1h8',text:'車の鍵',icon:'🚗'},
         ]},
         {id:'p1h_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-          {id:'p1h9',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p1h10',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-          {id:'p1h11',text:'警備室で打刻する'},
-          {id:'p1h12',text:'警備室の鍵を閉める'},
+          {id:'p1h9',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p1h10',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p1h11',text:'警備室で打刻する',icon:'⏱️'},
+          {id:'p1h12',text:'警備室の鍵を閉める',icon:'🔒'},
         ]}
       ]
     },
@@ -356,10 +359,10 @@ const DEFAULT_SECTIONS = [
           {id:'p1wb8',text:'車の鍵',icon:'🚗'},
         ]},
         {id:'p1w_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-          {id:'p1w1',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p1w2',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-          {id:'p1w3',text:'警備室で打刻する'},
-          {id:'p1w4',text:'警備室の鍵を閉める'},
+          {id:'p1w1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p1w2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p1w3',text:'警備室で打刻する',icon:'⏱️'},
+          {id:'p1w4',text:'警備室の鍵を閉める',icon:'🔒'},
         ]}
       ]
     }
@@ -376,10 +379,10 @@ const DEFAULT_SECTIONS = [
         {id:'p2b6',text:'車の鍵',icon:'🚗'},
       ]},
       {id:'p2_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-        {id:'p2d1',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p2d2',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-        {id:'p2d3',text:'警備室で打刻する'},
-        {id:'p2d4',text:'警備室の鍵を閉める'},
+        {id:'p2d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p2d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p2d3',text:'警備室で打刻する',icon:'⏱️'},
+        {id:'p2d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]}
     ]
   },
@@ -395,10 +398,10 @@ const DEFAULT_SECTIONS = [
         {id:'p3b6',text:'車の鍵',icon:'🚗'},
       ]},
       {id:'p3_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-        {id:'p3d1',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p3d2',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-        {id:'p3d3',text:'警備室で打刻する'},
-        {id:'p3d4',text:'警備室の鍵を閉める'},
+        {id:'p3d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p3d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p3d3',text:'警備室で打刻する',icon:'⏱️'},
+        {id:'p3d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]}
     ]
   },
@@ -414,10 +417,10 @@ const DEFAULT_SECTIONS = [
         {id:'p4b6',text:'車の鍵',icon:'🚗'},
       ]},
       {id:'p4_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-        {id:'p4d1',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p4d2',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-        {id:'p4d3',text:'警備室で打刻する'},
-        {id:'p4d4',text:'警備室の鍵を閉める'},
+        {id:'p4d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p4d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p4d3',text:'警備室で打刻する',icon:'⏱️'},
+        {id:'p4d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]}
     ]
   },
@@ -433,16 +436,16 @@ const DEFAULT_SECTIONS = [
         {id:'p5b6',text:'車の鍵',icon:'🚗'},
       ]},
       {id:'p5_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-        {id:'p5d1',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p5d2',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-        {id:'p5d3',text:'警備室で打刻する'},
-        {id:'p5d4',text:'警備室の鍵を閉める'},
+        {id:'p5d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p5d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p5d3',text:'警備室で打刻する',icon:'⏱️'},
+        {id:'p5d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]}
     ]
   },
   {
     id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:20 / 5:30',type:'pattern',expanded:false,
-    selectedPattern:'holiday',
+    selectedPattern:'weekday',
     holiday:{
       subsections:[
         {id:'p6h_bag',title:'〔持ち物〕',grid:true,items:[
@@ -454,24 +457,24 @@ const DEFAULT_SECTIONS = [
           {id:'p6hb6',text:'車の鍵',icon:'🚗'},
         ]},
         {id:'p6h_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-          {id:'p6hd1',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p6hd2',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-          {id:'p6hd3',text:'警備室で打刻する'},
-          {id:'p6hd4',text:'警備室の鍵を閉める'},
+          {id:'p6hd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p6hd2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6hd3',text:'警備室で打刻する',icon:'⏱️'},
+          {id:'p6hd4',text:'警備室の鍵を閉める',icon:'🔒'},
         ]},
         {id:'p6h_main',title:'5:30 巡回後',items:[
-          {id:'p6h1',text:'5:30 巡回実施（施錠状態を維持・扉は開けない）'},
-          {id:'p6h2',text:'懐中電灯を充電へ'},
+          {id:'p6h1',text:'5:30 巡回実施（施錠状態を維持・扉は開けない）',icon:'🔒'},
+          {id:'p6h2',text:'懐中電灯を充電へ',icon:'🔦'},
         ]},
         {id:'p6h_after',title:'巡回後にすること',items:[
-          {id:'p6af1',text:'ピッチ転送を解除'},
-          {id:'p6af2',text:'FAX転送を解除'},
-          {id:'p6af3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
-          {id:'p6af4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
-          {id:'p6af5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
-          {id:'p6af6',text:'日報（警備報告書）を書く'},
-          {id:'p6af7',text:'チェックリストを書く'},
-          {id:'p6af8',text:'月報を書く'},
+          {id:'p6af1',text:'ピッチ転送を解除',icon:'📞'},
+          {id:'p6af2',text:'FAX転送を解除',icon:'📠'},
+          {id:'p6af3',text:'打刻機を開けて記録取り出し・日報に貼り付け',icon:'⏱️'},
+          {id:'p6af4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）',icon:'📦'},
+          {id:'p6af5',text:'ピッチのロック解除・電源OFFで箱にしまう',icon:'📻'},
+          {id:'p6af6',text:'日報（警備報告書）を書く',icon:'📝'},
+          {id:'p6af7',text:'チェックリストを書く',icon:'✅'},
+          {id:'p6af8',text:'月報を書く',icon:'📅'},
         ]}
       ]
     },
@@ -486,24 +489,24 @@ const DEFAULT_SECTIONS = [
           {id:'p6wb6',text:'車の鍵',icon:'🚗'},
         ]},
         {id:'p6w_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-          {id:'p6wd1',text:'ピッチ転送',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p6wd2',text:'FAX転送',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-          {id:'p6wd3',text:'警備室で打刻する'},
-          {id:'p6wd4',text:'警備室の鍵を閉める'},
+          {id:'p6wd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p6wd2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6wd3',text:'警備室で打刻する',icon:'⏱️'},
+          {id:'p6wd4',text:'警備室の鍵を閉める',icon:'🔒'},
         ]},
         {id:'p6w_main',title:'5:20 巡回後',items:[
-          {id:'p6w1',text:'5:20 巡回実施（扉を開けていく）',hint:'従業員が入口で待っているため早めに'},
-          {id:'p6w2',text:'懐中電灯を充電へ'},
+          {id:'p6w1',text:'5:20 巡回実施（扉を開けていく）',icon:'🔓',hint:'従業員が入口で待っているため早めに'},
+          {id:'p6w2',text:'懐中電灯を充電へ',icon:'🔦'},
         ]},
         {id:'p6w_after',title:'巡回後にすること',items:[
-          {id:'p6waf1',text:'ピッチ転送を解除'},
-          {id:'p6waf2',text:'FAX転送を解除'},
-          {id:'p6waf3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
-          {id:'p6waf4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
-          {id:'p6waf5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
-          {id:'p6waf6',text:'日報（警備報告書）を書く'},
-          {id:'p6waf7',text:'チェックリストを書く'},
-          {id:'p6waf8',text:'月報を書く'},
+          {id:'p6waf1',text:'ピッチ転送を解除',icon:'📞'},
+          {id:'p6waf2',text:'FAX転送を解除',icon:'📠'},
+          {id:'p6waf3',text:'打刻機を開けて記録取り出し・日報に貼り付け',icon:'⏱️'},
+          {id:'p6waf4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）',icon:'📦'},
+          {id:'p6waf5',text:'ピッチのロック解除・電源OFFで箱にしまう',icon:'📻'},
+          {id:'p6waf6',text:'日報（警備報告書）を書く',icon:'📝'},
+          {id:'p6waf7',text:'チェックリストを書く',icon:'✅'},
+          {id:'p6waf8',text:'月報を書く',icon:'📅'},
         ]}
       ]
     }
@@ -511,17 +514,17 @@ const DEFAULT_SECTIONS = [
   {
     id:'final',icon:'🏁',title:'帰る前に',time:'8:15',type:'simple',expanded:false,
     items:[
-      {id:'fi_c1',text:'三井開発の来所・退所時間の記入漏れ確認',hint:'8:15までに来所した場合は必ず記入'},
-      {id:'fi_c2',text:'日報（警備報告書）をスマホで写真撮影'},
-      {id:'fi1',text:'電気・エアコンは必ず切る'},
-      {id:'fi2',text:'ケトルのコンセントは抜く'},
-      {id:'fi3',text:'換気扇は弱に戻す'},
-      {id:'fi4',text:'ゴミは持ち帰る'},
-      {id:'fi7',text:'充電器をしまう'},
-      {id:'fi5',text:'鍵・日報・チェックリストを事務所へ提出'},
-      {id:'fi6',text:'月末なら月報も提出'},
-      {id:'fi8',text:'LINEで日報（写真）を本社へ送信'},
-      {id:'fi9',text:'下番報告'},
+      {id:'fi_c1',text:'三井開発の来所・退所時間の記入漏れ確認',icon:'📝',hint:'8:15までに来所した場合は必ず記入'},
+      {id:'fi_c2',text:'日報（警備報告書）をスマホで写真撮影',icon:'📸'},
+      {id:'fi1',text:'電気・エアコンを必ず切る',icon:'💡'},
+      {id:'fi2',text:'ケトルのコンセントを抜く',icon:'🔌'},
+      {id:'fi3',text:'換気扇を弱に戻す',icon:'🌀'},
+      {id:'fi4',text:'ゴミは持ち帰る',icon:'🗑️'},
+      {id:'fi7',text:'充電器をしまう',icon:'🔋'},
+      {id:'fi5',text:'鍵・日報・チェックリストを事務所へ提出',icon:'📋'},
+      {id:'fi6',text:'月末なら月報も提出',icon:'📅'},
+      {id:'fi8',text:'LINEで日報（写真）を本社へ送信',icon:'📱'},
+      {id:'fi9',text:'下番報告',icon:'👋'},
     ]
   },
 ];
@@ -680,8 +683,8 @@ function renderBody(sec){
   if(sec.type==='pattern'){
     const pat=sec.selectedPattern||'holiday';
     h+=`<div class="tabs">
-      <button class="tab${pat==='holiday'?' active':''}" onclick="setPat('${sec.id}','holiday');event.stopPropagation()">🗓 休日</button>
       <button class="tab${pat==='weekday'?' active':''}" onclick="setPat('${sec.id}','weekday');event.stopPropagation()">💼 平日</button>
+      <button class="tab${pat==='holiday'?' active':''}" onclick="setPat('${sec.id}','holiday');event.stopPropagation()">🗓 休日</button>
     </div>`;
     const pData=sec[pat];
     if(pData){
@@ -727,7 +730,7 @@ function renderItem(item,sectionId='',isChip=false){
     ?`<button class="item-del" onclick="deleteItem('${item.id}','${sectionId}');event.stopPropagation()">×</button>`
     :'';
   return `
-    <div class="item${item.warn?' warn':''}" onclick="toggle('${item.id}')">
+    <div class="item${item.warn?' warn':''}${item.danger?' danger':''}" onclick="toggle('${item.id}')">
       <div class="cb${item.checked?' chk':''}"></div>
       <div class="item-main">
         <span class="item-label${item.checked?' chk':''}">${item.icon?item.icon+' ':''}${item.text}</span>
@@ -829,7 +832,7 @@ function renderKicha(){
   document.getElementById('kichaBody').innerHTML=S.kicha.map(item=>`
     <div class="item" onclick="toggleKicha('${item.id}')">
       <div class="cb${item.checked?' chk':''}"></div>
-      <div class="item-main"><span class="item-label${item.checked?' chk':''}">${item.text}</span></div>
+      <div class="item-main"><span class="item-label${item.checked?' chk':''}">${item.icon?item.icon+' ':''}${item.text}</span></div>
     </div>`).join('');
 }
 
