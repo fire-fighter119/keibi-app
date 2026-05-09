@@ -342,32 +342,41 @@ const DEFAULT_SECTIONS = [
     id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:20 / 5:30',type:'pattern',expanded:false,
     selectedPattern:'holiday',
     holiday:{
-      items:[
-        {id:'p6h1',text:'5:30 巡回実施（施錠状態を維持・扉は開けない）'},
-        {id:'p6h2',text:'懐中電灯を充電へ'},
-      ],
-      hasPatrolList:true
+      subsections:[
+        {id:'p6h_main',title:'',hasPatrolList:true,items:[
+          {id:'p6h1',text:'5:30 巡回実施（施錠状態を維持・扉は開けない）'},
+          {id:'p6h2',text:'懐中電灯を充電へ'},
+        ]},
+        {id:'p6h_after',title:'巡回後にすること',items:[
+          {id:'p6af1',text:'ピッチ転送を解除'},
+          {id:'p6af2',text:'FAX転送を解除'},
+          {id:'p6af3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
+          {id:'p6af4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
+          {id:'p6af5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
+          {id:'p6af6',text:'業務日誌（日報）を書く'},
+          {id:'p6af7',text:'チェックリストを書く'},
+          {id:'p6af8',text:'月報を書く'},
+        ]}
+      ]
     },
     weekday:{
-      items:[
-        {id:'p6w1',text:'5:20 巡回実施（扉を開けていく）',hint:'従業員が入口で待っているため早めに'},
-        {id:'p6w2',text:'懐中電灯を充電へ'},
-      ],
-      hasPatrolList:true
+      subsections:[
+        {id:'p6w_main',title:'',hasPatrolList:true,items:[
+          {id:'p6w1',text:'5:20 巡回実施（扉を開けていく）',hint:'従業員が入口で待っているため早めに'},
+          {id:'p6w2',text:'懐中電灯を充電へ'},
+        ]},
+        {id:'p6w_after',title:'巡回後にすること',items:[
+          {id:'p6waf1',text:'ピッチ転送を解除'},
+          {id:'p6waf2',text:'FAX転送を解除'},
+          {id:'p6waf3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
+          {id:'p6waf4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
+          {id:'p6waf5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
+          {id:'p6waf6',text:'業務日誌（日報）を書く'},
+          {id:'p6waf7',text:'チェックリストを書く'},
+          {id:'p6waf8',text:'月報を書く'},
+        ]}
+      ]
     }
-  },
-  {
-    id:'after',icon:'✅',title:'5:20の巡回後',time:'5:20以降',type:'simple',expanded:false,
-    items:[
-      {id:'af1',text:'ピッチ転送を解除'},
-      {id:'af2',text:'FAX転送を解除'},
-      {id:'af3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
-      {id:'af4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
-      {id:'af5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
-      {id:'af6',text:'業務日誌（日報）を書く'},
-      {id:'af7',text:'チェックリストを書く'},
-      {id:'af8',text:'月報を書く'},
-    ]
   },
   {
     id:'final',icon:'🏁',title:'帰る前に',time:'8:15',type:'simple',expanded:false,
@@ -527,8 +536,9 @@ function renderBody(sec){
       if(pData.subsections){
         h+=pData.subsections.map(sub=>`
           <div class="sub">
-            <div class="sub-title">${sub.title}</div>
+            ${sub.title?`<div class="sub-title">${sub.title}</div>`:''}
             ${sub.items.map(i=>renderItem(i,sec.id)).join('')}
+            ${sub.hasPatrolList?`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`:''}
           </div>`).join('');
       } else if(pData.items){
         h+=pData.items.map(i=>renderItem(i,sec.id)).join('');
