@@ -4,8 +4,8 @@
   "description": "警備シフト管理アプリ",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#0F172A",
+  "background_color": "#070B13",
+  "theme_color": "#070B13",
   "orientation": "portrait-primary",
   "icons": [
     {
