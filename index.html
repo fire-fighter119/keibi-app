@@ -20,11 +20,13 @@
     body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;min-height:100vh;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);}
 
     /* HEADER */
-    .hdr{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 16px;padding-top:calc(env(safe-area-inset-top,0px) + 12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;}
-    .hdr-title{font-size:17px;font-weight:700;letter-spacing:-.3px;}
-    .hdr-right{display:flex;align-items:center;gap:10px;}
-    .hdr-date{font-size:13px;color:var(--text2);}
-    .hdr-reset{background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;}
+    .hdr{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 12px;padding-top:calc(env(safe-area-inset-top,0px) + 10px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+    .hdr-title{font-size:16px;font-weight:700;flex-shrink:0;}
+    .hdr-date{font-size:11px;color:var(--text2);flex-shrink:0;}
+    .hdr-space{flex:1;}
+    .hdr-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:11px;font-weight:600;padding:5px 9px;border-radius:20px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+    .hdr-btn.orange{color:var(--orange);border-color:rgba(245,158,11,.35);}
+    .hdr-btn.edit-on{background:var(--green);border-color:var(--green);color:#fff;}
 
     /* MAIN */
     .main{padding:12px;display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto;}
@@ -32,7 +34,6 @@
     /* CARD */
     .card{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:border-color .2s;}
     .card.complete{border-color:var(--green);}
-
     .card-hdr{display:flex;align-items:center;padding:14px 16px;gap:10px;cursor:pointer;user-select:none;-webkit-user-select:none;}
     .card-icon{font-size:20px;width:26px;text-align:center;flex-shrink:0;}
     .card-info{flex:1;min-width:0;}
@@ -60,29 +61,33 @@
 
     /* SUBSECTION */
     .sub{margin-bottom:10px;}
-    .sub-title{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+    .sub-title{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.4px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
 
     /* ITEM */
-    .item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;}
-    .item:last-child{border-bottom:none;}
-    .cb{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;}
+    .item:last-of-type{border-bottom:none;}
+    .cb{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
     .cb.chk{background:var(--accent);border-color:var(--accent);}
     .cb.chk::after{content:'✓';color:#fff;font-size:14px;font-weight:700;}
-    .item-label{flex:1;font-size:14px;line-height:1.4;transition:color .15s;}
+    .item-main{flex:1;min-width:0;}
+    .item-label{font-size:14px;line-height:1.4;transition:color .15s;}
     .item-label.chk{color:var(--text2);text-decoration:line-through;}
-    .item-note-btn{background:none;border:none;color:var(--text2);font-size:16px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.6;}
+    .item-hint{font-size:11px;color:var(--orange);padding-top:3px;line-height:1.4;}
+    .item-note-btn{background:none;border:none;color:var(--text2);font-size:16px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.6;margin-top:-2px;}
     .item-note-btn.has-note{opacity:1;color:var(--orange);}
+    .item-del{background:none;border:none;color:var(--red);font-size:20px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.7;margin-top:-3px;line-height:1;}
 
-    /* PATROL LIST BTN */
-    .patrol-btn{width:100%;padding:13px;margin-top:10px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:10px;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;text-align:center;letter-spacing:.2px;}
+    /* PATROL BTN */
+    .patrol-btn{width:100%;padding:13px;margin-top:10px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:10px;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;text-align:center;}
 
     /* ACTIONS */
     .actions{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
     .btn{flex:1;padding:11px;border-radius:10px;border:none;font-size:13px;font-weight:600;cursor:pointer;text-align:center;}
     .btn-sec{background:var(--surface2);color:var(--text2);border:1px solid var(--border);}
     .btn-pri{background:var(--accent);color:#fff;}
+    .btn-red{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);}
 
-    /* MODAL OVERLAY */
+    /* MODAL */
     .modal{position:fixed;inset:0;z-index:200;display:none;}
     .modal.open{display:flex;flex-direction:column;}
     .modal-bd{position:absolute;inset:0;background:rgba(0,0,0,.7);}
@@ -94,32 +99,65 @@
     .modal-body{overflow-y:auto;flex:1;padding:16px;-webkit-overflow-scrolling:touch;}
     .modal-footer{padding:12px 16px;border-top:1px solid var(--border);}
 
+    /* PATROL PATTERN TABS (3-way) */
+    .patrol-tabs{display:flex;gap:6px;margin-bottom:14px;}
+    .patrol-tab{flex:1;padding:8px 4px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;}
+    .patrol-tab.施錠{border-color:rgba(59,130,246,.4);}
+    .patrol-tab.維持{border-color:rgba(148,163,184,.3);}
+    .patrol-tab.開錠{border-color:rgba(34,197,94,.4);}
+    .patrol-tab.active.施錠{background:var(--accent);border-color:var(--accent);color:#fff;}
+    .patrol-tab.active.維持{background:var(--surface2);border-color:var(--text2);color:var(--text);}
+    .patrol-tab.active.開錠{background:var(--green);border-color:var(--green);color:#fff;}
+
     /* NOTE MODAL */
     .note-area{width:100%;min-height:120px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:12px;resize:none;font-family:inherit;outline:none;-webkit-appearance:none;}
     .note-label{font-size:13px;color:var(--text2);margin-bottom:8px;display:block;}
     .note-item-name{font-size:15px;font-weight:600;margin-bottom:12px;}
 
+    /* PATROL DIVIDER */
+    .p-div{font-size:13px;font-weight:700;color:var(--text);padding:12px 0 6px;border-top:2px solid var(--border);}
+    .p-div:first-child{border-top:none;padding-top:4px;}
+    .p-car{font-size:12px;color:var(--text2);padding:8px 0;text-align:center;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);margin:6px 0;}
+    .p-note{font-size:12px;color:var(--orange);padding:4px 0 8px;line-height:1.4;}
+
     /* TOAST */
     .toast{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:400;transition:transform .3s;white-space:nowrap;pointer-events:none;}
     .toast.show{transform:translateX(-50%) translateY(0);}
-
-    /* EMPTY */
-    .empty{text-align:center;color:var(--text2);font-size:13px;padding:20px 0;}
   </style>
 </head>
 <body>
 
 <header class="hdr">
   <h1 class="hdr-title">🛡️ 警備チェック</h1>
-  <div class="hdr-right">
-    <span class="hdr-date" id="hdrDate"></span>
-    <button class="hdr-reset" onclick="confirmFullReset()">全リセット</button>
-  </div>
+  <span class="hdr-date" id="hdrDate"></span>
+  <div class="hdr-space"></div>
+  <button class="hdr-btn orange" onclick="openKichaModal()">🔄 帰着後</button>
+  <button class="hdr-btn" id="hdrEditBtn" onclick="toggleEditMode()">✏️ 編集</button>
+  <button class="hdr-btn" onclick="confirmFullReset()">↺</button>
 </header>
 
 <main class="main" id="mainContent"></main>
 
-<!-- Patrol List Modal -->
+<!-- 帰着後チェック Modal -->
+<div class="modal" id="kichaModal">
+  <div class="modal-bd" onclick="closeModal('kichaModal')"></div>
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-hdr">
+      <span class="modal-title">🔄 巡回帰着後チェック</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span id="kichaProg" style="font-size:13px;color:var(--text2)"></span>
+        <button class="modal-close" onclick="closeModal('kichaModal')">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="kichaBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-sec" style="width:100%;padding:13px;" onclick="resetKicha()">🔄 リセット</button>
+    </div>
+  </div>
+</div>
+
+<!-- 巡回リスト Modal -->
 <div class="modal" id="patrolModal">
   <div class="modal-bd" onclick="closeModal('patrolModal')"></div>
   <div class="modal-sheet">
@@ -131,14 +169,21 @@
         <button class="modal-close" onclick="closeModal('patrolModal')">✕</button>
       </div>
     </div>
-    <div class="modal-body" id="patrolListBody"></div>
+    <div class="modal-body">
+      <div class="patrol-tabs">
+        <button class="patrol-tab 施錠" id="ptab-施錠" onclick="setPatrolPattern('施錠')">🔒 施錠</button>
+        <button class="patrol-tab 維持" id="ptab-維持" onclick="setPatrolPattern('維持')">🔵 維持</button>
+        <button class="patrol-tab 開錠" id="ptab-開錠" onclick="setPatrolPattern('開錠')">🔓 開錠</button>
+      </div>
+      <div id="patrolListBody"></div>
+    </div>
     <div class="modal-footer">
       <button class="btn btn-sec" style="width:100%;padding:13px;" onclick="resetPatrolList()">🔄 巡回リストをリセット</button>
     </div>
   </div>
 </div>
 
-<!-- Note Modal -->
+<!-- メモ Modal -->
 <div class="modal" id="noteModal">
   <div class="modal-bd" onclick="closeNoteModal()"></div>
   <div class="modal-sheet" style="max-height:70vh;">
@@ -149,11 +194,11 @@
     </div>
     <div class="modal-body">
       <div class="note-item-name" id="noteItemName"></div>
-      <span class="note-label">巡回時の注意事項・メモ</span>
-      <textarea class="note-area" id="noteTextarea" placeholder="ここにメモを入力…"></textarea>
+      <span class="note-label">注意事項・メモ（複数行OK）</span>
+      <textarea class="note-area" id="noteTextarea" placeholder="1行目のメモ&#10;2行目のメモ&#10;3行目のメモ"></textarea>
     </div>
     <div class="modal-footer" style="display:flex;gap:8px;">
-      <button class="btn btn-sec" onclick="deleteNote()">削除</button>
+      <button class="btn btn-red" onclick="deleteNote()">削除</button>
       <button class="btn btn-pri" style="flex:2;" onclick="saveNote()">保存</button>
     </div>
   </div>
@@ -166,36 +211,81 @@
 // DEFAULT DATA
 // ═══════════════════════════════════════
 
+const DEFAULT_KICHA = [
+  {id:'ki1',text:'ピッチ転送を解除'},
+  {id:'ki2',text:'FAX転送を解除'},
+  {id:'ki3',text:'打刻機を打刻キーで開ける（2周回す）'},
+  {id:'ki4',text:'打刻記録を取り出しハサミでカット'},
+  {id:'ki5',text:'日報にのりで貼り付け'},
+  {id:'ki6',text:'新しい記録紙をセット・たるみを取る・打刻機を閉める'},
+];
+
 const DEFAULT_PATROL = [
-  {id:'pl1',text:'管理棟2階施錠確認'},{id:'pl2',text:'管理棟2階打刻'},
-  {id:'pl3',text:'管理棟1階施錠確認'},{id:'pl4',text:'管理棟1階打刻'},
-  {id:'pl5',text:'管理棟外観点検'},{id:'pl6',text:'設備棟外観点検'},
-  {id:'pl7',text:'発電設備施錠確認'},{id:'pl8',text:'設備棟内確認'},
-  {id:'pl9',text:'設備棟打刻'},{id:'pl10',text:'受付棟内確認'},
-  {id:'pl11',text:'受付棟打刻'},{id:'pl12',text:'計量棟内確認'},
-  {id:'pl13',text:'計量棟打刻'},{id:'pl14',text:'精算機施錠確認'},
-  {id:'pl15',text:'受付棟・計量棟外観点検'},{id:'pl16',text:'トイレ施錠確認'},
-  {id:'pl17',text:'倉庫施錠確認'},{id:'pl18',text:'トイレ・倉庫外観点検'},
+  {id:'d1',type:'div',text:'🏢 管理棟'},
+  {id:'pl1',text:'管理棟2階施錠確認'},{id:'pl2',text:'管理棟2階打刻 🔑'},
+  {id:'pl3',text:'管理棟1階施錠確認'},{id:'pl4',text:'管理棟1階打刻 🔑'},
+  {id:'pl5',text:'管理棟外観点検'},
+  {id:'d2',type:'div',text:'🏭 設備棟'},
+  {id:'pl6',text:'発電設備施錠確認'},{id:'pl7',text:'設備棟外観点検'},
+  {id:'pl8',text:'設備棟内確認'},{id:'pl9',text:'設備棟打刻 🔑'},
+  {id:'d3',type:'div',text:'🏠 受付棟・計量棟'},
+  {id:'pl10',text:'受付棟内確認'},{id:'pl11',text:'受付棟打刻 🔑'},
+  {id:'pl12',text:'計量棟内確認'},{id:'pl13',text:'計量棟打刻 🔑'},
+  {id:'pl14',text:'精算機施錠確認'},{id:'pl15',text:'受付棟・計量棟外観点検'},
+  {id:'d4',type:'div',text:'🚻 トイレ・倉庫'},
+  {id:'pl16',text:'トイレ施錠確認'},{id:'pl17',text:'倉庫施錠確認'},
+  {id:'pl18',text:'トイレ・倉庫外観点検'},
+  {id:'d5',type:'div',text:'🏠 車庫棟'},
   {id:'pl19',text:'車庫棟外観点検'},{id:'pl20',text:'車庫棟内確認'},
-  {id:'pl21',text:'車庫棟打刻'},{id:'pl22',text:'敷地入口施錠確認'},
-  {id:'pl23',text:'敷地入口打刻'},{id:'pl24',text:'車両洗車場確認'},
-  {id:'pl25',text:'車両洗車場打刻'},{id:'pl26',text:'埋立地搬入路確認'},
-  {id:'pl27',text:'埋立地搬入路打刻'},{id:'pl28',text:'浸出水処理施設 3F確認'},
-  {id:'pl29',text:'浸出水処理施設 2F確認'},{id:'pl30',text:'浸出水処理施設 1F確認'},
-  {id:'pl31',text:'浸出水処理施設打刻'},{id:'pl32',text:'浸出水処理施設施錠確認'},
-  {id:'pl33',text:'浸出水処理施設外観点検'},{id:'pl34',text:'敷地内車両点検'},
+  {id:'pl21',text:'車庫棟打刻 🔑'},
+  {id:'n1',type:'note',text:'※ 雪の場合：写真→LINEで本社報告→日報に記載'},
+  {id:'dcar',type:'car'},
+  {id:'d6',type:'div',text:'🚧 敷地入口・洗車場・搬入路'},
+  {id:'pl22',text:'敷地入口施錠確認'},{id:'pl23',text:'敷地入口打刻 🔑'},
+  {id:'pl24',text:'車両洗車場確認'},{id:'pl25',text:'車両洗車場打刻 🔑'},
+  {id:'pl26',text:'埋立地搬入路確認'},{id:'pl27',text:'埋立地搬入路打刻 🔑'},
+  {id:'d7',type:'div',text:'🏗 浸出水処理施設'},
+  {id:'pl28',text:'浸出水処理施設 3F確認'},{id:'pl29',text:'浸出水処理施設 2F確認'},
+  {id:'pl30',text:'浸出水処理施設 1F確認'},{id:'pl31',text:'浸出水処理施設打刻 🔑'},
+  {id:'pl32',text:'浸出水処理施設施錠確認'},{id:'pl33',text:'浸出水処理施設外観点検'},
+  {id:'d8',type:'div',text:'🚗 敷地内'},
+  {id:'pl34',text:'敷地内車両点検'},
 ];
 
 const DEFAULT_SECTIONS = [
   {
-    id:'arrival',icon:'🏁',title:'出勤〜巡回まで',time:'17:15〜',type:'simple',expanded:false,
+    id:'arrival',icon:'🏁',title:'着替え・出勤準備',time:'17:15〜',type:'simple',expanded:false,
     items:[
-      {id:'ar1',text:'着替え・身支度'},
-      {id:'ar2',text:'持ち物確認'},
-      {id:'ar3',text:'日報記入（上番）'},
-      {id:'ar4',text:'チェックリスト記入'},
-      {id:'ar5',text:'前任者からの引き継ぎ確認'},
-      {id:'ar6',text:'各設備の状況確認'},
+      {id:'ar1',text:'上番報告'},
+      {id:'ar2',text:'正装で鍵・日報をもらう',hint:'制帽と名札を付ける。ノック＋「失礼します。警備につきます。」鍵2本あるか確認'},
+      {id:'ar3',text:'日報確認'},
+      {id:'ar4',text:'月報記入'},
+      {id:'ar5',text:'チェックリスト記入'},
+      {id:'ar6',text:'日報記入',hint:'天気を忘れない'},
+      {id:'ar7',text:'三井開発来所時間、退所時間記入'},
+      {id:'ar8',text:'打刻機時刻確認',hint:'大幅にズレていたら時刻調整・電池交換'},
+      {id:'ar9',text:'打刻機からマスターキーを必ず外す'},
+      {id:'ar10',text:'打刻機からクマ鈴を外す（任意）'},
+      {id:'ar11',text:'ピッチの電源「入」、ロックする'},
+      {id:'ar12',text:'備品、紙等が少なくなってないか確認'},
+    ]
+  },
+  {
+    id:'notes',icon:'📋',title:'確認事項',time:'参照用',type:'simple',expanded:false,
+    items:[
+      {id:'no1',text:'電話切替後→環境局の方は事務所へ案内'},
+      {id:'no2',text:'電話・ピッチは頭に「0」をつけないとかからない'},
+      {id:'no3',text:'関係者の連絡網は壁に貼ってある'},
+      {id:'no4',text:'関係機関の連絡先は引き出しの中'},
+      {id:'no5',text:'用紙が少なくなったら会社へLINEで連絡（他の人と被ってもOK）'},
+      {id:'no6',text:'打刻紙が残り1箱になったら報告'},
+      {id:'no7',text:'のりなどの備品も残量確認'},
+      {id:'no8',text:'紙を持ってきたらパンチしてから収納'},
+      {id:'no9',text:'ゴミは仕事の紙類のみ捨ててよい'},
+      {id:'no10',text:'三井開発：施錠していても勝手に入れる（対応不要）'},
+      {id:'no11',text:'従業員：鍵・ゲートを開けてあげる（巡回時に開錠）'},
+      {id:'no12',text:'他の業者：鍵（かぎ）を外しておく'},
+      {id:'no13',text:'業者＋三井開発が両方来る場合：鍵を外さず警備室へ回収',hint:'三井開発が閉め忘れと勘違いして施錠してしまうため'},
     ]
   },
   {
@@ -203,158 +293,181 @@ const DEFAULT_SECTIONS = [
     selectedPattern:'holiday',
     holiday:{
       subsections:[
-        {id:'p1h_bag',title:'持ち物',items:[
-          {id:'p1h1',text:'懐中電灯（充電確認）'},
-          {id:'p1h2',text:'ピッチ'},
-          {id:'p1h3',text:'鍵'},
-          {id:'p1h4',text:'巡回記録簿'},
+        {id:'p1h_bag',title:'〔持ち物〕マスターキー2本',items:[
+          {id:'p1h1',text:'マスターキー2本'},
+          {id:'p1h2',text:'打刻機'},
+          {id:'p1h3',text:'懐中電灯（充電確認）'},
+          {id:'p1h4',text:'チェックリスト'},
+          {id:'p1h5',text:'ペン'},
+          {id:'p1h6',text:'入り口の看板（監視カメラ）'},
+          {id:'p1h7',text:'入り口のかぎ'},
+          {id:'p1h8',text:'車の鍵'},
         ]},
-        {id:'p1h_do',title:'やること',items:[
-          {id:'p1h5',text:'FAX転送設定（転送→280）'},
-          {id:'p1h6',text:'入口施錠確認'},
+        {id:'p1h_do',title:'〔巡回前〕ピッチ転送: 不在転送「307」',items:[
+          {id:'p1h9',text:'FAX転送「280」'},
+          {id:'p1h10',text:'打刻する'},
+          {id:'p1h11',text:'警備室の鍵を閉める'},
         ]}
       ],
       hasPatrolList:true
     },
     weekday:{
       items:[
-        {id:'p1w1',text:'FAX転送設定（転送→280）'},
-        {id:'p1w2',text:'入口施錠確認'},
+        {id:'p1w1',text:'FAX転送「280」'},
+        {id:'p1w2',text:'打刻する'},
+        {id:'p1w3',text:'警備室の鍵を閉める'},
       ],
       hasPatrolList:true
     }
   },
   {
     id:'patrol2',icon:'🔵',title:'2回目の巡回',time:'20:00',type:'simple',expanded:false,
-    hasPatrolList:true,
-    items:[{id:'p2_1',text:'巡回実施'}]
+    hasPatrolList:true,items:[{id:'p2_1',text:'巡回実施'}]
   },
   {
     id:'patrol3',icon:'🔵',title:'3回目の巡回',time:'23:00',type:'simple',expanded:false,
-    hasPatrolList:true,
-    items:[{id:'p3_1',text:'巡回実施'}]
+    hasPatrolList:true,items:[{id:'p3_1',text:'巡回実施'}]
   },
   {
     id:'patrol4',icon:'⏰',title:'4回目の巡回',time:'1:30',type:'simple',expanded:false,
     hasPatrolList:true,
-    items:[
-      {id:'p4_1',text:'FAX転送確認'},
-      {id:'p4_2',text:'巡回実施'},
-    ]
+    items:[{id:'p4_1',text:'FAX転送確認'},{id:'p4_2',text:'巡回実施'}]
   },
   {
     id:'patrol5',icon:'⏰',title:'5回目の巡回',time:'3:30',type:'simple',expanded:false,
     hasPatrolList:true,
-    items:[
-      {id:'p5_1',text:'FAX転送確認'},
-      {id:'p5_2',text:'巡回実施'},
-    ]
+    items:[{id:'p5_1',text:'FAX転送確認'},{id:'p5_2',text:'巡回実施'}]
   },
   {
     id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:20 / 5:30',type:'pattern',expanded:false,
     selectedPattern:'holiday',
     holiday:{
       items:[
-        {id:'p6h1',text:'5:20 巡回実施'},
+        {id:'p6h1',text:'5:30 巡回実施（施錠状態を維持・扉は開けない）'},
         {id:'p6h2',text:'懐中電灯を充電へ'},
       ],
       hasPatrolList:true
     },
     weekday:{
       items:[
-        {id:'p6w1',text:'5:30 巡回実施'},
+        {id:'p6w1',text:'5:20 巡回実施（扉を開けていく）',hint:'従業員が入口で待っているため早めに'},
         {id:'p6w2',text:'懐中電灯を充電へ'},
       ],
       hasPatrolList:true
     }
   },
   {
-    id:'after',icon:'✅',title:'巡回後',time:'5:20以降',type:'simple',expanded:false,
+    id:'after',icon:'✅',title:'5:20の巡回後',time:'5:20以降',type:'simple',expanded:false,
     items:[
-      {id:'af1',text:'ピッチ転送を元に戻す'},
-      {id:'af2',text:'懐中電灯の充電確認'},
-      {id:'af3',text:'5:20後の締め業務実施'},
+      {id:'af1',text:'ピッチ転送を解除'},
+      {id:'af2',text:'FAX転送を解除'},
+      {id:'af3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
+      {id:'af4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
+      {id:'af5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
+      {id:'af6',text:'業務日誌（日報）を書く'},
+      {id:'af7',text:'チェックリストを書く'},
+      {id:'af8',text:'月報を書く'},
     ]
   },
   {
-    id:'final',icon:'🏁',title:'最終確認・下番',time:'8:15',type:'simple',expanded:false,
+    id:'final',icon:'🏁',title:'帰る前に',time:'8:15',type:'simple',expanded:false,
     items:[
-      {id:'fi1',text:'日報記入（下番）'},
-      {id:'fi2',text:'鍵・日報・チェックリスト提出'},
-      {id:'fi3',text:'LINEで下番報告'},
-      {id:'fi4',text:'警備室の鍵を閉める'},
+      {id:'fi1',text:'電気・エアコンは必ず切る'},
+      {id:'fi2',text:'ケトルのコンセントは抜く'},
+      {id:'fi3',text:'換気扇は弱に戻す'},
+      {id:'fi4',text:'ゴミは持ち帰る'},
+      {id:'fi5',text:'鍵・日報・チェックリストを提出'},
+      {id:'fi6',text:'月末なら月報も提出'},
+      {id:'fi7',text:'充電器をしまう'},
+      {id:'fi8',text:'警備報告書をLINEで送り・下番報告'},
     ]
-  }
+  },
 ];
 
 // ═══════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════
 
-let S = { sections:[], patrol:[], patrolNotes:{} };
-let noteTarget = null; // {type:'patrol'|'section', id}
+let S = {sections:[],patrol:[],patrolNotes:{},patrolPattern:'維持',kicha:[]};
+let noteTarget = null;
+let editMode = false;
 
 function loadState(){
   try{
-    const raw = localStorage.getItem('keibi_v3');
-    if(raw) S = JSON.parse(raw);
+    const raw = localStorage.getItem('keibi_v4');
+    if(raw){ S = JSON.parse(raw); migrate(); }
     else initDefault();
   }catch(e){ initDefault(); }
 }
 
+function migrate(){
+  if(!S.kicha) S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
+  if(!S.patrolNotes) S.patrolNotes = {};
+  if(!S.patrolPattern) S.patrolPattern = '維持';
+}
+
 function initDefault(){
-  S.patrol = DEFAULT_PATROL.map(i=>({...i,checked:false}));
+  S.patrol = DEFAULT_PATROL.map(i=>({...i}));
   S.patrolNotes = {};
+  S.patrolPattern = '維持';
+  S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
   S.sections = DEFAULT_SECTIONS.map(deepClone);
-  addCheckedToItems(S.sections);
+  addChecked(S.sections);
 }
 
 function deepClone(s){
-  const n = {...s};
-  if(s.items) n.items = s.items.map(i=>({...i,checked:false}));
+  const n={...s};
+  if(s.items) n.items=s.items.map(i=>({...i,checked:false}));
   if(s.holiday){
-    n.holiday = {...s.holiday};
-    if(s.holiday.subsections) n.holiday.subsections = s.holiday.subsections.map(sub=>({...sub,items:sub.items.map(i=>({...i,checked:false}))}));
-    if(s.holiday.items) n.holiday.items = s.holiday.items.map(i=>({...i,checked:false}));
+    n.holiday={...s.holiday};
+    if(s.holiday.subsections) n.holiday.subsections=s.holiday.subsections.map(sub=>({...sub,items:sub.items.map(i=>({...i,checked:false}))}));
+    if(s.holiday.items) n.holiday.items=s.holiday.items.map(i=>({...i,checked:false}));
   }
   if(s.weekday){
-    n.weekday = {...s.weekday};
-    if(s.weekday.items) n.weekday.items = s.weekday.items.map(i=>({...i,checked:false}));
+    n.weekday={...s.weekday};
+    if(s.weekday.items) n.weekday.items=s.weekday.items.map(i=>({...i,checked:false}));
+    if(s.weekday.subsections) n.weekday.subsections=s.weekday.subsections.map(sub=>({...sub,items:sub.items.map(i=>({...i,checked:false}))}));
   }
   return n;
 }
 
-function addCheckedToItems(sections){
+function addChecked(sections){
   sections.forEach(s=>{
-    if(s.items) s.items.forEach(i=>{if(i.checked===undefined)i.checked=false;});
-    if(s.holiday?.subsections) s.holiday.subsections.forEach(sub=>sub.items?.forEach(i=>{if(i.checked===undefined)i.checked=false;}));
-    if(s.holiday?.items) s.holiday.items.forEach(i=>{if(i.checked===undefined)i.checked=false;});
-    if(s.weekday?.items) s.weekday.items.forEach(i=>{if(i.checked===undefined)i.checked=false;});
+    const ck=arr=>{if(arr)arr.forEach(i=>{if(i.checked===undefined)i.checked=false;});};
+    ck(s.items);
+    ck(s.holiday?.items); ck(s.weekday?.items);
+    s.holiday?.subsections?.forEach(sub=>ck(sub.items));
+    s.weekday?.subsections?.forEach(sub=>ck(sub.items));
   });
 }
 
-function save(){ localStorage.setItem('keibi_v3', JSON.stringify(S)); }
+function save(){ localStorage.setItem('keibi_v4',JSON.stringify(S)); }
 
 // ═══════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════
 
-function allItems(section){
-  if(section.type==='simple') return section.items||[];
-  const pat = section[section.selectedPattern||'holiday'];
-  if(!pat) return [];
-  if(pat.subsections) return pat.subsections.flatMap(s=>s.items||[]);
-  return pat.items||[];
+function allItems(sec){
+  if(sec.type==='simple') return sec.items||[];
+  const p=sec[sec.selectedPattern||'holiday'];
+  if(!p) return [];
+  if(p.subsections) return p.subsections.flatMap(s=>s.items||[]);
+  return p.items||[];
 }
 
-function progress(section){
-  const items = allItems(section);
-  return {done:items.filter(i=>i.checked).length, total:items.length};
+function progress(sec){
+  const items=allItems(sec);
+  return {done:items.filter(i=>i.checked).length,total:items.length};
 }
 
+function patrolItems(){ return S.patrol.filter(i=>!i.type); }
 function patrolProgress(){
-  const done = S.patrol.filter(i=>i.checked).length;
-  return {done, total:S.patrol.length};
+  const items=patrolItems();
+  return {done:items.filter(i=>i.checked).length,total:items.length};
+}
+
+function kichaProgress(){
+  return {done:S.kicha.filter(i=>i.checked).length,total:S.kicha.length};
 }
 
 function uid(){ return 'i'+Date.now()+Math.random().toString(36).slice(2,6); }
@@ -364,20 +477,23 @@ function uid(){ return 'i'+Date.now()+Math.random().toString(36).slice(2,6); }
 // ═══════════════════════════════════════
 
 function render(){
-  document.getElementById('hdrDate').textContent = dateStr();
-  document.getElementById('mainContent').innerHTML = S.sections.map(renderCard).join('');
+  document.getElementById('hdrDate').textContent=dateStr();
+  document.getElementById('mainContent').innerHTML=S.sections.map(renderCard).join('');
+  const btn=document.getElementById('hdrEditBtn');
+  btn.textContent=editMode?'✅ 完了':'✏️ 編集';
+  btn.className=editMode?'hdr-btn edit-on':'hdr-btn';
   save();
 }
 
 function dateStr(){
-  const d=new Date(), days=['日','月','火','水','木','金','土'];
+  const d=new Date(),days=['日','月','火','水','木','金','土'];
   return `${d.getMonth()+1}/${d.getDate()}（${days[d.getDay()]}）`;
 }
 
 function renderCard(sec){
-  const {done,total} = progress(sec);
-  const pct = total>0?Math.round(done/total*100):0;
-  const isDone = total>0&&done===total;
+  const {done,total}=progress(sec);
+  const pct=total>0?Math.round(done/total*100):0;
+  const isDone=total>0&&done===total;
   return `
     <div class="card${isDone?' complete':''}" id="card-${sec.id}">
       <div class="card-hdr" onclick="toggleCard('${sec.id}')">
@@ -399,71 +515,79 @@ function renderCard(sec){
 }
 
 function renderBody(sec){
-  let h = '';
+  let h='';
   if(sec.type==='pattern'){
-    const pat = sec.selectedPattern||'holiday';
-    h += `<div class="tabs">
+    const pat=sec.selectedPattern||'holiday';
+    h+=`<div class="tabs">
       <button class="tab${pat==='holiday'?' active':''}" onclick="setPat('${sec.id}','holiday');event.stopPropagation()">🗓 休日</button>
       <button class="tab${pat==='weekday'?' active':''}" onclick="setPat('${sec.id}','weekday');event.stopPropagation()">💼 平日</button>
     </div>`;
-    const pData = sec[pat];
+    const pData=sec[pat];
     if(pData){
       if(pData.subsections){
-        h += pData.subsections.map(sub=>`
+        h+=pData.subsections.map(sub=>`
           <div class="sub">
             <div class="sub-title">${sub.title}</div>
-            ${sub.items.map(i=>renderItem(i)).join('')}
+            ${sub.items.map(i=>renderItem(i,sec.id)).join('')}
           </div>`).join('');
       } else if(pData.items){
-        h += pData.items.map(i=>renderItem(i)).join('');
+        h+=pData.items.map(i=>renderItem(i,sec.id)).join('');
       }
-      if(pData.hasPatrolList) h += renderPatrolBtn();
+      if(pData.hasPatrolList) h+=`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
     }
   } else {
-    h += (sec.items||[]).map(i=>renderItem(i)).join('');
-    if(sec.hasPatrolList) h += renderPatrolBtn();
+    h+=(sec.items||[]).map(i=>renderItem(i,sec.id)).join('');
+    if(sec.hasPatrolList) h+=`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
   }
-  h += `<div class="actions">
+  h+=`<div class="actions">
     <button class="btn btn-sec" onclick="resetSection('${sec.id}');event.stopPropagation()">🔄 リセット</button>
-    <button class="btn btn-pri" onclick="addItem('${sec.id}');event.stopPropagation()">＋ 追加</button>
+    ${editMode?`<button class="btn btn-pri" onclick="addItem('${sec.id}');event.stopPropagation()">＋ 追加</button>`:''}
   </div>`;
   return h;
 }
 
-function renderItem(item){
-  return `<div class="item" onclick="toggle('${item.id}')">
-    <div class="cb${item.checked?' chk':''}"></div>
-    <span class="item-label${item.checked?' chk':''}">${item.text}</span>
-  </div>`;
-}
-
-function renderPatrolBtn(){
-  return `<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
+function renderItem(item,sectionId=''){
+  const del=editMode&&sectionId
+    ?`<button class="item-del" onclick="deleteItem('${item.id}','${sectionId}');event.stopPropagation()">×</button>`
+    :'';
+  return `
+    <div class="item" onclick="toggle('${item.id}')">
+      <div class="cb${item.checked?' chk':''}"></div>
+      <div class="item-main">
+        <span class="item-label${item.checked?' chk':''}">${item.text}</span>
+        ${item.hint?`<div class="item-hint">💬 ${item.hint}</div>`:''}
+      </div>
+      ${del}
+    </div>`;
 }
 
 // ═══════════════════════════════════════
 // ACTIONS
 // ═══════════════════════════════════════
 
+function toggleEditMode(){
+  editMode=!editMode;
+  render();
+  toast(editMode?'編集モードON':'保存しました');
+}
+
 function toggleCard(id){
-  const s = S.sections.find(x=>x.id===id);
-  if(s){ s.expanded=!s.expanded; render(); }
+  const s=S.sections.find(x=>x.id===id);
+  if(s){s.expanded=!s.expanded;render();}
 }
 
 function setPat(id,pat){
-  const s = S.sections.find(x=>x.id===id);
-  if(s){ s.selectedPattern=pat; render(); }
+  const s=S.sections.find(x=>x.id===id);
+  if(s){s.selectedPattern=pat;render();}
 }
 
 function findItem(id){
   for(const s of S.sections){
-    for(const arr of [s.items, s.holiday?.items, s.weekday?.items]){
-      if(arr){ const i=arr.find(x=>x.id===id); if(i)return i; }
+    for(const arr of [s.items,s.holiday?.items,s.weekday?.items]){
+      if(arr){const i=arr.find(x=>x.id===id);if(i)return i;}
     }
-    if(s.holiday?.subsections){
-      for(const sub of s.holiday.subsections){
-        const i=sub.items?.find(x=>x.id===id); if(i)return i;
-      }
+    for(const subs of [s.holiday?.subsections,s.weekday?.subsections]){
+      if(subs){for(const sub of subs){const i=sub.items?.find(x=>x.id===id);if(i)return i;}}
     }
   }
   return null;
@@ -471,7 +595,7 @@ function findItem(id){
 
 function toggle(id){
   const i=findItem(id);
-  if(i){ i.checked=!i.checked; render(); }
+  if(i){i.checked=!i.checked;render();}
 }
 
 function resetSection(id){
@@ -479,75 +603,116 @@ function resetSection(id){
   if(!s)return;
   [s.items,s.holiday?.items,s.weekday?.items].forEach(arr=>arr?.forEach(i=>i.checked=false));
   s.holiday?.subsections?.forEach(sub=>sub.items?.forEach(i=>i.checked=false));
-  render(); toast('リセットしました');
+  s.weekday?.subsections?.forEach(sub=>sub.items?.forEach(i=>i.checked=false));
+  render();toast('リセットしました');
 }
 
 function addItem(sectionId){
-  const text = prompt('追加する項目：');
+  const text=prompt('追加する項目：');
   if(!text||!text.trim())return;
-  const s = S.sections.find(x=>x.id===sectionId);
+  const s=S.sections.find(x=>x.id===sectionId);
   if(!s)return;
-  const item = {id:uid(),text:text.trim(),checked:false};
+  const item={id:uid(),text:text.trim(),checked:false};
   if(s.type==='pattern'){
-    const pat = s[s.selectedPattern||'holiday'];
-    if(pat?.subsections) pat.subsections[pat.subsections.length-1].items.push(item);
-    else if(pat?.items) pat.items.push(item);
+    const p=s[s.selectedPattern||'holiday'];
+    if(p?.subsections) p.subsections[p.subsections.length-1].items.push(item);
+    else if(p?.items) p.items.push(item);
   } else {
     if(!s.items)s.items=[];
     s.items.push(item);
   }
-  render(); toast('追加しました');
+  render();toast('追加しました');
+}
+
+function deleteItem(itemId,sectionId){
+  const s=S.sections.find(x=>x.id===sectionId);
+  if(!s)return;
+  const rm=arr=>{if(arr){const idx=arr.findIndex(i=>i.id===itemId);if(idx>-1)arr.splice(idx,1);}};
+  rm(s.items);rm(s.holiday?.items);rm(s.weekday?.items);
+  s.holiday?.subsections?.forEach(sub=>rm(sub.items));
+  s.weekday?.subsections?.forEach(sub=>rm(sub.items));
+  render();toast('削除しました');
 }
 
 function confirmFullReset(){
   if(confirm('全セクションとフォームをリセットします。よろしいですか？')){
-    initDefault(); render(); toast('全リセット完了');
+    editMode=false;initDefault();render();toast('全リセット完了');
   }
+}
+
+// ═══════════════════════════════════════
+// KICHA MODAL
+// ═══════════════════════════════════════
+
+function openKichaModal(){renderKicha();openModal('kichaModal');}
+
+function renderKicha(){
+  const {done,total}=kichaProgress();
+  document.getElementById('kichaProg').textContent=`${done}/${total}`;
+  document.getElementById('kichaBody').innerHTML=S.kicha.map(item=>`
+    <div class="item" onclick="toggleKicha('${item.id}')">
+      <div class="cb${item.checked?' chk':''}"></div>
+      <div class="item-main"><span class="item-label${item.checked?' chk':''}">${item.text}</span></div>
+    </div>`).join('');
+}
+
+function toggleKicha(id){
+  const i=S.kicha.find(x=>x.id===id);
+  if(i){i.checked=!i.checked;renderKicha();save();}
+}
+
+function resetKicha(){
+  S.kicha.forEach(i=>i.checked=false);
+  renderKicha();save();toast('リセットしました');
 }
 
 // ═══════════════════════════════════════
 // PATROL MODAL
 // ═══════════════════════════════════════
 
-function openPatrolModal(){
-  renderPatrolList();
-  openModal('patrolModal');
+function openPatrolModal(){renderPatrolList();openModal('patrolModal');}
+
+function setPatrolPattern(p){
+  S.patrolPattern=p;
+  renderPatrolList();save();
 }
 
 function renderPatrolList(){
-  const {done,total} = patrolProgress();
-  document.getElementById('patrolProg').textContent = `${done}/${total}`;
-  document.getElementById('patrolListBody').innerHTML = S.patrol.map(item=>{
-    const note = S.patrolNotes[item.id]||'';
+  // update tab styles
+  ['施錠','維持','開錠'].forEach(p=>{
+    const el=document.getElementById('ptab-'+p);
+    if(el) el.className=`patrol-tab ${p}${S.patrolPattern===p?' active':''}`;
+  });
+  const {done,total}=patrolProgress();
+  document.getElementById('patrolProg').textContent=`${done}/${total}`;
+  document.getElementById('patrolListBody').innerHTML=S.patrol.map((item,idx)=>{
+    if(item.type==='div'){
+      const first=idx===0||S.patrol.slice(0,idx).every(x=>x.type);
+      return `<div class="p-div"${first?'':''} style="${first?'border-top:none;padding-top:4px;':''}">${item.text}</div>`;
+    }
+    if(item.type==='car') return `<div class="p-car">── 🚗 ここから車で移動 ──</div>`;
+    if(item.type==='note') return `<div class="p-note">${item.text}</div>`;
+    const note=S.patrolNotes[item.id]||'';
+    const lines=note?note.split('\n').filter(l=>l.trim()):[];
     return `
       <div class="item" onclick="togglePatrol('${item.id}')">
         <div class="cb${item.checked?' chk':''}"></div>
-        <span class="item-label${item.checked?' chk':''}">${item.text}</span>
-        <button class="item-note-btn${note?' has-note':''}"
-          onclick="openNote('${item.id}');event.stopPropagation()">
-          ${note?'💬':'＋'}
-        </button>
+        <span class="item-main"><span class="item-label${item.checked?' chk':''}">${item.text}</span></span>
+        <button class="item-note-btn${note?' has-note':''}" onclick="openNote('${item.id}');event.stopPropagation()">${note?'💬':'＋'}</button>
       </div>
-      ${note?`<div style="font-size:12px;color:var(--orange);padding:0 0 8px 36px;margin-top:-6px;">${note}</div>`:''}
+      ${lines.length?`<div style="padding:0 0 8px 36px;margin-top:-4px;">${lines.map(l=>`<div style="font-size:12px;color:var(--orange);padding:1px 0;">・${l}</div>`).join('')}</div>`:''}
     `;
   }).join('');
 }
 
 function togglePatrol(id){
   const i=S.patrol.find(x=>x.id===id);
-  if(i){ i.checked=!i.checked; renderPatrolList(); save(); }
+  if(i){i.checked=!i.checked;renderPatrolList();save();}
 }
 
 function resetPatrolList(){
-  S.patrol.forEach(i=>i.checked=false);
-  renderPatrolList(); save(); toast('巡回リストをリセットしました');
-}
-
-function addPatrolItem(){
-  const text=prompt('巡回リストに追加：');
-  if(!text||!text.trim())return;
-  S.patrol.push({id:uid(),text:text.trim(),checked:false});
-  renderPatrolList(); save(); toast('追加しました');
+  patrolItems().forEach(i=>i.checked=false);
+  renderPatrolList();save();toast('巡回リストをリセットしました');
 }
 
 // ═══════════════════════════════════════
@@ -555,10 +720,10 @@ function addPatrolItem(){
 // ═══════════════════════════════════════
 
 function openNote(patrolId){
-  noteTarget = patrolId;
-  const item = S.patrol.find(x=>x.id===patrolId);
-  document.getElementById('noteItemName').textContent = item?.text||'';
-  document.getElementById('noteTextarea').value = S.patrolNotes[patrolId]||'';
+  noteTarget=patrolId;
+  const item=S.patrol.find(x=>x.id===patrolId);
+  document.getElementById('noteItemName').textContent=item?.text||'';
+  document.getElementById('noteTextarea').value=S.patrolNotes[patrolId]||'';
   openModal('noteModal');
   setTimeout(()=>document.getElementById('noteTextarea').focus(),300);
 }
@@ -568,19 +733,18 @@ function saveNote(){
   const val=document.getElementById('noteTextarea').value.trim();
   if(val) S.patrolNotes[noteTarget]=val;
   else delete S.patrolNotes[noteTarget];
-  closeNoteModal(); save(); toast('メモを保存しました');
+  closeNoteModal();save();toast('メモを保存しました');
 }
 
 function deleteNote(){
   if(!noteTarget)return;
   delete S.patrolNotes[noteTarget];
-  closeNoteModal(); save(); toast('メモを削除しました');
+  closeNoteModal();save();toast('メモを削除しました');
 }
 
 function closeNoteModal(){
   closeModal('noteModal');
   noteTarget=null;
-  // refresh patrol list if open
   if(document.getElementById('patrolModal').classList.contains('open')) renderPatrolList();
 }
 
@@ -595,9 +759,7 @@ function openModal(id){
 
 function closeModal(id){
   document.getElementById(id).classList.remove('open');
-  // only unlock scroll if no other modal open
-  const anyOpen = document.querySelector('.modal.open');
-  if(!anyOpen) document.body.style.overflow='';
+  if(!document.querySelector('.modal.open')) document.body.style.overflow='';
 }
 
 // ═══════════════════════════════════════
@@ -607,8 +769,8 @@ function closeModal(id){
 let _tt;
 function toast(msg){
   const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  clearTimeout(_tt); _tt=setTimeout(()=>el.classList.remove('show'),2200);
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2200);
 }
 
 // ═══════════════════════════════════════
@@ -617,11 +779,8 @@ function toast(msg){
 
 loadState();
 render();
-setInterval(()=>document.getElementById('hdrDate').textContent=dateStr(), 60000);
-
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
-}
+setInterval(()=>document.getElementById('hdrDate').textContent=dateStr(),60000);
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>
