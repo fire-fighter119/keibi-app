@@ -162,7 +162,7 @@
     .chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0 4px;max-width:100%;}
     .chip{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;padding:9px 5px;border-radius:12px;border:1px solid var(--soft-border);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));cursor:default;text-align:center;transition:all .15s;min-height:48px;user-select:none;-webkit-user-select:none;overflow:hidden;}
     .chip-icon{font-size:17px;line-height:1;flex-shrink:0;}
-    .chip-text{min-width:0;font-size:10.5px;color:var(--text2);line-height:1.25;word-break:break-word;overflow-wrap:anywhere;text-align:center;}
+    .chip-text{min-width:0;font-size:10.5px;color:var(--text2);line-height:1.25;word-break:break-word;overflow-wrap:anywhere;text-align:center;white-space:pre-line;}
     .chip-sub{display:block;margin-top:2px;color:#D6A84F;font-size:10px;font-weight:800;}
     .chip.chk{background:var(--accent);border-color:var(--accent);}
     .chip.chk .chip-text{color:rgba(255,255,255,.85);}
@@ -531,8 +531,8 @@ const DEFAULT_SECTIONS = [
         {id:'p1b4',text:'チェックリスト',icon:'📋'},
         {id:'p1b5',text:'ペン',icon:'✏️'},
         {id:'p1b8',text:'自分の車の鍵',icon:'🚗'},
-        {id:'p1b6',text:'入口看板',icon:'🪧',rare:true},
-        {id:'p1b7',text:'入口U字錠',icon:'u-lock',rare:true},
+        {id:'p1b6',text:'入口\n看板',icon:'🪧',rare:true},
+        {id:'p1b7',text:'入口\nU字錠',icon:'u-lock',rare:true},
       ]},
       {id:'p1_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p1d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
@@ -677,8 +677,8 @@ const DEFAULT_SECTIONS = [
         {id:'p6h_after_report',title:'〔提出・報告〕',items:[
           {id:'p6h_report_photo',text:'日報が完成したらスマホで撮影',icon:'📸'},
           {id:'p6h_report_submit',text:'マスターキー2本・日報・チェックリスト・入口看板を次の警備員へ引き継ぐ',icon:'📋',hint:'月末なら表紙をつけて月報も引き継ぐ'},
-          {id:'p6h_report_line',text:'LINEで日報（写真）を本社へ送信',icon:'📱'},
-          {id:'p6h_report_off',text:'下番報告',icon:'👋',hint:'本部にLINEで「恵下埋立地、服部です。下番します。お疲れさまでした。」と報告',lineMsg:'恵下埋立地、服部です。下番します。お疲れさまでした。',sharePhoto:true},
+          {id:'p6h_report_line',text:'LINEで日報（写真）を本社へ送信',icon:'📱',hint:'写真はLINEアプリで選択して送信する'},
+          {id:'p6h_report_off',text:'下番報告',icon:'👋',hint:'本部にLINEで「恵下埋立地、服部です。下番します。お疲れさまでした。」と報告',lineMsg:'恵下埋立地、服部です。下番します。お疲れさまでした。'},
         ]}
       ]
     },
@@ -714,8 +714,8 @@ const DEFAULT_SECTIONS = [
         {id:'p6w_after_report',title:'〔提出・報告〕',items:[
           {id:'p6w_report_photo',text:'日報が完成したらスマホで撮影',icon:'📸'},
           {id:'p6w_report_submit',text:'マスターキー2本・日報・チェックリスト・入口看板を次の警備員へ引き継ぐ',icon:'📋',hint:'月末なら表紙をつけて月報も引き継ぐ'},
-          {id:'p6w_report_line',text:'LINEで日報（写真）を本社へ送信',icon:'📱'},
-          {id:'p6w_report_off',text:'下番報告',icon:'👋',hint:'本部にLINEで「恵下埋立地、服部です。下番します。お疲れさまでした。」と報告',lineMsg:'恵下埋立地、服部です。下番します。お疲れさまでした。',sharePhoto:true},
+          {id:'p6w_report_line',text:'LINEで日報（写真）を本社へ送信',icon:'📱',hint:'写真はLINEアプリで選択して送信する'},
+          {id:'p6w_report_off',text:'下番報告',icon:'👋',hint:'本部にLINEで「恵下埋立地、服部です。下番します。お疲れさまでした。」と報告',lineMsg:'恵下埋立地、服部です。下番します。お疲れさまでした。'},
         ]}
       ]
     }
@@ -1031,11 +1031,11 @@ function renderSubs(subs,secId,sectionComplete=false){
   return subs.map(sub=>`
     <div class="sub${isSubComplete(sub,sectionComplete)?' stamp-complete':''}${subClass(sub)}">
       ${sub.title?`<div class="sub-title">${sub.title}</div>`:''}
-      ${sub.hint?`<div class="sub-help">${sub.hint}</div>`:''}
       ${sub.grid
         ?`<div class="chips">${(sub.items||[]).map(i=>renderItem(i,secId,true)).join('')}</div>`
         :(sub.items||[]).map(i=>renderItem(i,secId)).join('')}
       ${sub.hasPatrolList?`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`:''}
+      ${sub.hint?`<div class="sub-help">${sub.hint}</div>`:''}
     </div>`).join('');
 }
 
