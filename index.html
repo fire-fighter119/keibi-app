@@ -125,6 +125,8 @@
     /* LINE BUTTON */
     .line-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:8px 16px;background:#06C755;border-radius:20px;color:#fff;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;box-shadow:0 6px 16px rgba(6,199,85,.18);max-width:100%;white-space:normal;}
     .share-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:8px 14px;background:rgba(6,199,85,.12);border:1px solid rgba(6,199,85,.35);border-radius:20px;color:#8EF0B7;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;max-width:100%;white-space:normal;}
+    .share-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+    .share-file-name{font-size:11px;color:#8EF0B7;line-height:1.4;width:100%;}
     .line-preview{margin-top:8px;padding:10px 12px;background:var(--surface2);border-radius:12px;}
     .line-preview-name{font-size:10px;color:var(--text2);margin-bottom:5px;}
     .line-preview-bubble{display:inline-block;background:#06C755;color:#fff;font-size:13px;line-height:1.55;padding:9px 13px;border-radius:14px 14px 3px 14px;max-width:90%;}
@@ -733,6 +735,7 @@ let noteTarget = null;
 let editMode = false;
 let dragItemId = null;
 let pointerDragItemId = null;
+let shareFiles = {};
 const PITCH_STEPS = ['受話器をあげる','不在転送を押す','「307」をダイヤル','「完了」を確認'];
 const FAX_STEPS = ['転送ボタンを押す','「280」をダイヤル','「完了」を確認'];
 
@@ -1114,10 +1117,22 @@ function renderItem(item,sectionId='',isChip=false){
         <span class="item-label${item.checked?' chk':''}">${item.icon?iconHtml(item.icon)+' ':''}${item.text}${safeBadge}${tagBadge}</span>
         ${renderHint(item)}
         ${item.lineMsg?`<a class="line-btn" href="line://msg/text/${encodeURIComponent(item.lineMsg)}" onclick="event.stopPropagation()">文章をLINEで送る</a>`:''}
-        ${item.sharePhoto?`<button class="share-btn" onclick="shareLinePhoto('${item.id}');event.stopPropagation()">写真を選んで共有</button>`:''}
+        ${item.sharePhoto?renderPhotoShareControls(item):''}
       </div>
       ${del}
     </div>`;
+}
+
+function renderPhotoShareControls(item){
+  const picked=shareFiles[item.id]?.name || '';
+  return `<div class="share-row" onclick="event.stopPropagation()">
+    <label class="share-btn">
+      写真を選ぶ
+      <input type="file" accept="image/*" style="display:none" onchange="selectSharePhoto(event,'${item.id}')">
+    </label>
+    <button class="share-btn" onclick="shareSelectedPhoto('${item.id}');event.stopPropagation()">選んだ写真を共有</button>
+    <div class="share-file-name" id="share-name-${item.id}">${picked?`選択中：${picked}`:'先に写真を選んでください。文章は共有時にコピーします。'}</div>
+  </div>`;
 }
 
 // ═══════════════════════════════════════
@@ -1233,29 +1248,36 @@ function toggle(id){
   if(i){i.checked=!i.checked;render();}
 }
 
-function shareLinePhoto(itemId){
+function selectSharePhoto(event,itemId){
+  const file=event.target.files?.[0];
+  if(!file) return;
+  shareFiles[itemId]=file;
+  const label=document.getElementById(`share-name-${itemId}`);
+  if(label) label.textContent=`選択中：${file.name}`;
+  toast('写真を選びました');
+}
+
+async function shareSelectedPhoto(itemId){
   const item=findItem(itemId);
   const message=item?.lineMsg || '';
-  try{ navigator.clipboard?.writeText(message); }catch(e){}
-  const input=document.createElement('input');
-  input.type='file';
-  input.accept='image/*';
-  input.onchange=async()=>{
-    const file=input.files?.[0];
-    if(!file) return;
-    try{
-      if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
-        await navigator.share({files:[file],text:message,title:'下番報告'});
-        toast('文章はコピー済みです');
-        return;
-      }
-    }catch(e){
+  const file=shareFiles[itemId];
+  if(!file){
+    toast('先に写真を選んでください');
+    return;
+  }
+  try{ await navigator.clipboard?.writeText(message); }catch(e){}
+  try{
+    if(navigator.share && (!navigator.canShare || navigator.canShare({files:[file]}))){
+      await navigator.share({files:[file],text:message,title:'下番報告'});
+      toast('文章はコピー済みです');
       return;
     }
-    toast('写真共有に非対応です。文章はコピー済みです');
-    location.href=`line://msg/text/${encodeURIComponent(message)}`;
-  };
-  input.click();
+  }catch(e){
+    toast('共有を中止しました');
+    return;
+  }
+  toast('このiPhoneでは写真共有できません。文章はコピー済みです');
+  location.href=`line://msg/text/${encodeURIComponent(message)}`;
 }
 
 function resetSection(id){
