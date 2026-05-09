@@ -13,41 +13,67 @@
   <style>
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
     :root{
-      --bg:#0F172A;--surface:#1E293B;--surface2:#293548;--border:#334155;
-      --text:#F1F5F9;--text2:#94A3B8;--accent:#3B82F6;--green:#22C55E;
-      --orange:#F59E0B;--red:#EF4444;--radius:14px;
+      --bg:#11110F;--surface:#1B1D18;--surface2:#252820;--surface3:#303428;
+      --border:#3A3D32;--soft-border:rgba(255,255,255,.075);
+      --text:#F7F3EA;--text2:#B7B0A1;--muted:#817A6C;
+      --accent:#2F9E63;--accent2:#D6A84F;--green:#22C55E;--quest:#24386A;
+      --orange:#F2A93B;--red:#EF5B4B;--radius:14px;--shadow:0 14px 34px rgba(0,0,0,.28);
     }
-    body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;min-height:100vh;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);}
+    body{background:radial-gradient(circle at 50% -20%,rgba(71,99,170,.22),transparent 36%),linear-gradient(180deg,#171711 0%,#11110F 36%,#0D0E0C 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;min-height:100vh;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);}
 
     /* HEADER */
-    .hdr{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 12px;padding-top:calc(env(safe-area-inset-top,0px) + 10px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
-    .hdr-title{font-size:16px;font-weight:700;flex-shrink:0;}
-    .hdr-date{font-size:11px;color:var(--text2);flex-shrink:0;}
+    .hdr{position:sticky;top:0;z-index:100;background:rgba(17,17,15,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:10px 12px;padding-top:calc(env(safe-area-inset-top,0px) + 10px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.2);}
+    .hdr-title{font-size:16px;font-weight:900;flex-shrink:0;letter-spacing:0;color:#FFE8A6;text-shadow:0 1px 0 rgba(0,0,0,.4);}
+    .hdr-date{font-size:11px;color:var(--text2);flex-shrink:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);padding:4px 7px;border-radius:999px;}
     .hdr-space{flex:1;}
-    .hdr-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:11px;font-weight:600;padding:5px 9px;border-radius:20px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-    .hdr-btn.orange{color:var(--orange);border-color:rgba(245,158,11,.35);}
+    .hdr-btn{background:var(--surface2);border:1px solid var(--soft-border);color:var(--text2);font-size:11px;font-weight:700;padding:7px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+    .hdr-btn.orange{color:#FFE1A6;border-color:rgba(242,169,59,.35);background:rgba(242,169,59,.11);}
+    .hdr-btn.start{color:#F7F3EA;border-color:rgba(214,168,79,.55);background:linear-gradient(135deg,rgba(36,56,106,.82),rgba(91,70,29,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 8px 18px rgba(0,0,0,.18);}
     .hdr-btn.edit-on{background:var(--green);border-color:var(--green);color:#fff;}
 
     /* MAIN */
-    .main{padding:12px;display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto;}
+    .main{padding:12px;display:flex;flex-direction:column;gap:10px;max-width:620px;margin:0 auto;}
+
+    /* OVERVIEW */
+    .overview{border:2px solid rgba(214,168,79,.32);background:linear-gradient(135deg,rgba(36,56,106,.38),rgba(214,168,79,.13),rgba(47,158,99,.08));border-radius:8px;padding:14px;box-shadow:var(--shadow),inset 0 0 0 1px rgba(255,255,255,.06);}
+    .overview.complete{position:relative;overflow:hidden;min-height:190px;border-color:rgba(240,190,88,.82);background:radial-gradient(circle at 78% 10%,rgba(255,238,176,.28),transparent 26%),linear-gradient(135deg,rgba(214,168,79,.32),rgba(117,80,23,.22),rgba(27,29,24,.94));box-shadow:0 0 0 1px rgba(240,190,88,.24),0 22px 54px rgba(214,168,79,.22),var(--shadow);}
+    .overview.complete::before{content:'';position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 46%,transparent 57%);transform:rotate(8deg);pointer-events:none;}
+    .overview.complete::after{content:'MISSION\A COMPLETE';white-space:pre;position:absolute;left:50%;top:52%;transform:translate(-50%,-50%) rotate(-9deg);width:min(92%,430px);padding:18px 20px;border:6px double rgba(255,224,150,.9);border-radius:18px;color:#FFE08A;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.2),transparent 28%),repeating-linear-gradient(-18deg,rgba(255,224,150,.16) 0 2px,rgba(255,224,150,.03) 2px 6px),rgba(76,48,10,.2);font-size:clamp(34px,10vw,58px);font-weight:950;letter-spacing:2px;line-height:.92;text-align:center;box-shadow:inset 0 0 0 2px rgba(255,224,150,.22),0 18px 36px rgba(0,0,0,.32),0 0 42px rgba(214,168,79,.18);pointer-events:none;text-shadow:1px 1px 0 rgba(92,49,0,.36),0 0 18px rgba(255,224,150,.26);z-index:1;}
+    .overview-complete-badge{display:none;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(214,168,79,.14);border:1px solid rgba(240,190,88,.3);color:#FFE8A6;font-size:13px;font-weight:850;line-height:1.45;}
+    .overview.complete .overview-complete-badge{display:block;}
+    .overview.complete .overview-top,.overview.complete .overview-stats{position:relative;z-index:2;}
+    .overview-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px;}
+    .overview-kicker{font-size:11px;color:#E9CB85;font-weight:800;letter-spacing:0;}
+    .overview-title{font-size:20px;font-weight:850;line-height:1.25;margin-top:2px;}
+    .overview-sub{font-size:12px;color:var(--text2);line-height:1.5;margin-top:5px;}
+    .overview-ring{width:62px;height:62px;border-radius:50%;background:conic-gradient(var(--accent) var(--pct),rgba(255,255,255,.11) 0);display:grid;place-items:center;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);}
+    .overview-ring span{width:48px;height:48px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-size:14px;font-weight:850;color:#EAF8EF;}
+    .overview-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+    .stat{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:9px 8px;}
+    .stat-label{font-size:10px;color:var(--muted);font-weight:700;}
+    .stat-value{font-size:15px;font-weight:850;margin-top:3px;}
 
     /* CARD */
-    .card{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:border-color .2s;}
-    .card.complete{border-color:var(--green);}
-    .card-hdr{display:flex;align-items:center;padding:14px 16px;gap:10px;cursor:pointer;user-select:none;-webkit-user-select:none;}
-    .card-icon{font-size:20px;width:26px;text-align:center;flex-shrink:0;}
+    .card{background:linear-gradient(180deg,rgba(30,33,44,.96),rgba(27,29,24,.95));border-radius:8px;overflow:hidden;border:2px solid rgba(214,168,79,.18);transition:border-color .2s,transform .2s,background .2s;box-shadow:0 8px 22px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.035);}
+    .card.complete{position:relative;border-color:rgba(34,197,94,.82);background:linear-gradient(135deg,rgba(23,55,33,.98),rgba(27,29,24,.96));box-shadow:0 0 0 1px rgba(34,197,94,.18),0 14px 34px rgba(34,197,94,.12),0 8px 22px rgba(0,0,0,.2);}
+    .card.complete::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#22C55E,#A3E635,#22C55E);}
+    .card.complete::after{content:'完了';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-11deg);padding:11px 26px;border:4px double rgba(255,72,56,.88);border-radius:12px;color:#FF4B3E;background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.1),transparent 30%),repeating-linear-gradient(-18deg,rgba(255,75,62,.12) 0 2px,rgba(255,75,62,.02) 2px 5px),rgba(55,10,8,.22);font-size:32px;font-weight:950;letter-spacing:5px;line-height:1;box-shadow:0 0 0 1px rgba(255,75,62,.16),inset 0 0 0 2px rgba(255,75,62,.16),0 10px 24px rgba(0,0,0,.22);opacity:.94;pointer-events:none;z-index:2;text-shadow:1px 1px 0 rgba(80,0,0,.18),-1px 0 0 rgba(255,120,110,.18);mix-blend-mode:screen;}
+    .card.complete .card-icon{background:rgba(34,197,94,.18);box-shadow:inset 0 0 0 1px rgba(34,197,94,.22);}
+    .card.complete .card-title{color:#E9FFE9;}
+    .card-hdr{display:flex;align-items:center;padding:15px 15px;gap:11px;cursor:pointer;user-select:none;-webkit-user-select:none;}
+    .card-icon{font-size:20px;width:34px;height:34px;border-radius:6px;background:rgba(36,56,106,.46);border:1px solid rgba(214,168,79,.22);display:flex;align-items:center;justify-content:center;text-align:center;flex-shrink:0;}
     .card-info{flex:1;min-width:0;}
-    .card-title{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .card-time{font-size:12px;color:var(--text2);margin-top:2px;}
+    .card-title{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0;}
+    .card-time{font-size:12px;color:var(--text2);margin-top:3px;}
     .card-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-    .card-prog{font-size:12px;color:var(--text2);min-width:32px;text-align:right;}
+    .card-prog{font-size:12px;color:var(--text2);min-width:40px;text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:999px;padding:4px 7px;font-weight:800;}
     .card-prog.done{color:var(--green);}
     .chevron{color:var(--text2);font-size:13px;transition:transform .25s;}
     .chevron.open{transform:rotate(180deg);}
 
     /* PROGRESS BAR */
-    .pbar-wrap{height:3px;background:var(--border);}
-    .pbar{height:100%;background:var(--accent);transition:width .35s;}
+    .pbar-wrap{height:4px;background:rgba(255,255,255,.08);}
+    .pbar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s;}
     .pbar.done{background:var(--green);}
 
     /* BODY */
@@ -56,23 +82,34 @@
 
     /* PATTERN TABS */
     .tabs{display:flex;gap:6px;margin-top:12px;margin-bottom:12px;}
-    .tab{flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;text-align:center;transition:all .15s;}
+    .tab{flex:1;padding:10px;border-radius:12px;border:1px solid var(--soft-border);background:rgba(255,255,255,.035);color:var(--text2);font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s;}
     .tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
 
     /* SUBSECTION */
     .sub{margin-bottom:10px;}
-    .sub-title{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.4px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+    .sub.priority-urgent .sub-title{color:#FFB1A8;border-color:rgba(239,91,75,.34);background:rgba(239,91,75,.09);}
+    .sub.priority-docs .sub-title{color:#BFD8FF;border-color:rgba(59,130,246,.32);background:rgba(59,130,246,.1);}
+    .sub.priority-report .sub-title{color:#FFE0A3;border-color:rgba(214,168,79,.36);background:rgba(214,168,79,.11);}
+    .sub.stamp-complete{position:relative;border-radius:14px;background:rgba(34,197,94,.045);box-shadow:inset 0 0 0 1px rgba(34,197,94,.14);padding:8px 8px 2px;}
+    .sub.stamp-complete::after{content:'完了';position:absolute;right:18px;top:50%;transform:translateY(-50%) rotate(-10deg);padding:8px 18px;border:3px double rgba(255,72,56,.88);border-radius:10px;color:#FF4B3E;background:rgba(55,10,8,.18);font-size:24px;font-weight:950;letter-spacing:4px;line-height:1;pointer-events:none;opacity:.9;box-shadow:0 8px 18px rgba(0,0,0,.18);text-shadow:1px 1px 0 rgba(80,0,0,.14);z-index:1;}
+    .sub-title{font-size:12px;font-weight:800;color:#DACCA7;letter-spacing:0;margin-bottom:8px;padding:8px 10px;border:1px solid var(--soft-border);border-radius:10px;background:rgba(255,255,255,.04);}
 
     /* ITEM */
-    .item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;}
+    .item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.055);cursor:pointer;}
+    .item.dragging{opacity:.45;background:rgba(214,168,79,.09);border-radius:10px;}
+    .drag-handle{width:26px;height:26px;border-radius:7px;border:1px solid rgba(214,168,79,.32);background:rgba(214,168,79,.11);color:#FFE0A3;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;line-height:1;cursor:grab;touch-action:none;flex-shrink:0;margin-top:0;}
+    .drag-handle:active{cursor:grabbing;background:rgba(214,168,79,.2);}
     .item:last-of-type{border-bottom:none;}
     .cb{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
     .cb.chk{background:var(--accent);border-color:var(--accent);}
     .cb.chk::after{content:'✓';color:#fff;font-size:14px;font-weight:700;}
     .item-main{flex:1;min-width:0;}
-    .item-label{font-size:14px;line-height:1.5;transition:color .15s;}
+    .item-label{font-size:14.5px;line-height:1.55;transition:color .15s;}
     .item-label.chk{color:var(--text2);text-decoration:line-through;}
-    .item-hint{font-size:12px;color:rgba(245,158,11,.75);padding-top:4px;padding-left:2px;line-height:1.5;}
+    .item-hint{font-size:12px;color:#F3BF62;padding-top:5px;padding-left:2px;line-height:1.55;}
+    .steps{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+    .step{display:inline-flex;align-items:center;gap:4px;color:#F3BF62;background:rgba(242,169,59,.09);border:1px solid rgba(242,169,59,.18);border-radius:999px;padding:4px 7px;font-size:11px;line-height:1.2;}
+    .step-num{width:15px;height:15px;border-radius:50%;background:rgba(242,169,59,.2);color:#FFD99B;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;}
     .item-note-btn{background:none;border:none;color:var(--text2);font-size:16px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.6;margin-top:-2px;}
     .item-note-btn.has-note{opacity:1;color:var(--orange);}
     .item-del{background:none;border:none;color:var(--red);font-size:20px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.7;margin-top:-3px;line-height:1;}
@@ -81,9 +118,12 @@
     .item-notice{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.35);border-radius:10px;padding:11px 14px;margin:8px 0;cursor:default;}
     .item-notice-label{font-size:13px;font-weight:700;color:var(--orange);line-height:1.4;}
     .item-notice-hint{font-size:12px;color:rgba(245,158,11,.75);padding-top:4px;line-height:1.5;}
+    .notice-chips{display:flex;flex-wrap:wrap;gap:6px;}
+    .notice-chip{display:inline-flex;align-items:center;gap:4px;padding:5px 8px;border-radius:999px;background:rgba(242,169,59,.1);border:1px solid rgba(242,169,59,.22);color:#FFD58E;font-size:11px;font-weight:800;line-height:1.2;}
 
     /* LINE BUTTON */
-    .line-btn{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:7px 16px;background:#06C755;border-radius:20px;color:#fff;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+    .line-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:8px 16px;background:#06C755;border-radius:20px;color:#fff;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;box-shadow:0 6px 16px rgba(6,199,85,.18);}
+    .share-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;margin-left:6px;padding:8px 14px;background:rgba(6,199,85,.12);border:1px solid rgba(6,199,85,.35);border-radius:20px;color:#8EF0B7;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
     .line-preview{margin-top:8px;padding:10px 12px;background:var(--surface2);border-radius:12px;}
     .line-preview-name{font-size:10px;color:var(--text2);margin-bottom:5px;}
     .line-preview-bubble{display:inline-block;background:#06C755;color:#fff;font-size:13px;line-height:1.55;padding:9px 13px;border-radius:14px 14px 3px 14px;max-width:90%;}
@@ -91,23 +131,51 @@
     /* SECTION LABEL (within simple list) */
     .item-section-label{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.5px;padding:14px 0 6px;border-top:1px solid var(--border);margin-top:8px;}
 
+    /* REFERENCE SECTION */
+    .notes-card .card-body{padding:0 12px 14px;}
+    .notes-card .item-section-label{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.24);border-radius:10px;color:#BFDBFE;margin:12px 0 8px;padding:9px 11px;font-size:13px;letter-spacing:0;}
+    .notes-card .item{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);border-radius:10px;margin:7px 0;padding:11px 12px;gap:10px;}
+    .notes-card .item.safe-info{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.18);}
+    .notes-card .cb{width:20px;height:20px;border-radius:6px;margin-top:2px;border-width:1px;}
+    .notes-card .item-label{font-size:13.5px;line-height:1.65;}
+    .notes-card .item-hint{margin-top:6px;padding:7px 9px;background:rgba(245,158,11,.1);border-radius:8px;color:#FBBF24;line-height:1.55;}
+    .notes-card .safe-info .item-hint{background:rgba(34,197,94,.1);color:#86EFAC;}
+    .safe-badge{display:inline-flex;align-items:center;margin-left:6px;padding:2px 7px;border-radius:999px;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.28);color:#A7F3D0;font-size:10px;font-weight:900;vertical-align:middle;white-space:nowrap;}
+    .attention-badge{display:inline-flex;align-items:center;margin-left:6px;padding:2px 7px;border-radius:999px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.28);color:#FFD58E;font-size:10px;font-weight:900;vertical-align:middle;white-space:nowrap;}
+    .phone-badge{display:inline-flex;align-items:center;margin-left:6px;padding:2px 7px;border-radius:999px;background:rgba(59,130,246,.14);border:1px solid rgba(59,130,246,.28);color:#BFDBFE;font-size:10px;font-weight:900;vertical-align:middle;white-space:nowrap;}
+
     /* WARN ITEM */
     .item.warn .cb:not(.chk){border-color:var(--orange);background:rgba(245,158,11,.08);}
     .item.warn .item-label:not(.chk){color:var(--orange);font-weight:700;}
     .item.danger{background:rgba(239,68,68,.05);border-radius:8px;margin:2px -8px;padding:9px 8px;}
     .item.danger .cb:not(.chk){border-color:var(--red);background:rgba(239,68,68,.1);}
     .item.danger .item-label:not(.chk){color:var(--red);font-weight:700;}
+    .item.punch .cb:not(.chk){border-color:var(--red);background:rgba(239,91,75,.1);}
+    .item.punch .item-label:not(.chk){color:#FF7A6E;font-weight:850;}
 
     /* CHIP GRID */
-    .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px;}
-    .chip{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;text-align:center;transition:all .15s;min-height:72px;user-select:none;-webkit-user-select:none;}
-    .chip-icon{font-size:26px;margin-bottom:5px;line-height:1;}
-    .chip-text{font-size:10px;color:var(--text2);line-height:1.3;word-break:keep-all;}
+    .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0 4px;}
+    .chip{display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 6px;border-radius:12px;border:1px solid var(--soft-border);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));cursor:default;text-align:left;transition:all .15s;min-height:46px;user-select:none;-webkit-user-select:none;}
+    .chip-icon{font-size:17px;line-height:1;flex-shrink:0;}
+    .chip-text{font-size:10px;color:var(--text2);line-height:1.25;word-break:keep-all;text-align:center;}
+    .chip-sub{display:block;margin-top:2px;color:#D6A84F;font-size:10px;font-weight:800;}
     .chip.chk{background:var(--accent);border-color:var(--accent);}
     .chip.chk .chip-text{color:rgba(255,255,255,.85);}
+    .chip.equipment{border-color:rgba(59,130,246,.32);background:linear-gradient(180deg,rgba(59,130,246,.13),rgba(59,130,246,.055));}
+    .chip.equipment .chip-text{color:#BFDBFE;}
+    .chip.equipment .chip-sub{color:#93C5FD;}
+    .chip.rare{border-color:rgba(242,169,59,.34);background:linear-gradient(180deg,rgba(242,169,59,.13),rgba(242,169,59,.055));box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+    .chip.rare .chip-text{color:#F4CF8C;}
+    .chip.rare .chip-icon{filter:saturate(1.1);}
+    .u-lock-icon{width:18px;height:18px;display:inline-block;position:relative;flex-shrink:0;}
+    .u-lock-icon::before{content:'';position:absolute;left:3px;top:1px;width:12px;height:13px;border:3px solid #111;border-bottom:none;border-radius:8px 8px 0 0;box-shadow:0 0 0 1px rgba(255,255,255,.16);}
+    .u-lock-icon::after{content:'';position:absolute;left:1px;bottom:1px;width:16px;height:8px;background:#111;border-radius:3px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 0 1px rgba(255,255,255,.14);}
+    .phs-icon{width:18px;height:22px;display:inline-block;position:relative;flex-shrink:0;transform:rotate(-4deg);}
+    .phs-icon::before{content:'';position:absolute;left:3px;top:0;width:12px;height:20px;background:#111;border-radius:4px;box-shadow:inset 0 2px 0 rgba(255,255,255,.16),0 0 0 1px rgba(255,255,255,.14);}
+    .phs-icon::after{content:'';position:absolute;left:6px;top:4px;width:6px;height:5px;background:#A7F3D0;border-radius:1px;box-shadow:0 8px 0 -1px #333,0 11px 0 -1px #333;}
 
     /* PATROL BTN */
-    .patrol-btn{width:100%;padding:13px;margin-top:10px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:10px;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;text-align:center;}
+    .patrol-btn{width:100%;padding:13px;margin-top:10px;background:rgba(47,158,99,.13);border:1px solid rgba(47,158,99,.35);border-radius:12px;color:#8FE3B2;font-size:14px;font-weight:800;cursor:pointer;text-align:center;}
 
     /* ACTIONS */
     .actions{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
@@ -115,12 +183,13 @@
     .btn-sec{background:var(--surface2);color:var(--text2);border:1px solid var(--border);}
     .btn-pri{background:var(--accent);color:#fff;}
     .btn-red{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+    .btn-close{background:rgba(214,168,79,.14);color:#FFE0A3;border:1px solid rgba(214,168,79,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
 
     /* MODAL */
     .modal{position:fixed;inset:0;z-index:200;display:none;}
     .modal.open{display:flex;flex-direction:column;}
     .modal-bd{position:absolute;inset:0;background:rgba(0,0,0,.7);}
-    .modal-sheet{position:relative;margin-top:auto;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,16px);}
+    .modal-sheet{position:relative;margin-top:auto;background:var(--surface);border-radius:24px 24px 0 0;max-height:88vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,16px);border:1px solid var(--soft-border);box-shadow:0 -18px 42px rgba(0,0,0,.35);}
     .modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 2px;}
     .modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;border-bottom:1px solid var(--border);}
     .modal-title{font-size:16px;font-weight:700;}
@@ -133,10 +202,10 @@
     .patrol-tab{flex:1;padding:8px 4px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;}
     .patrol-tab.施錠{border-color:rgba(59,130,246,.4);}
     .patrol-tab.維持{border-color:rgba(148,163,184,.3);}
-    .patrol-tab.開錠{border-color:rgba(34,197,94,.4);}
+    .patrol-tab.解錠{border-color:rgba(34,197,94,.4);}
     .patrol-tab.active.施錠{background:var(--accent);border-color:var(--accent);color:#fff;}
     .patrol-tab.active.維持{background:var(--surface2);border-color:var(--text2);color:var(--text);}
-    .patrol-tab.active.開錠{background:var(--green);border-color:var(--green);color:#fff;}
+    .patrol-tab.active.解錠{background:var(--green);border-color:var(--green);color:#fff;}
 
     /* NOTE MODAL */
     .note-area{width:100%;min-height:120px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:12px;resize:none;font-family:inherit;outline:none;-webkit-appearance:none;}
@@ -144,14 +213,35 @@
     .note-item-name{font-size:15px;font-weight:600;margin-bottom:12px;}
 
     /* PATROL DIVIDER */
-    .p-div{font-size:13px;font-weight:700;color:var(--text);padding:12px 0 6px;border-top:2px solid var(--border);}
+    .p-div{font-size:13px;font-weight:850;color:#F3EAD8;padding:12px 0 6px;border-top:2px solid var(--border);}
+    .p-div-note{display:block;margin-top:6px;color:#F5C76D;font-size:11px;font-weight:650;line-height:1.45;}
+    .p-mini-step{display:inline-flex;align-items:center;margin:2px 3px 2px 0;padding:3px 7px;border-radius:999px;background:rgba(242,169,59,.09);border:1px solid rgba(242,169,59,.16);}
+    .p-mini-step.punch-step{background:rgba(239,91,75,.12);border-color:rgba(239,91,75,.28);color:#FF8A7F;font-weight:850;}
+    .p-mini-arrow{display:inline-flex;color:#8FE3B2;font-weight:900;margin:0 3px;}
     .p-div:first-child{border-top:none;padding-top:4px;}
+    .p-guide{margin:3px 0 8px;padding:8px 10px;border-radius:10px;background:rgba(242,169,59,.08);border:1px solid rgba(242,169,59,.18);color:#F5C76D;font-size:11.5px;line-height:1.55;}
+    .p-guide-line{display:flex;align-items:flex-start;gap:6px;padding:2px 0;}
+    .p-guide-icon{font-size:12px;line-height:1.4;flex-shrink:0;}
     .p-car{font-size:12px;color:var(--text2);padding:8px 0;text-align:center;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);margin:6px 0;}
     .p-note{font-size:12px;color:var(--orange);padding:4px 0 8px;line-height:1.4;}
 
     /* TOAST */
     .toast{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:400;transition:transform .3s;white-space:nowrap;pointer-events:none;}
     .toast.show{transform:translateX(-50%) translateY(0);}
+
+    @media (max-width:380px){
+      .hdr{gap:5px;padding-left:8px;padding-right:8px;}
+      .hdr-title{font-size:14px;}
+      .hdr-date{display:none;}
+      .hdr-btn{font-size:10px;padding:6px 8px;}
+      .overview-title{font-size:18px;}
+      .overview-ring{width:56px;height:56px;}
+      .overview-ring span{width:43px;height:43px;font-size:13px;}
+      .stat{padding:8px 6px;}
+      .stat-value{font-size:14px;}
+      .card-title{font-size:14px;}
+      .card.complete::after{font-size:25px;padding:9px 20px;letter-spacing:4px;}
+    }
   </style>
 </head>
 <body>
@@ -160,7 +250,7 @@
   <h1 class="hdr-title">🛡️ 警備チェック</h1>
   <span class="hdr-date" id="hdrDate"></span>
   <div class="hdr-space"></div>
-  <button class="hdr-btn orange" onclick="openKichaModal()">🔄 帰着後</button>
+  <button class="hdr-btn start" onclick="startShift()">⚔️ 勤務開始</button>
   <button class="hdr-btn" id="hdrEditBtn" onclick="toggleEditMode()">✏️ 編集</button>
   <button class="hdr-btn" onclick="confirmFullReset()">↺</button>
 </header>
@@ -202,7 +292,7 @@
       <div class="patrol-tabs">
         <button class="patrol-tab 施錠" id="ptab-施錠" onclick="setPatrolPattern('施錠')">🔒 施錠</button>
         <button class="patrol-tab 維持" id="ptab-維持" onclick="setPatrolPattern('維持')">🔵 維持</button>
-        <button class="patrol-tab 開錠" id="ptab-開錠" onclick="setPatrolPattern('開錠')">🔓 開錠</button>
+        <button class="patrol-tab 解錠" id="ptab-解錠" onclick="setPatrolPattern('解錠')">🔓 解錠</button>
       </div>
       <div id="patrolListBody"></div>
     </div>
@@ -241,41 +331,38 @@
 // ═══════════════════════════════════════
 
 const DEFAULT_KICHA = [
-  {id:'ki1',text:'ピッチ転送を解除',icon:'📞'},
-  {id:'ki2',text:'FAX転送を解除',icon:'📠'},
-  {id:'ki3',text:'打刻機を打刻キーで開ける（2周回す）',icon:'⏱️'},
-  {id:'ki4',text:'打刻記録を取り出しハサミでカット',icon:'✂️'},
-  {id:'ki5',text:'日報にのりで貼り付け',icon:'📄'},
-  {id:'ki6',text:'新しい記録紙をセット・たるみを取る・打刻機を閉める',icon:'🔄'},
+  {id:'ki1',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
 ];
 
 const DEFAULT_PATROL = [
-  {id:'d1',type:'div',text:'🏢 管理棟'},
+  {id:'d1',type:'div',text:'🏢 管理棟',hint:'最後の従業員が帰ったら風除室・玄関を施錠|2階から左回りで巡回|窓の施錠と人の気配を確認|通路側の扉のみ施錠|2階打刻|給湯室IHの電源確認|1階打刻|1階倉庫・会議室は施錠しない'},
   {id:'pl1',text:'管理棟2階施錠確認'},{id:'pl2',text:'管理棟2階打刻 🔑'},
   {id:'pl3',text:'管理棟1階施錠確認'},{id:'pl4',text:'管理棟1階打刻 🔑'},
   {id:'pl5',text:'管理棟外観点検'},
-  {id:'d2',type:'div',text:'🏭 設備棟'},
-  {id:'pl9',text:'設備棟打刻 🔑'},{id:'pl6',text:'発電設備施錠確認'},
-  {id:'pl7',text:'設備棟外観点検'},{id:'pl8',text:'設備棟内確認'},
-  {id:'d3',type:'div',text:'🏠 受付棟'},
+  {id:'d2',type:'div',text:'🏭 設備棟',hint:'打刻ドアを施錠|外観点検|機械室内確認|機械室を出たら施錠|設備棟入口を施錠して内部を確認|打刻|出口を開錠して外に出る|施錠'},
+  {id:'pl7',text:'設備棟外観点検'},{id:'pl6',text:'機械室施錠確認'},
+  {id:'pl8',text:'設備棟内確認'},{id:'pl9',text:'設備棟打刻 🔑'},
+  {id:'d3',type:'div',text:'🏠 受付棟',hint:'打刻|トイレ確認|施錠|外観点検'},
   {id:'pl10',text:'受付棟内確認'},{id:'pl11',text:'受付棟打刻 🔑'},
-  {id:'d3b',type:'div',text:'🏠 計量棟'},
-  {id:'pl12',text:'計量棟内確認'},{id:'pl13',text:'計量棟打刻 🔑'},
-  {id:'pl14',text:'精算機施錠確認'},{id:'pl15',text:'受付棟・計量棟外観点検'},
-  {id:'d4',type:'div',text:'🚻 トイレ・倉庫'},
-  {id:'pl16',text:'トイレ施錠確認'},{id:'pl17',text:'倉庫施錠確認'},
-  {id:'pl18',text:'トイレ・倉庫外観点検'},
-  {id:'d5',type:'div',text:'🏠 車庫棟'},
+  {id:'pl11b',text:'受付棟外観点検'},
+  {id:'d3b',type:'div',text:'🏠 計量棟',hint:'精算機確認|打刻|施錠|外観点検'},
+  {id:'pl14',text:'精算機施錠確認'},{id:'pl12',text:'計量棟内確認'},
+  {id:'pl13',text:'計量棟打刻 🔑'},{id:'pl15',text:'計量棟外観点検'},
+  {id:'d4',type:'div',text:'🚻 トイレ',hint:'窓ガラス確認|トイレ内確認|施錠'},
+  {id:'pl16',text:'トイレ施錠確認'},{id:'pl18a',text:'トイレ外観点検'},
+  {id:'d4b',type:'div',text:'📦 倉庫',hint:'倉庫内確認|シャッターが開いていたら中から内鍵を閉める|施錠'},
+  {id:'pl17',text:'倉庫施錠確認'},{id:'pl18b',text:'倉庫外観点検'},
+  {id:'d5',type:'div',text:'🏠 車庫棟',hint:'先に打刻|外観点検|施錠確認'},
   {id:'pl21',text:'車庫棟打刻 🔑'},{id:'pl19',text:'車庫棟外観点検'},
   {id:'pl20',text:'車庫棟内確認'},
   {id:'n1',type:'note',text:'※ 雪の場合：写真→LINEで本社報告→日報に記載'},
   {id:'dcar',type:'car'},
-  {id:'d6',type:'div',text:'🚧 敷地入口'},
+  {id:'d6',type:'div',text:'🚧 敷地入口',hint:'打刻|ゲートを閉める|鍵を取り付け、ダイヤルを回しておく|看板を取り付ける'},
   {id:'pl23',text:'敷地入口打刻 🔑'},{id:'pl22',text:'敷地入口施錠確認'},
   {id:'d6b',type:'div',text:'🚧 洗車場・搬入路'},
   {id:'pl25',text:'車両洗車場打刻 🔑'},{id:'pl24',text:'車両洗車場確認'},
   {id:'pl27',text:'埋立地搬入路打刻 🔑'},{id:'pl26',text:'埋立地搬入路確認'},
-  {id:'d7',type:'div',text:'🏗 浸出水処理施設'},
+  {id:'d7',type:'div',text:'🏗 浸出水処理施設',hint:'3階から確認|2階は右から確認|1階は最後に打刻|最後に3か所施錠（事務所・風除室・入口）'},
   {id:'pl28',text:'浸出水処理施設 3F確認'},{id:'pl29',text:'浸出水処理施設 2F確認'},
   {id:'pl30',text:'浸出水処理施設 1F確認'},{id:'pl31',text:'浸出水処理施設打刻 🔑'},
   {id:'pl32',text:'浸出水処理施設施錠確認'},{id:'pl33',text:'浸出水処理施設外観点検'},
@@ -283,21 +370,121 @@ const DEFAULT_PATROL = [
   {id:'pl34',text:'敷地内車両点検'},
 ];
 
+const DEFAULT_PATROL_LOCK = DEFAULT_PATROL;
+
+const DEFAULT_PATROL_MAINTAIN = [
+  {id:'d1',type:'div',text:'🏢 管理棟',hint:'管理棟2階から1階へ左回りで施錠確認|2階打刻|1階打刻'},
+  {id:'pl1',text:'管理棟2階施錠確認'},
+  {id:'pl2',text:'管理棟2階打刻 🔑'},
+  {id:'pl3',text:'管理棟1階施錠確認'},
+  {id:'pl4',text:'管理棟1階打刻 🔑'},
+  {id:'pl5',text:'管理棟外観点検'},
+  {id:'d2',type:'div',text:'🏭 設備棟',hint:'打刻|外観点検|施錠確認'},
+  {id:'pl9',text:'設備棟打刻 🔑'},
+  {id:'pl7',text:'設備棟外観点検'},
+  {id:'pl6',text:'機械室施錠確認'},
+  {id:'pl8',text:'設備棟内確認'},
+  {id:'d3',type:'div',text:'🏠 受付棟',hint:'打刻|トイレ確認|施錠|外観点検'},
+  {id:'pl11',text:'受付棟打刻 🔑'},
+  {id:'pl10',text:'受付棟内確認'},
+  {id:'pl11b',text:'受付棟外観点検'},
+  {id:'d3b',type:'div',text:'🏠 計量棟',hint:'精算機確認|打刻|施錠|外観点検'},
+  {id:'pl14',text:'精算機施錠確認'},
+  {id:'pl13',text:'計量棟打刻 🔑'},
+  {id:'pl12',text:'計量棟内確認'},
+  {id:'pl15',text:'計量棟外観点検'},
+  {id:'d4',type:'div',text:'🚻 トイレ',hint:'窓ガラス確認|施錠確認|外観点検'},
+  {id:'pl16',text:'トイレ施錠確認'},
+  {id:'pl18a',text:'トイレ外観点検'},
+  {id:'d4b',type:'div',text:'📦 倉庫',hint:'施錠確認|外観点検'},
+  {id:'pl17',text:'倉庫施錠確認'},
+  {id:'pl18b',text:'倉庫外観点検'},
+  {id:'d5',type:'div',text:'🏠 車庫棟',hint:'打刻|外観点検|施錠確認'},
+  {id:'pl21',text:'車庫棟打刻 🔑'},{id:'pl19',text:'車庫棟外観点検'},
+  {id:'pl20',text:'車庫棟内確認'},
+  {id:'n1',type:'note',text:'※ 雪の場合：写真→LINEで本社報告→日報に記載'},
+  {id:'dcar',type:'car'},
+  {id:'m_d6',type:'div',text:'🚧 敷地入口',hint:'打刻|施錠確認|看板の取り付け確認'},
+  {id:'pl23',text:'敷地入口打刻 🔑'},
+  {id:'pl22',text:'敷地入口施錠確認'},
+  {id:'d6b',type:'div',text:'🚧 洗車場・搬入路'},
+  {id:'pl25',text:'車両洗車場打刻 🔑'},{id:'pl24',text:'車両洗車場確認'},
+  {id:'pl27',text:'埋立地搬入路打刻 🔑'},{id:'pl26',text:'埋立地搬入路確認'},
+  {id:'d7',type:'div',text:'🏗 浸出水処理施設',hint:'3階から確認|2階は右から確認|1階は最後に打刻|最後に3か所施錠（事務所・風除室・入口）'},
+  {id:'pl28',text:'浸出水処理施設 3F確認'},{id:'pl29',text:'浸出水処理施設 2F確認'},
+  {id:'pl30',text:'浸出水処理施設 1F確認'},{id:'pl31',text:'浸出水処理施設打刻 🔑'},
+  {id:'pl32',text:'浸出水処理施設施錠確認'},{id:'pl33',text:'浸出水処理施設外観点検'},
+  {id:'d8',type:'div',text:'🚗 敷地内'},
+  {id:'pl34',text:'敷地内車両点検'},
+];
+
+const DEFAULT_PATROL_UNLOCK = [
+  {id:'u_d1',type:'div',text:'🏢 管理棟',hint:'1階風除室・玄関を解錠|2階から左回りで解錠|2階打刻|2階委託業者事務室2は施錠したまま|1階打刻'},
+  {id:'u_pl1',text:'管理棟2階解錠確認'},
+  {id:'pl2',text:'管理棟2階打刻 🔑'},
+  {id:'u_pl3',text:'管理棟1階解錠確認'},
+  {id:'pl4',text:'管理棟1階打刻 🔑'},
+  {id:'pl5',text:'管理棟外観点検'},
+  {id:'u_d2',type:'div',text:'🏭 設備棟',hint:'打刻|解錠|外観点検'},
+  {id:'pl9',text:'設備棟打刻 🔑'},
+  {id:'u_pl6',text:'設備棟解錠確認'},
+  {id:'pl7',text:'設備棟外観点検'},
+  {id:'pl8',text:'設備棟内確認'},
+  {id:'u_d3',type:'div',text:'🏠 受付棟',hint:'解錠|打刻|トイレ確認|外観点検'},
+  {id:'pl11',text:'受付棟打刻 🔑'},
+  {id:'pl10',text:'受付棟内確認'},
+  {id:'pl11b',text:'受付棟外観点検'},
+  {id:'u_d3b',type:'div',text:'🏠 計量棟',hint:'精算機確認|解錠|打刻|外観点検'},
+  {id:'pl14',text:'精算機施錠確認'},
+  {id:'pl13',text:'計量棟打刻 🔑'},
+  {id:'u_pl12',text:'計量棟解錠確認'},
+  {id:'pl15',text:'計量棟外観点検'},
+  {id:'u_d4',type:'div',text:'🚻 トイレ',hint:'窓ガラス確認|解錠|外観点検'},
+  {id:'u_pl16',text:'トイレ解錠確認'},
+  {id:'pl18a',text:'トイレ外観点検'},
+  {id:'u_d4b',type:'div',text:'📦 倉庫',hint:'窓ガラス確認|解錠|外観点検'},
+  {id:'u_pl17',text:'倉庫解錠確認'},
+  {id:'pl18b',text:'倉庫外観点検'},
+  {id:'d5',type:'div',text:'🏠 車庫棟',hint:'打刻|外観点検|施錠確認'},
+  {id:'pl21',text:'車庫棟打刻 🔑'},{id:'pl19',text:'車庫棟外観点検'},
+  {id:'pl20',text:'車庫棟内確認'},
+  {id:'n1',type:'note',text:'※ 雪の場合：写真→LINEで本社報告→日報に記載'},
+  {id:'dcar',type:'car'},
+  {id:'u_d6',type:'div',text:'🚧 敷地入口',hint:'打刻|看板取り外し|解錠|ゲートを開ける|鍵はゲートに取り付け、ダイヤルを回しておく'},
+  {id:'pl23',text:'敷地入口打刻 🔑'},
+  {id:'u_pl22',text:'敷地入口解錠確認'},
+  {id:'d6b',type:'div',text:'🚧 洗車場・搬入路'},
+  {id:'pl25',text:'車両洗車場打刻 🔑'},{id:'pl24',text:'車両洗車場確認'},
+  {id:'pl27',text:'埋立地搬入路打刻 🔑'},{id:'pl26',text:'埋立地搬入路確認'},
+  {id:'d7',type:'div',text:'🏗 浸出水処理施設',hint:'3階から確認|2階は右から確認|1階は最後に打刻|最後に3か所施錠（事務所・風除室・入口）'},
+  {id:'pl28',text:'浸出水処理施設 3F確認'},{id:'pl29',text:'浸出水処理施設 2F確認'},
+  {id:'pl30',text:'浸出水処理施設 1F確認'},{id:'pl31',text:'浸出水処理施設打刻 🔑'},
+  {id:'pl32',text:'浸出水処理施設施錠確認'},{id:'pl33',text:'浸出水処理施設外観点検'},
+  {id:'d8',type:'div',text:'🚗 敷地内'},
+  {id:'pl34',text:'敷地内車両点検'},
+];
+
+const DEFAULT_PATROLS = {
+  '施錠': DEFAULT_PATROL_LOCK,
+  '維持': DEFAULT_PATROL_MAINTAIN,
+  '解錠': DEFAULT_PATROL_UNLOCK,
+};
+
 const DEFAULT_SECTIONS = [
   {
     id:'arrival',icon:'🏁',title:'着替え・出勤準備',time:'17:15〜',type:'simple',expanded:false,
     items:[
       {id:'ar1',text:'上番報告',icon:'📱',hint:'本部にLINEで「恵下埋立地、服部です。上番します。よろしくお願いします。」と報告',lineMsg:'恵下埋立地、服部です。上番します。よろしくお願いします。'},
-      {id:'ar2',text:'鍵・日報を受け取る',icon:'📥',hint:'制帽と名札を付ける\nノック＋「失礼します。警備につきます。」\n鍵2本あるか確認'},
-      {id:'ar3',text:'前日までの日報を確認',icon:'🔍'},
-      {id:'ar4',text:'月報記入',icon:'✏️'},
-      {id:'ar5',text:'チェックリスト記入',icon:'✏️'},
-      {id:'ar6',text:'日報（警備報告書）記入',icon:'✏️',hint:'天気を忘れない\n三井開発の来所・退所時刻を記入'},
-      {id:'ar8',text:'打刻機の準備',icon:'⏱️',hint:'時刻を確認する\n大幅にずれていたら時刻調整・電池交換'},
-      {id:'ar9',text:'マスターキーを打刻機から外す',icon:'🗝️',danger:true,hint:'必ず外すこと！打刻機に付けたまま巡回しない'},
+      {id:'ar2',text:'鍵と日報を受け取る',icon:'📥',hint:'制帽と名札を装着する\nノック後「失礼します。警備につきます。」と入室する\n鍵が2本あることを確認する'},
+      {id:'ar3',text:'前日分までの日報を確認する',icon:'🔍'},
+      {id:'ar4',text:'月報を記入する',icon:'✏️'},
+      {id:'ar5',text:'チェックリストを記入する',icon:'✏️'},
+      {id:'ar6',text:'日報（警備報告書）を記入する',icon:'✏️',hint:'天気を必ず記入する\n三井開発の来所・退所時刻を記入する'},
+      {id:'ar8',text:'打刻機の時刻を確認する',icon:'⏱️',hint:'大幅なずれがある場合は時刻調整・電池交換をおこなう'},
+      {id:'ar9',text:'マスターキーを打刻機から外す',icon:'🗝️',danger:true,hint:'必ず外すこと。付けたまま巡回しないこと'},
       {id:'ar10',text:'クマ鈴を打刻機から外す（任意）',icon:'🔔'},
-      {id:'ar11',text:'ピッチを携帯する',icon:'📻',hint:'電源「入」にする\nロックをする'},
-      {id:'ar12',text:'備品の在庫確認',icon:'📦',hint:'残りが少なくなっていれば本部へ報告'},
+      {id:'ar11',text:'ピッチを携帯する',icon:'📻',hint:'電源を「入」にする\nロックをかける'},
+      {id:'ar12',text:'備品の在庫を確認する',icon:'📦',hint:'残量が少ない場合は本部へ報告する'},
       {id:'ar_key',type:'notice',text:'🔑 入口の鍵の場所を確認',hint:'警備室にある場合：退所後の最初の巡回で持って出て施錠'},
     ]
   },
@@ -305,84 +492,71 @@ const DEFAULT_SECTIONS = [
     id:'notes',icon:'📋',title:'確認事項',time:'参照用',type:'simple',expanded:false,
     items:[
       {id:'no_l1',type:'label',text:'📞 連絡方法について'},
-      {id:'no1',text:'警備室へ電話切替後→環境局の方からの連絡は事務所へ伝える。警備室の電話でのみ対応可能。'},
-      {id:'no2',text:'電話・ピッチは「0」を押してからじゃないとかからない'},
-      {id:'no3',text:'関係者の連絡網は壁に貼ってある'},
-      {id:'no4',text:'関係機関の連絡先は引き出しの中'},
+      {id:'no1',text:'環境局からの電話対応',icon:'☎️',tag:'電話のみ',hint:'警備室へ電話切替後の連絡は事務所へ伝える\n環境局からの電話は転送できないため、警備室の電話で対応する'},
+      {id:'no2',text:'外線をかけるとき',icon:'0️⃣',hint:'電話・ピッチは先に「0」を押す\n「0」を押してから番号を入力する'},
+      {id:'no3',text:'関係者の連絡網',icon:'📌',hint:'連絡網は壁に貼ってある\n迷ったらまず壁の連絡網を確認'},
+      {id:'no4',text:'関係機関の連絡先',icon:'🚨',tag:'要注意',hint:'連絡先は引き出しの中\n警察・消防は110・119じゃないので注意！'},
       {id:'no_l2',type:'label',text:'📦 在庫管理について'},
-      {id:'no5',text:'用紙が少なくなったら会社へLINEで連絡（他の人と被ってもOK）'},
-      {id:'no6',text:'打刻紙が残り1箱になったら報告'},
-      {id:'no7',text:'のりなどの備品も残量確認'},
-      {id:'no8',text:'紙を持ってきたらパンチしてから収納'},
+      {id:'no5',text:'用紙が少ないとき',icon:'📄',hint:'会社へLINEで連絡する\n他の人と連絡が被ってもOK'},
+      {id:'no6',text:'打刻紙の残量',icon:'⏱️',hint:'残り1箱になったら報告する'},
+      {id:'no7',text:'備品の残量確認',icon:'🧴',hint:'のりなどの備品も残量を確認する'},
+      {id:'no8',text:'紙を補充したとき',icon:'🗂️',hint:'持ってきた紙はパンチしてから収納する'},
       {id:'no_l3',type:'label',text:'🗑️ ごみについて'},
-      {id:'no9',text:'ゴミは仕事の紙類のみ捨ててよい'},
+      {id:'no9',text:'捨ててよいゴミ',icon:'🗑️',hint:'仕事で出た紙類のみ捨ててよい'},
       {id:'no_l4',type:'label',text:'🔑 入口ゲートの鍵の管理について'},
-      {id:'no10',text:'三井開発：施錠していても勝手に入れる（対応不要）'},
-      {id:'no11',text:'従業員：営業時は鍵・ゲートを開けてあげる（巡回時に開錠）'},
-      {id:'no12',text:'他の業者：鍵のみを外しておいてあげる'},
-      {id:'no13',text:'業者＋三井開発が両方来る場合：鍵ごと警備室へ回収・ゲートは閉めたまま',hint:'三井開発が閉め忘れと勘違いして施錠してしまうため'},
+      {id:'no10',text:'三井開発の場合',icon:'🏢',safe:true,hint:'鍵があっても自分で入れます\n施錠していても開けに行かなくてOK'},
+      {id:'no11',text:'従業員の場合',icon:'👷',hint:'営業時は鍵・ゲートを開けてあげる\n巡回時に開錠する'},
+      {id:'no12',text:'他の業者の場合',icon:'🚚',hint:'鍵のみを外しておいてあげる'},
+      {id:'no13',text:'他社の業者と三井開発が同じ日に来るとき',icon:'🚚🏢',hint:'鍵は警備室へ回収する\nゲートは閉めたままにする\n三井開発が「閉め忘れ」と思って施錠するのを防ぐため'},
     ]
   },
   {
-    id:'patrol1',icon:'🔵',title:'1回目の巡回',time:'18:00',type:'pattern',expanded:false,
-    selectedPattern:'weekday',
-    holiday:{
-      subsections:[
-        {id:'p1h_bag',title:'〔持ち物〕',grid:true,items:[
-          {id:'p1h1',text:'マスターキー2本',icon:'🗝️'},
-          {id:'p1h2',text:'打刻機',icon:'⏱️'},
-          {id:'p1h3',text:'懐中電灯',icon:'🔦'},
-          {id:'p1h4',text:'チェックリスト',icon:'📋'},
-          {id:'p1h5',text:'ペン',icon:'✏️'},
-          {id:'p1h6',text:'看板（監視カメラ）',icon:'📷'},
-          {id:'p1h7',text:'入口のかぎ',icon:'🔑'},
-          {id:'p1h8',text:'車の鍵',icon:'🚗'},
-        ]},
-        {id:'p1h_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-          {id:'p1h9',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p1h10',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-          {id:'p1h11',text:'警備室で打刻する',icon:'⏱️'},
-          {id:'p1h12',text:'警備室の鍵を閉める',icon:'🔒'},
-        ]}
-      ]
-    },
-    weekday:{
-      subsections:[
-        {id:'p1w_bag',title:'〔持ち物〕',grid:true,items:[
-          {id:'p1wb1',text:'マスターキー2本',icon:'🗝️'},
-          {id:'p1wb2',text:'打刻機',icon:'⏱️'},
-          {id:'p1wb3',text:'懐中電灯',icon:'🔦'},
-          {id:'p1wb4',text:'チェックリスト',icon:'📋'},
-          {id:'p1wb5',text:'ペン',icon:'✏️'},
-          {id:'p1wb6',text:'看板（監視カメラ）',icon:'📷'},
-          {id:'p1wb7',text:'入口の鍵（ダイヤル式）',icon:'🔑'},
-          {id:'p1wb8',text:'車の鍵',icon:'🚗'},
-        ]},
-        {id:'p1w_do',title:'〔巡回前〕',hasPatrolList:true,items:[
-          {id:'p1w1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p1w2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
-          {id:'p1w3',text:'警備室で打刻する',icon:'⏱️'},
-          {id:'p1w4',text:'警備室の鍵を閉める',icon:'🔒'},
-        ]}
-      ]
-    }
+    id:'patrol1',icon:'🔵',title:'1回目の巡回',time:'18:00',type:'simple',expanded:false,
+    subsections:[
+      {id:'p1_bag',title:'〔持ち物〕',grid:true,items:[
+        {id:'p1b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
+        {id:'p1_pich',text:'ピッチ（装備品）',icon:'phs'},
+        {id:'p1b2',text:'打刻機',icon:'⏱️'},
+        {id:'p1b3',text:'懐中電灯',icon:'🔦'},
+        {id:'p1b4',text:'チェックリスト',icon:'📋'},
+        {id:'p1b5',text:'ペン',icon:'✏️'},
+        {id:'p1b8',text:'自分の車の鍵',icon:'🚗'},
+        {id:'p1b6',text:'看板（監視カメラ作動中）',icon:'🪧',rare:true},
+        {id:'p1b7',text:'入口のU字ダイヤル錠（警備室に回収されているときのみ）',icon:'u-lock',rare:true},
+      ]},
+      {id:'p1_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
+        {id:'p1d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p1d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p1d3',text:'警備室で打刻する',icon:'⏱️'},
+        {id:'p1d4',text:'警備室の鍵を閉める',icon:'🔒'},
+      ]},
+      {id:'p1_after',title:'〔巡回後にやること〕',items:[
+        {id:'p1a1',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
+        {id:'p1a2',type:'notice',text:'チェックは不要。できる範囲で進める作業',icon:'📝',chips:['ピッチ転送解除','チェックリスト記入','月報記入','日報記入']},
+      ]}
+    ]
   },
   {
     id:'patrol2',icon:'🔵',title:'2回目の巡回',time:'20:00',type:'simple',expanded:false,
     subsections:[
       {id:'p2_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p2b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p2b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
+        {id:'p2b_pich',text:'ピッチ（装備品）',icon:'phs'},
         {id:'p2b2',text:'打刻機',icon:'⏱️'},
         {id:'p2b3',text:'懐中電灯',icon:'🔦'},
         {id:'p2b4',text:'チェックリスト',icon:'📋'},
         {id:'p2b5',text:'ペン',icon:'✏️'},
-        {id:'p2b6',text:'車の鍵',icon:'🚗'},
+        {id:'p2b6',text:'自分の車の鍵',icon:'🚗'},
       ]},
-      {id:'p2_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+      {id:'p2_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p2d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
         {id:'p2d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p2d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p2d4',text:'警備室の鍵を閉める',icon:'🔒'},
+      ]},
+      {id:'p2_after',title:'〔巡回後にやること〕',items:[
+        {id:'p2a1',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
+        {id:'p2a2',type:'notice',text:'チェックは不要。できる範囲で進める作業',icon:'📝',chips:['ピッチ転送解除','チェックリスト記入','月報記入','日報記入']},
       ]}
     ]
   },
@@ -390,18 +564,23 @@ const DEFAULT_SECTIONS = [
     id:'patrol3',icon:'🔵',title:'3回目の巡回',time:'23:00',type:'simple',expanded:false,
     subsections:[
       {id:'p3_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p3b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p3b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
+        {id:'p3b_pich',text:'ピッチ（装備品）',icon:'phs'},
         {id:'p3b2',text:'打刻機',icon:'⏱️'},
         {id:'p3b3',text:'懐中電灯',icon:'🔦'},
         {id:'p3b4',text:'チェックリスト',icon:'📋'},
         {id:'p3b5',text:'ペン',icon:'✏️'},
-        {id:'p3b6',text:'車の鍵',icon:'🚗'},
+        {id:'p3b6',text:'自分の車の鍵',icon:'🚗'},
       ]},
-      {id:'p3_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+      {id:'p3_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p3d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
         {id:'p3d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p3d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p3d4',text:'警備室の鍵を閉める',icon:'🔒'},
+      ]},
+      {id:'p3_after',title:'〔巡回後にやること〕',items:[
+        {id:'p3a1',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
+        {id:'p3a2',type:'notice',text:'チェックは不要。できる範囲で進める作業',icon:'📝',chips:['ピッチ転送解除','チェックリスト記入','月報記入','日報記入']},
       ]}
     ]
   },
@@ -409,18 +588,23 @@ const DEFAULT_SECTIONS = [
     id:'patrol4',icon:'⏰',title:'4回目の巡回',time:'1:30',type:'simple',expanded:false,
     subsections:[
       {id:'p4_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p4b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p4b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
+        {id:'p4b_pich',text:'ピッチ（装備品）',icon:'phs'},
         {id:'p4b2',text:'打刻機',icon:'⏱️'},
         {id:'p4b3',text:'懐中電灯',icon:'🔦'},
         {id:'p4b4',text:'チェックリスト',icon:'📋'},
         {id:'p4b5',text:'ペン',icon:'✏️'},
-        {id:'p4b6',text:'車の鍵',icon:'🚗'},
+        {id:'p4b6',text:'自分の車の鍵',icon:'🚗'},
       ]},
-      {id:'p4_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+      {id:'p4_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p4d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
         {id:'p4d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p4d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p4d4',text:'警備室の鍵を閉める',icon:'🔒'},
+      ]},
+      {id:'p4_after',title:'〔巡回後にやること〕',items:[
+        {id:'p4a1',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
+        {id:'p4a2',type:'notice',text:'チェックは不要。できる範囲で進める作業',icon:'📝',chips:['ピッチ転送解除','チェックリスト記入','月報記入','日報記入']},
       ]}
     ]
   },
@@ -428,85 +612,100 @@ const DEFAULT_SECTIONS = [
     id:'patrol5',icon:'⏰',title:'5回目の巡回',time:'3:30',type:'simple',expanded:false,
     subsections:[
       {id:'p5_bag',title:'〔持ち物〕',grid:true,items:[
-        {id:'p5b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p5b1',text:'マスターキー2本（装備品）',icon:'🗝️'},
+        {id:'p5b_pich',text:'ピッチ（装備品）',icon:'phs'},
         {id:'p5b2',text:'打刻機',icon:'⏱️'},
         {id:'p5b3',text:'懐中電灯',icon:'🔦'},
         {id:'p5b4',text:'チェックリスト',icon:'📋'},
         {id:'p5b5',text:'ペン',icon:'✏️'},
-        {id:'p5b6',text:'車の鍵',icon:'🚗'},
+        {id:'p5b6',text:'自分の車の鍵',icon:'🚗'},
       ]},
-      {id:'p5_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+      {id:'p5_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p5d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
         {id:'p5d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p5d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p5d4',text:'警備室の鍵を閉める',icon:'🔒'},
+      ]},
+      {id:'p5_after',title:'〔巡回後にやること〕',items:[
+        {id:'p5a1',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
+        {id:'p5a2',type:'notice',text:'チェックは不要。できる範囲で進める作業',icon:'📝',chips:['ピッチ転送解除','チェックリスト記入','月報記入','日報記入']},
       ]}
     ]
   },
   {
-    id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:20 / 5:30',type:'pattern',expanded:false,
+    id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:30 / 5:20（従業員が入口で待つため早め）',type:'pattern',expanded:false,
     selectedPattern:'weekday',
     holiday:{
       subsections:[
         {id:'p6h_bag',title:'〔持ち物〕',grid:true,items:[
-          {id:'p6hb1',text:'マスターキー2本',icon:'🗝️'},
+          {id:'p6hb1',text:'マスターキー2本（装備品）',icon:'🗝️'},
+          {id:'p6h_pich',text:'ピッチ（装備品）',icon:'phs'},
           {id:'p6hb2',text:'打刻機',icon:'⏱️'},
           {id:'p6hb3',text:'懐中電灯',icon:'🔦'},
           {id:'p6hb4',text:'チェックリスト',icon:'📋'},
           {id:'p6hb5',text:'ペン',icon:'✏️'},
-          {id:'p6hb6',text:'車の鍵',icon:'🚗'},
+          {id:'p6hb6',text:'自分の車の鍵',icon:'🚗'},
         ]},
-        {id:'p6h_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+        {id:'p6h_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
           {id:'p6hd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
           {id:'p6hd2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
           {id:'p6hd3',text:'警備室で打刻する',icon:'⏱️'},
           {id:'p6hd4',text:'警備室の鍵を閉める',icon:'🔒'},
         ]},
-        {id:'p6h_main',title:'5:30 巡回後',items:[
-          {id:'p6h1',text:'5:30 巡回実施（施錠状態を維持・扉は開けない）',icon:'🔒'},
-          {id:'p6h2',text:'懐中電灯を充電へ',icon:'🔦'},
+        {id:'p6h_after_urgent',title:'〔巡回後にすること｜最優先〕',items:[
+          {id:'p6h_urgent_record',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
+          {id:'p6h_urgent_light',text:'懐中電灯を充電（立てて充電）',icon:'🔦',warn:true},
         ]},
-        {id:'p6h_after',title:'巡回後にすること',items:[
-          {id:'p6af1',text:'ピッチ転送を解除',icon:'📞'},
-          {id:'p6af2',text:'FAX転送を解除',icon:'📠'},
-          {id:'p6af3',text:'打刻機を開けて記録取り出し・日報に貼り付け',icon:'⏱️'},
-          {id:'p6af4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）',icon:'📦'},
-          {id:'p6af5',text:'ピッチのロック解除・電源OFFで箱にしまう',icon:'📻'},
-          {id:'p6af6',text:'日報（警備報告書）を書く',icon:'📝'},
-          {id:'p6af7',text:'チェックリストを書く',icon:'✅'},
-          {id:'p6af8',text:'月報を書く',icon:'📅'},
+        {id:'p6h_after_docs',title:'〔記入・整理〕',completeStamp:true,items:[
+          {id:'p6h_docs_pitch_transfer',text:'ピッチ転送を解除',icon:'📞'},
+          {id:'p6h_docs_pitch_box',text:'ピッチのロック解除・充電確認・電源OFFにして箱に収納',icon:'phs'},
+          {id:'p6h_docs_stamp_box',text:'打刻機に打刻機キーとクマ鈴をつけて箱に収納',icon:'📦'},
+          {id:'p6h_docs_checklist',text:'チェックリストの記入（完成）',icon:'✅'},
+          {id:'p6h_docs_monthly',text:'月報の記入（完成）',icon:'📅',hint:'月末なら月報の表紙を作る'},
+          {id:'p6h_docs_report',text:'日報（警備報告書）の記入',icon:'📝',hint:'三井開発が8:15までに来たら必ず記入'},
+        ]},
+        {id:'p6h_after_report',title:'〔提出・報告〕',items:[
+          {id:'p6h_report_photo',text:'日報が完成したらスマホで撮影',icon:'📸'},
+          {id:'p6h_report_submit',text:'マスターキー2本・日報・チェックリスト・入口看板を次の警備員へ引き継ぐ',icon:'📋',hint:'月末なら表紙をつけて月報も引き継ぐ'},
+          {id:'p6h_report_line',text:'LINEで日報（写真）を本社へ送信',icon:'📱'},
+          {id:'p6h_report_off',text:'下番報告',icon:'👋',hint:'本部にLINEで「恵下埋立地、服部です。下番します。お疲れさまでした。」と報告',lineMsg:'恵下埋立地、服部です。下番します。お疲れさまでした。',sharePhoto:true},
         ]}
       ]
     },
     weekday:{
       subsections:[
         {id:'p6w_bag',title:'〔持ち物〕',grid:true,items:[
-          {id:'p6wb1',text:'マスターキー2本',icon:'🗝️'},
+          {id:'p6wb1',text:'マスターキー2本（装備品）',icon:'🗝️'},
+          {id:'p6w_pich',text:'ピッチ（装備品）',icon:'phs'},
           {id:'p6wb2',text:'打刻機',icon:'⏱️'},
           {id:'p6wb3',text:'懐中電灯',icon:'🔦'},
           {id:'p6wb4',text:'チェックリスト',icon:'📋'},
           {id:'p6wb5',text:'ペン',icon:'✏️'},
-          {id:'p6wb6',text:'車の鍵',icon:'🚗'},
+          {id:'p6wb6',text:'自分の車の鍵',icon:'🚗'},
         ]},
-        {id:'p6w_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+        {id:'p6w_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
           {id:'p6wd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
           {id:'p6wd2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
           {id:'p6wd3',text:'警備室で打刻する',icon:'⏱️'},
           {id:'p6wd4',text:'警備室の鍵を閉める',icon:'🔒'},
         ]},
-        {id:'p6w_main',title:'5:20 巡回後',items:[
-          {id:'p6w1',text:'5:20 巡回実施（扉を開けていく）',icon:'🔓',hint:'従業員が入口で待っているため早めに'},
-          {id:'p6w2',text:'懐中電灯を充電へ',icon:'🔦'},
+        {id:'p6w_after_urgent',title:'〔巡回後にすること｜最優先〕',items:[
+          {id:'p6w_urgent_record',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
+          {id:'p6w_urgent_light',text:'懐中電灯を充電（立てて充電）',icon:'🔦',warn:true},
         ]},
-        {id:'p6w_after',title:'巡回後にすること',items:[
-          {id:'p6waf1',text:'ピッチ転送を解除',icon:'📞'},
-          {id:'p6waf2',text:'FAX転送を解除',icon:'📠'},
-          {id:'p6waf3',text:'打刻機を開けて記録取り出し・日報に貼り付け',icon:'⏱️'},
-          {id:'p6waf4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）',icon:'📦'},
-          {id:'p6waf5',text:'ピッチのロック解除・電源OFFで箱にしまう',icon:'📻'},
-          {id:'p6waf6',text:'日報（警備報告書）を書く',icon:'📝'},
-          {id:'p6waf7',text:'チェックリストを書く',icon:'✅'},
-          {id:'p6waf8',text:'月報を書く',icon:'📅'},
+        {id:'p6w_after_docs',title:'〔記入・整理〕',completeStamp:true,items:[
+          {id:'p6w_docs_pitch_transfer',text:'ピッチ転送を解除',icon:'📞'},
+          {id:'p6w_docs_pitch_box',text:'ピッチのロック解除・充電確認・電源OFFにして箱に収納',icon:'phs'},
+          {id:'p6w_docs_stamp_box',text:'打刻機に打刻機キーとクマ鈴をつけて箱に収納',icon:'📦'},
+          {id:'p6w_docs_checklist',text:'チェックリストの記入（完成）',icon:'✅'},
+          {id:'p6w_docs_monthly',text:'月報の記入（完成）',icon:'📅',hint:'月末なら月報の表紙を作る'},
+          {id:'p6w_docs_report',text:'日報（警備報告書）の記入',icon:'📝',hint:'三井開発が8:15までに来たら必ず記入'},
+        ]},
+        {id:'p6w_after_report',title:'〔提出・報告〕',items:[
+          {id:'p6w_report_photo',text:'日報が完成したらスマホで撮影',icon:'📸'},
+          {id:'p6w_report_submit',text:'マスターキー2本・日報・チェックリスト・入口看板を次の警備員へ引き継ぐ',icon:'📋',hint:'月末なら表紙をつけて月報も引き継ぐ'},
+          {id:'p6w_report_line',text:'LINEで日報（写真）を本社へ送信',icon:'📱'},
+          {id:'p6w_report_off',text:'下番報告',icon:'👋',hint:'本部にLINEで「恵下埋立地、服部です。下番します。お疲れさまでした。」と報告',lineMsg:'恵下埋立地、服部です。下番します。お疲れさまでした。',sharePhoto:true},
         ]}
       ]
     }
@@ -514,17 +713,12 @@ const DEFAULT_SECTIONS = [
   {
     id:'final',icon:'🏁',title:'帰る前に',time:'8:15',type:'simple',expanded:false,
     items:[
-      {id:'fi_c1',text:'三井開発の来所・退所時間の記入漏れ確認',icon:'📝',hint:'8:15までに来所した場合は必ず記入'},
-      {id:'fi_c2',text:'日報（警備報告書）をスマホで写真撮影',icon:'📸'},
-      {id:'fi1',text:'電気・エアコンを必ず切る',icon:'💡'},
-      {id:'fi2',text:'ケトルのコンセントを抜く',icon:'🔌'},
-      {id:'fi3',text:'換気扇を弱に戻す',icon:'🌀'},
-      {id:'fi4',text:'ゴミは持ち帰る',icon:'🗑️'},
       {id:'fi7',text:'充電器をしまう',icon:'🔋'},
-      {id:'fi5',text:'鍵・日報・チェックリストを事務所へ提出',icon:'📋'},
-      {id:'fi6',text:'月末なら月報も提出',icon:'📅'},
-      {id:'fi8',text:'LINEで日報（写真）を本社へ送信',icon:'📱'},
-      {id:'fi9',text:'下番報告',icon:'👋'},
+      {id:'fi8',text:'冷蔵庫の中を空にする',icon:'🧊'},
+      {id:'fi1',text:'電気・エアコンを必ず切る',icon:'💡'},
+      {id:'fi3',text:'換気扇を弱に戻す',icon:'🌀'},
+      {id:'fi2',text:'ケトルのコンセントを抜く',icon:'🔌'},
+      {id:'fi4',text:'ゴミは持ち帰る',icon:'🗑️'},
     ]
   },
 ];
@@ -533,9 +727,13 @@ const DEFAULT_SECTIONS = [
 // STATE
 // ═══════════════════════════════════════
 
-let S = {sections:[],patrol:[],patrolNotes:{},patrolPattern:'',kicha:[]};
+let S = {sections:[],patrol:[],patrolByPattern:{},patrolNotes:{},patrolPattern:'',kicha:[]};
 let noteTarget = null;
 let editMode = false;
+let dragItemId = null;
+let pointerDragItemId = null;
+const PITCH_STEPS = ['受話器をあげる','不在転送を押す','「307」をダイヤル','「完了」を確認'];
+const FAX_STEPS = ['転送ボタンを押す','「280」をダイヤル','「完了」を確認'];
 
 function loadState(){
   try{
@@ -550,15 +748,134 @@ function migrate(){
   if(!S.patrolNotes) S.patrolNotes = {};
   if(S.patrolPattern===undefined) S.patrolPattern = '';
   if(!S.sections) initDefault();
+  S.kicha = syncDefaultList(S.kicha, DEFAULT_KICHA);
+  S.patrol = syncDefaultList(S.patrol, DEFAULT_PATROL);
+  S.patrolByPattern = syncPatrolPatterns(S.patrolByPattern, S.patrol);
+  patchKnownContent();
 }
 
 function initDefault(){
   S.patrol = DEFAULT_PATROL.map(i=>({...i}));
+  S.patrolByPattern = syncPatrolPatterns({}, S.patrol);
   S.patrolNotes = {};
   S.patrolPattern = '';
   S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
   S.sections = DEFAULT_SECTIONS.map(deepClone);
   addChecked(S.sections);
+}
+
+function syncDefaultList(current, defaults){
+  const oldById = new Map((current||[]).map(i=>[i.id,i]));
+  return defaults.map(def=>{
+    const old = oldById.get(def.id) || {};
+    return {...def, checked: old.checked ?? false};
+  });
+}
+
+function syncPatrolPatterns(current, fallback){
+  const source = current || {};
+  return Object.fromEntries(Object.entries(DEFAULT_PATROLS).map(([name, defaults])=>[
+    name,
+    syncDefaultList(source[name] || fallback || [], defaults)
+  ]));
+}
+
+function patchKnownContent(){
+  syncSectionFromDefault('notes');
+  ['patrol1','patrol2','patrol3','patrol4','patrol5'].forEach(syncSimpleSectionFromDefault);
+  syncPatternSectionFromDefault('patrol6');
+  syncSectionFromDefault('final');
+  applyTransferSteps();
+}
+
+function syncSectionFromDefault(sectionId){
+  const current = S.sections.find(s=>s.id===sectionId);
+  const defaults = DEFAULT_SECTIONS.find(s=>s.id===sectionId);
+  if(!current || !defaults || !defaults.items) return;
+  current.items = syncDefaultList(current.items, defaults.items);
+}
+
+function patchSectionFromDefault(sectionId){
+  const current = S.sections.find(s=>s.id===sectionId);
+  const defaults = DEFAULT_SECTIONS.find(s=>s.id===sectionId);
+  if(!current || !defaults) return;
+  patchSubsections(current.subsections, defaults.subsections);
+  ['holiday','weekday'].forEach(p=>{
+    if(current[p]&&defaults[p]) patchSubsections(current[p].subsections, defaults[p].subsections);
+  });
+}
+
+function syncSimpleSectionFromDefault(sectionId){
+  const current = S.sections.find(s=>s.id===sectionId);
+  const defaults = DEFAULT_SECTIONS.find(s=>s.id===sectionId);
+  if(!current || !defaults) return;
+  ['icon','title','time','type','hasPatrolList'].forEach(k=>{
+    if(defaults[k]!==undefined) current[k]=defaults[k];
+    else delete current[k];
+  });
+  delete current.holiday;
+  delete current.weekday;
+  delete current.selectedPattern;
+  if(defaults.subsections) current.subsections = syncSubsections(current.subsections, defaults.subsections);
+  if(defaults.items) current.items = syncDefaultList(current.items, defaults.items);
+}
+
+function syncPatternSectionFromDefault(sectionId){
+  const current = S.sections.find(s=>s.id===sectionId);
+  const defaults = DEFAULT_SECTIONS.find(s=>s.id===sectionId);
+  if(!current || !defaults) return;
+  ['holiday','weekday'].forEach(p=>{
+    if(current[p] && defaults[p]){
+      current[p].subsections = syncSubsections(current[p].subsections, defaults[p].subsections);
+    }
+  });
+}
+
+function syncSubsections(currentSubs, defaultSubs){
+  const oldById = new Map((currentSubs||[]).map(s=>[s.id,s]));
+  return (defaultSubs||[]).map(def=>{
+    const old = oldById.get(def.id) || {};
+    return {
+      ...def,
+      items: syncDefaultList(old.items, def.items||[])
+    };
+  });
+}
+
+function patchSubsections(currentSubs, defaultSubs){
+  if(!currentSubs||!defaultSubs) return;
+  const defaultsById = new Map(defaultSubs.map(s=>[s.id,s]));
+  currentSubs.forEach(sub=>{
+    const def = defaultsById.get(sub.id);
+    if(!def) return;
+    sub.title = def.title;
+    sub.hasPatrolList = def.hasPatrolList;
+    if(def.grid) sub.items = syncDefaultList(sub.items, def.items);
+    else patchItems(sub.items, def.items);
+  });
+}
+
+function patchItems(currentItems, defaultItems){
+  if(!currentItems||!defaultItems) return;
+  const defaultsById = new Map(defaultItems.map(i=>[i.id,i]));
+  currentItems.forEach(item=>{
+    const def = defaultsById.get(item.id);
+    if(!def) return;
+    ['text','icon','hint','lineMsg','sharePhoto','danger','warn','safe','rare','tag','chips'].forEach(k=>{
+      if(def[k]!==undefined) item[k]=def[k];
+      else delete item[k];
+    });
+  });
+}
+
+function applyTransferSteps(){
+  S.sections.forEach(sec=>{
+    const groups=[sec.items,sec.subsections?.flatMap(s=>s.items||[]),sec.holiday?.subsections?.flatMap(s=>s.items||[]),sec.weekday?.subsections?.flatMap(s=>s.items||[])];
+    groups.flat().filter(Boolean).forEach(item=>{
+      if(item.text==='ピッチ転送') item.steps=PITCH_STEPS;
+      if(item.text==='FAX転送') item.steps=FAX_STEPS;
+    });
+  });
 }
 
 function deepClone(s){
@@ -599,12 +916,12 @@ function save(){ localStorage.setItem('keibi_v5',JSON.stringify(S)); }
 function allItems(sec){
   const filter=arr=>(arr||[]).filter(i=>i.type!=='notice'&&i.type!=='label');
   if(sec.type==='simple'){
-    if(sec.subsections) return sec.subsections.flatMap(sub=>filter(sub.items||[]));
+    if(sec.subsections) return sec.subsections.flatMap(sub=>sub.grid?[]:filter(sub.items||[]));
     return filter(sec.items||[]);
   }
   const p=sec[sec.selectedPattern||'holiday'];
   if(!p) return [];
-  if(p.subsections) return p.subsections.flatMap(s=>filter(s.items||[]));
+  if(p.subsections) return p.subsections.flatMap(s=>s.grid?[]:filter(s.items||[]));
   return filter(p.items||[]);
 }
 
@@ -613,7 +930,11 @@ function progress(sec){
   return {done:items.filter(i=>i.checked).length,total:items.length};
 }
 
-function patrolItems(){ return S.patrol.filter(i=>!i.type); }
+function currentPatrolList(){
+  return S.patrolByPattern?.[S.patrolPattern || '施錠'] || S.patrol || [];
+}
+
+function patrolItems(){ return currentPatrolList().filter(i=>!i.type); }
 function patrolProgress(){
   const items=patrolItems();
   return {done:items.filter(i=>i.checked).length,total:items.length};
@@ -631,7 +952,7 @@ function uid(){ return 'i'+Date.now()+Math.random().toString(36).slice(2,6); }
 
 function render(){
   document.getElementById('hdrDate').textContent=dateStr();
-  document.getElementById('mainContent').innerHTML=S.sections.map(renderCard).join('');
+  document.getElementById('mainContent').innerHTML=renderOverview()+S.sections.map(renderCard).join('');
   const btn=document.getElementById('hdrEditBtn');
   btn.textContent=editMode?'✅ 完了':'✏️ 編集';
   btn.className=editMode?'hdr-btn edit-on':'hdr-btn';
@@ -643,12 +964,40 @@ function dateStr(){
   return `${d.getMonth()+1}/${d.getDate()}（${days[d.getDay()]}）`;
 }
 
+function renderOverview(){
+  const sectionTotals=S.sections.reduce((acc,sec)=>{
+    const p=progress(sec);
+    acc.done+=p.done;acc.total+=p.total;
+    return acc;
+  },{done:0,total:0});
+  const patrol=patrolProgress();
+  const pct=sectionTotals.total?Math.round(sectionTotals.done/sectionTotals.total*100):0;
+  const allDone=sectionTotals.total>0 && sectionTotals.done===sectionTotals.total;
+  const remaining=Math.max(sectionTotals.total-sectionTotals.done,0);
+  return `
+    <section class="overview${allDone?' complete':''}" style="--pct:${pct}%">
+      <div class="overview-top">
+        <div>
+          <div class="overview-kicker">${allDone?'MISSION COMPLETE':'TODAY CHECK'}</div>
+          <div class="overview-title">${allDone?'本日の警備任務、完了':'今日の警備チェック'}</div>
+          <div class="overview-sub">${allDone?'必要な確認項目はすべて完了しています。':'必要な作業を上から順に確認できます。迷ったら確認事項を開いてください。'}</div>
+          <div class="overview-complete-badge">任務完了。帰る前の最終確認まで終わっています。</div>
+        </div>
+        <div class="overview-ring"><span>${pct}%</span></div>
+      </div>
+      <div class="overview-stats">
+        <div class="stat"><div class="stat-label">全体</div><div class="stat-value">${sectionTotals.done}/${sectionTotals.total}</div></div>
+        <div class="stat"><div class="stat-label">残り</div><div class="stat-value">${remaining}</div></div>
+      </div>
+    </section>`;
+}
+
 function renderCard(sec){
   const {done,total}=progress(sec);
   const pct=total>0?Math.round(done/total*100):0;
   const isDone=total>0&&done===total;
   return `
-    <div class="card${isDone?' complete':''}" id="card-${sec.id}">
+    <div class="card${isDone?' complete':''}${sec.id==='notes'?' notes-card':''}" id="card-${sec.id}">
       <div class="card-hdr" onclick="toggleCard('${sec.id}')">
         <span class="card-icon">${sec.icon}</span>
         <div class="card-info">
@@ -667,9 +1016,9 @@ function renderCard(sec){
     </div>`;
 }
 
-function renderSubs(subs,secId){
+function renderSubs(subs,secId,sectionComplete=false){
   return subs.map(sub=>`
-    <div class="sub">
+    <div class="sub${isSubComplete(sub,sectionComplete)?' stamp-complete':''}${subClass(sub)}">
       ${sub.title?`<div class="sub-title">${sub.title}</div>`:''}
       ${sub.grid
         ?`<div class="chips">${(sub.items||[]).map(i=>renderItem(i,secId,true)).join('')}</div>`
@@ -678,8 +1027,23 @@ function renderSubs(subs,secId){
     </div>`).join('');
 }
 
+function subClass(sub){
+  if(!sub.title) return '';
+  if(sub.title.includes('最優先')) return ' priority-urgent';
+  if(sub.title.includes('記入・整理')) return ' priority-docs';
+  if(sub.title.includes('提出・報告')) return ' priority-report';
+  return '';
+}
+
+function isSubComplete(sub,sectionComplete=false){
+  if(!sub.completeStamp || sectionComplete) return false;
+  const items=(sub.items||[]).filter(i=>i.type!=='notice'&&i.type!=='label');
+  return items.length>0 && items.every(i=>i.checked);
+}
+
 function renderBody(sec){
   let h='';
+  const sectionComplete=progress(sec).total>0 && progress(sec).done===progress(sec).total;
   if(sec.type==='pattern'){
     const pat=sec.selectedPattern||'holiday';
     h+=`<div class="tabs">
@@ -689,7 +1053,7 @@ function renderBody(sec){
     const pData=sec[pat];
     if(pData){
       if(pData.subsections){
-        h+=renderSubs(pData.subsections,sec.id);
+        h+=renderSubs(pData.subsections,sec.id,sectionComplete);
       } else if(pData.items){
         h+=pData.items.map(i=>renderItem(i,sec.id)).join('');
       }
@@ -697,13 +1061,14 @@ function renderBody(sec){
     }
   } else {
     if(sec.subsections){
-      h+=renderSubs(sec.subsections,sec.id);
+      h+=renderSubs(sec.subsections,sec.id,sectionComplete);
     } else {
       h+=(sec.items||[]).map(i=>renderItem(i,sec.id)).join('');
       if(sec.hasPatrolList) h+=`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
     }
   }
   h+=`<div class="actions">
+    <button class="btn btn-close" onclick="closeSection('${sec.id}');event.stopPropagation()">▲ 閉じる</button>
     <button class="btn btn-sec" onclick="resetSection('${sec.id}');event.stopPropagation()">🔄 リセット</button>
     ${editMode?`<button class="btn btn-pri" onclick="addItem('${sec.id}');event.stopPropagation()">＋ 追加</button>`:''}
   </div>`;
@@ -712,9 +1077,9 @@ function renderBody(sec){
 
 function renderItem(item,sectionId='',isChip=false){
   if(isChip){
-    return `<div class="chip${item.checked?' chk':''}" onclick="toggle('${item.id}')">
-      <div class="chip-icon">${item.icon||'📦'}</div>
-      <div class="chip-text">${item.text}</div>
+    return `<div class="chip${item.rare?' rare':''}${item.text.includes('（装備品）')?' equipment':''}">
+      <div class="chip-icon">${iconHtml(item.icon||'📦')}</div>
+      <div class="chip-text">${formatChipText(item.text)}</div>
     </div>`;
   }
   if(item.type==='label'){
@@ -722,23 +1087,33 @@ function renderItem(item,sectionId='',isChip=false){
   }
   if(item.type==='notice'){
     return `<div class="item-notice">
-      <div class="item-notice-label">${item.text}</div>
+      <div class="item-notice-label">${item.icon?iconHtml(item.icon)+' ':''}${item.text}</div>
+      ${item.chips?`<div class="notice-chips">${item.chips.map(c=>`<span class="notice-chip">${c}</span>`).join('')}</div>`:''}
       ${item.hint?item.hint.split('\n').map(h=>`<div class="item-notice-hint">💬 ${h}</div>`).join(''):''}
     </div>`;
   }
   const del=editMode&&sectionId
     ?`<button class="item-del" onclick="deleteItem('${item.id}','${sectionId}');event.stopPropagation()">×</button>`
     :'';
+  const drag=editMode&&sectionId
+    ?`draggable="true" data-item-id="${item.id}" ondragstart="dragStart(event,'${item.id}')" ondragover="dragOver(event)" ondrop="dropItem(event,'${item.id}')" ondragend="dragEnd()" onpointerup="pointerDrop(event,'${item.id}')"`
+    :'';
+  const handle=editMode&&sectionId
+    ?`<button class="drag-handle" onpointerdown="pointerDragStart(event,'${item.id}')" onclick="event.stopPropagation()" aria-label="並び替え">⋮⋮</button>`
+    :'';
+  const punch=isPunchItem(item)?' punch':'';
+  const safe=item.safe?' safe-info':'';
+  const safeBadge=item.safe?'<span class="safe-badge">対応不要</span>':'';
+  const tagBadge=item.tag==='要注意'?'<span class="attention-badge">要注意</span>':item.tag==='電話のみ'?'<span class="phone-badge">電話のみ</span>':'';
   return `
-    <div class="item${item.warn?' warn':''}${item.danger?' danger':''}" onclick="toggle('${item.id}')">
+    <div class="item${item.warn?' warn':''}${item.danger?' danger':''}${punch}${safe}" ${drag} onclick="toggle('${item.id}')">
+      ${handle}
       <div class="cb${item.checked?' chk':''}"></div>
       <div class="item-main">
-        <span class="item-label${item.checked?' chk':''}">${item.icon?item.icon+' ':''}${item.text}</span>
-        ${item.hint?item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join(''):''}
-        ${item.lineMsg?`<div class="line-preview" onclick="event.stopPropagation()">
-          <div class="line-preview-bubble">${item.lineMsg}</div>
-        </div>
-        <a class="line-btn" href="line://msg/text/${encodeURIComponent(item.lineMsg)}" onclick="event.stopPropagation()">LINE で送る →</a>`:''}
+        <span class="item-label${item.checked?' chk':''}">${item.icon?iconHtml(item.icon)+' ':''}${item.text}${safeBadge}${tagBadge}</span>
+        ${renderHint(item)}
+        ${item.lineMsg?`<a class="line-btn" href="line://msg/text/${encodeURIComponent(item.lineMsg)}" onclick="event.stopPropagation()">LINE で送る →</a>`:''}
+        ${item.sharePhoto?`<button class="share-btn" onclick="shareLinePhoto('${item.id}');event.stopPropagation()">写真を選んで共有</button>`:''}
       </div>
       ${del}
     </div>`;
@@ -764,6 +1139,11 @@ function setPat(id,pat){
   if(s){s.selectedPattern=pat;render();}
 }
 
+function closeSection(id){
+  const s=S.sections.find(x=>x.id===id);
+  if(s){s.expanded=false;render();}
+}
+
 function findItem(id){
   for(const s of S.sections){
     for(const arr of [s.items,s.holiday?.items,s.weekday?.items]){
@@ -775,9 +1155,105 @@ function findItem(id){
   return null;
 }
 
+function findItemArray(id){
+  for(const s of S.sections){
+    for(const arr of [s.items,s.holiday?.items,s.weekday?.items]){
+      if(arr?.some(x=>x.id===id)) return arr;
+    }
+    const allSubs=[...(s.subsections||[]),...(s.holiday?.subsections||[]),...(s.weekday?.subsections||[])];
+    for(const sub of allSubs){
+      if(sub.items?.some(x=>x.id===id)) return sub.items;
+    }
+  }
+  return null;
+}
+
+function dragStart(event,id){
+  if(!editMode) return;
+  dragItemId=id;
+  event.dataTransfer?.setData('text/plain',id);
+  event.currentTarget.classList.add('dragging');
+}
+
+function dragOver(event){
+  if(editMode && dragItemId) event.preventDefault();
+}
+
+function dropItem(event,targetId){
+  if(!editMode) return;
+  event.preventDefault();
+  moveItem(dragItemId,targetId);
+  dragEnd();
+}
+
+function dragEnd(){
+  dragItemId=null;
+  document.querySelectorAll('.item.dragging').forEach(el=>el.classList.remove('dragging'));
+}
+
+function pointerDragStart(event,id){
+  if(!editMode) return;
+  pointerDragItemId=id;
+  dragItemId=id;
+  event.currentTarget.closest('.item')?.classList.add('dragging');
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+function pointerDrop(event,targetId){
+  if(!editMode || !pointerDragItemId) return;
+  event.preventDefault();
+  event.stopPropagation();
+  moveItem(pointerDragItemId,targetId);
+  pointerDragItemId=null;
+  dragEnd();
+}
+
+function moveItem(fromId,toId){
+  if(!fromId || !toId || fromId===toId) return;
+  const fromArr=findItemArray(fromId);
+  const toArr=findItemArray(toId);
+  if(!fromArr || fromArr!==toArr){
+    toast('同じグループ内で移動できます');
+    return;
+  }
+  const fromIdx=fromArr.findIndex(i=>i.id===fromId);
+  const toIdx=fromArr.findIndex(i=>i.id===toId);
+  if(fromIdx<0 || toIdx<0) return;
+  const [moved]=fromArr.splice(fromIdx,1);
+  fromArr.splice(toIdx,0,moved);
+  render();
+  toast('並び替えました');
+}
+
 function toggle(id){
+  if(dragItemId || pointerDragItemId) return;
   const i=findItem(id);
   if(i){i.checked=!i.checked;render();}
+}
+
+function shareLinePhoto(itemId){
+  const item=findItem(itemId);
+  const message=item?.lineMsg || '';
+  const input=document.createElement('input');
+  input.type='file';
+  input.accept='image/*';
+  input.onchange=async()=>{
+    const file=input.files?.[0];
+    if(!file) return;
+    try{
+      if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
+        await navigator.share({files:[file],text:message,title:'下番報告'});
+        return;
+      }
+    }catch(e){
+      return;
+    }
+    try{ await navigator.clipboard?.writeText(message); }catch(e){}
+    toast('写真共有に非対応です。文章はコピーしました');
+    location.href=`line://msg/text/${encodeURIComponent(message)}`;
+  };
+  input.click();
 }
 
 function resetSection(id){
@@ -786,6 +1262,25 @@ function resetSection(id){
   [s.items,s.holiday?.items,s.weekday?.items].forEach(arr=>arr?.forEach(i=>i.checked=false));
   [...(s.subsections||[]),...(s.holiday?.subsections||[]),...(s.weekday?.subsections||[])].forEach(sub=>sub.items?.forEach(i=>i.checked=false));
   render();toast('リセットしました');
+}
+
+function startShift(){
+  if(!confirm('すべてのチェックを外して、今日の勤務を開始しますか？\n手順やメモは残ります。')) return;
+  uncheckAllItems();
+  editMode=false;
+  render();
+  toast('勤務開始。チェックを外しました');
+}
+
+function uncheckAllItems(){
+  S.sections.forEach(s=>{
+    [s.items,s.holiday?.items,s.weekday?.items].forEach(arr=>arr?.forEach(i=>i.checked=false));
+    [...(s.subsections||[]),...(s.holiday?.subsections||[]),...(s.weekday?.subsections||[])].forEach(sub=>sub.items?.forEach(i=>i.checked=false));
+  });
+  S.kicha?.forEach(i=>i.checked=false);
+  S.patrol?.forEach(i=>{if(i.checked!==undefined)i.checked=false;});
+  Object.values(S.patrolByPattern||{}).forEach(list=>list.forEach(i=>{if(i.checked!==undefined)i.checked=false;}));
+  S.patrolPattern='';
 }
 
 function addItem(sectionId){
@@ -830,9 +1325,9 @@ function renderKicha(){
   const {done,total}=kichaProgress();
   document.getElementById('kichaProg').textContent=`${done}/${total}`;
   document.getElementById('kichaBody').innerHTML=S.kicha.map(item=>`
-    <div class="item" onclick="toggleKicha('${item.id}')">
+    <div class="item${item.warn?' warn':''}${item.danger?' danger':''}" onclick="toggleKicha('${item.id}')">
       <div class="cb${item.checked?' chk':''}"></div>
-      <div class="item-main"><span class="item-label${item.checked?' chk':''}">${item.icon?item.icon+' ':''}${item.text}</span></div>
+      <div class="item-main"><span class="item-label${item.checked?' chk':''}">${item.icon?iconHtml(item.icon)+' ':''}${item.text}</span></div>
     </div>`).join('');
 }
 
@@ -850,7 +1345,11 @@ function resetKicha(){
 // PATROL MODAL
 // ═══════════════════════════════════════
 
-function openPatrolModal(){renderPatrolList();openModal('patrolModal');}
+function openPatrolModal(){
+  S.patrolPattern='';
+  renderPatrolList();
+  openModal('patrolModal');
+}
 
 function setPatrolPattern(p){
   S.patrolPattern=p;
@@ -858,7 +1357,7 @@ function setPatrolPattern(p){
 }
 
 function renderPatrolList(){
-  ['施錠','維持','開錠'].forEach(p=>{
+  ['施錠','維持','解錠'].forEach(p=>{
     const el=document.getElementById('ptab-'+p);
     if(el) el.className=`patrol-tab ${p}${S.patrolPattern===p?' active':''}`;
   });
@@ -868,28 +1367,74 @@ function renderPatrolList(){
     document.getElementById('patrolListBody').innerHTML=`<div style="text-align:center;color:var(--text2);padding:40px 0;font-size:14px;">パターンを選択してください</div>`;
     return;
   }
-  document.getElementById('patrolListBody').innerHTML=S.patrol.map((item,idx)=>{
-    if(item.type==='div'){
-      const first=idx===0||S.patrol.slice(0,idx).every(x=>x.type);
-      return `<div class="p-div"${first?'':''} style="${first?'border-top:none;padding-top:4px;':''}">${item.text}</div>`;
+  const patrolList = currentPatrolList();
+  document.getElementById('patrolListBody').innerHTML=patrolList.map((item,idx)=>{
+      if(item.type==='div'){
+      const first=idx===0||patrolList.slice(0,idx).every(x=>x.type);
+      return `<div class="p-div"${first?'':''} style="${first?'border-top:none;padding-top:4px;':''}">${item.text}${renderPatrolGuideInline(item.hint)}</div>`;
     }
     if(item.type==='car') return `<div class="p-car">── 🚗 ここから車で移動 ──</div>`;
     if(item.type==='note') return `<div class="p-note">${item.text}</div>`;
     const note=S.patrolNotes[item.id]||'';
     const lines=note?note.split('\n').filter(l=>l.trim()):[];
+    const punch=isPunchItem(item)?' punch':'';
     return `
-      <div class="item" onclick="togglePatrol('${item.id}')">
+      <div class="item${punch}" onclick="togglePatrol('${item.id}')">
         <div class="cb${item.checked?' chk':''}"></div>
         <span class="item-main"><span class="item-label${item.checked?' chk':''}">${item.text}</span></span>
         <button class="item-note-btn${note?' has-note':''}" onclick="openNote('${item.id}');event.stopPropagation()">${note?'💬':'＋'}</button>
       </div>
+      ${renderPatrolGuide(item.hint)}
       ${lines.length?`<div style="padding:0 0 8px 36px;margin-top:-4px;">${lines.map(l=>`<div style="font-size:12px;color:var(--orange);padding:1px 0;">・${l}</div>`).join('')}</div>`:''}
     `;
   }).join('');
 }
 
+function isPunchItem(item){
+  return /打刻する|打刻 🔑/.test(item?.text||'');
+}
+
+function renderPatrolGuide(hint){
+  if(!hint) return '';
+  return `<div class="p-guide">${hint.split('\n').map(line=>`
+    <div class="p-guide-line"><span class="p-guide-icon">💬</span><span>${line}</span></div>
+  `).join('')}</div>`;
+}
+
+function renderPatrolGuideInline(hint){
+  if(!hint) return '';
+  const parts = hint.split('|');
+  return `<span class="p-div-note">💬 ${parts.map((p,idx)=>`
+    ${idx>0?'<span class="p-mini-arrow">→</span>':''}<span class="p-mini-step${isPunchStep(p)?' punch-step':''}">${p}</span>
+  `).join('')}</span>`;
+}
+
+function isPunchStep(text){
+  return /打刻$/.test(text) && !/打刻ドア/.test(text);
+}
+
+function renderHint(item){
+  if(!item.hint) return '';
+  if(item.steps){
+    return `<div class="steps">${item.steps.map((s,idx)=>`
+      <div class="step"><span class="step-num">${idx+1}</span><span>${s}</span></div>
+    `).join('')}</div>`;
+  }
+  return item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join('');
+}
+
+function iconHtml(icon){
+  if(icon==='u-lock') return '<span class="u-lock-icon" aria-label="ダイヤル式U字ロック"></span>';
+  if(icon==='phs') return '<span class="phs-icon" aria-label="PHS"></span>';
+  return icon;
+}
+
+function formatChipText(text){
+  return text.replace('（装備品）','<span class="chip-sub">装備品</span>');
+}
+
 function togglePatrol(id){
-  const i=S.patrol.find(x=>x.id===id);
+  const i=currentPatrolList().find(x=>x.id===id);
   if(i){i.checked=!i.checked;renderPatrolList();save();}
 }
 
@@ -904,7 +1449,7 @@ function resetPatrolList(){
 
 function openNote(patrolId){
   noteTarget=patrolId;
-  const item=S.patrol.find(x=>x.id===patrolId);
+  const item=currentPatrolList().find(x=>x.id===patrolId);
   document.getElementById('noteItemName').textContent=item?.text||'';
   document.getElementById('noteTextarea').value=S.patrolNotes[patrolId]||'';
   openModal('noteModal');
