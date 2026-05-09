@@ -82,6 +82,14 @@
     .item-notice-label{font-size:13px;font-weight:600;color:var(--orange);line-height:1.4;}
     .item-notice-hint{font-size:11px;color:rgba(245,158,11,.8);padding-top:3px;line-height:1.4;}
 
+    /* CHIP GRID */
+    .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px;}
+    .chip{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;text-align:center;transition:all .15s;min-height:72px;user-select:none;-webkit-user-select:none;}
+    .chip-icon{font-size:26px;margin-bottom:5px;line-height:1;}
+    .chip-text{font-size:10px;color:var(--text2);line-height:1.3;word-break:keep-all;}
+    .chip.chk{background:var(--accent);border-color:var(--accent);}
+    .chip.chk .chip-text{color:rgba(255,255,255,.85);}
+
     /* PATROL BTN */
     .patrol-btn{width:100%;padding:13px;margin-top:10px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:10px;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;text-align:center;}
 
@@ -231,24 +239,25 @@ const DEFAULT_PATROL = [
   {id:'pl3',text:'管理棟1階施錠確認'},{id:'pl4',text:'管理棟1階打刻 🔑'},
   {id:'pl5',text:'管理棟外観点検'},
   {id:'d2',type:'div',text:'🏭 設備棟'},
-  {id:'pl6',text:'発電設備施錠確認'},{id:'pl7',text:'設備棟外観点検'},
-  {id:'pl8',text:'設備棟内確認'},{id:'pl9',text:'設備棟打刻 🔑'},
+  {id:'pl9',text:'設備棟打刻 🔑'},{id:'pl6',text:'発電設備施錠確認'},
+  {id:'pl7',text:'設備棟外観点検'},{id:'pl8',text:'設備棟内確認'},
   {id:'d3',type:'div',text:'🏠 受付棟・計量棟'},
-  {id:'pl10',text:'受付棟内確認'},{id:'pl11',text:'受付棟打刻 🔑'},
-  {id:'pl12',text:'計量棟内確認'},{id:'pl13',text:'計量棟打刻 🔑'},
+  {id:'pl11',text:'受付棟打刻 🔑'},{id:'pl10',text:'受付棟内確認'},
+  {id:'pl13',text:'計量棟打刻 🔑'},{id:'pl12',text:'計量棟内確認'},
   {id:'pl14',text:'精算機施錠確認'},{id:'pl15',text:'受付棟・計量棟外観点検'},
   {id:'d4',type:'div',text:'🚻 トイレ・倉庫'},
   {id:'pl16',text:'トイレ施錠確認'},{id:'pl17',text:'倉庫施錠確認'},
   {id:'pl18',text:'トイレ・倉庫外観点検'},
   {id:'d5',type:'div',text:'🏠 車庫棟'},
-  {id:'pl19',text:'車庫棟外観点検'},{id:'pl20',text:'車庫棟内確認'},
-  {id:'pl21',text:'車庫棟打刻 🔑'},
+  {id:'pl21',text:'車庫棟打刻 🔑'},{id:'pl19',text:'車庫棟外観点検'},
+  {id:'pl20',text:'車庫棟内確認'},
   {id:'n1',type:'note',text:'※ 雪の場合：写真→LINEで本社報告→日報に記載'},
   {id:'dcar',type:'car'},
-  {id:'d6',type:'div',text:'🚧 敷地入口・洗車場・搬入路'},
-  {id:'pl22',text:'敷地入口施錠確認'},{id:'pl23',text:'敷地入口打刻 🔑'},
-  {id:'pl24',text:'車両洗車場確認'},{id:'pl25',text:'車両洗車場打刻 🔑'},
-  {id:'pl26',text:'埋立地搬入路確認'},{id:'pl27',text:'埋立地搬入路打刻 🔑'},
+  {id:'d6',type:'div',text:'🚧 敷地入口'},
+  {id:'pl23',text:'敷地入口打刻 🔑'},{id:'pl22',text:'敷地入口施錠確認'},
+  {id:'d6b',type:'div',text:'🚧 洗車場・搬入路'},
+  {id:'pl25',text:'車両洗車場打刻 🔑'},{id:'pl24',text:'車両洗車場確認'},
+  {id:'pl27',text:'埋立地搬入路打刻 🔑'},{id:'pl26',text:'埋立地搬入路確認'},
   {id:'d7',type:'div',text:'🏗 浸出水処理施設'},
   {id:'pl28',text:'浸出水処理施設 3F確認'},{id:'pl29',text:'浸出水処理施設 2F確認'},
   {id:'pl30',text:'浸出水処理施設 1F確認'},{id:'pl31',text:'浸出水処理施設打刻 🔑'},
@@ -299,57 +308,141 @@ const DEFAULT_SECTIONS = [
     selectedPattern:'holiday',
     holiday:{
       subsections:[
-        {id:'p1h_bag',title:'〔持ち物〕マスターキー2本',items:[
-          {id:'p1h1',text:'マスターキー2本'},
-          {id:'p1h2',text:'打刻機'},
-          {id:'p1h3',text:'懐中電灯（充電確認）'},
-          {id:'p1h4',text:'チェックリスト'},
-          {id:'p1h5',text:'ペン'},
-          {id:'p1h6',text:'入り口の看板（監視カメラ）'},
-          {id:'p1h7',text:'入り口のかぎ'},
-          {id:'p1h8',text:'車の鍵'},
+        {id:'p1h_bag',title:'〔持ち物〕',grid:true,items:[
+          {id:'p1h1',text:'マスターキー2本',icon:'🗝️'},
+          {id:'p1h2',text:'打刻機',icon:'⏱️'},
+          {id:'p1h3',text:'懐中電灯',icon:'🔦'},
+          {id:'p1h4',text:'チェックリスト',icon:'📋'},
+          {id:'p1h5',text:'ペン',icon:'✏️'},
+          {id:'p1h6',text:'看板（監視カメラ）',icon:'📷'},
+          {id:'p1h7',text:'入口のかぎ',icon:'🔑'},
+          {id:'p1h8',text:'車の鍵',icon:'🚗'},
         ]},
-        {id:'p1h_do',title:'〔巡回前〕ピッチ転送: 不在転送「307」',items:[
-          {id:'p1h9',text:'FAX転送「280」'},
-          {id:'p1h10',text:'打刻する'},
-          {id:'p1h11',text:'警備室の鍵を閉める'},
+        {id:'p1h_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+          {id:'p1h9',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p1h10',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p1h11',text:'警備室で打刻する'},
+          {id:'p1h12',text:'警備室の鍵を閉める'},
         ]}
-      ],
-      hasPatrolList:true
+      ]
     },
     weekday:{
-      items:[
-        {id:'p1w1',text:'FAX転送「280」'},
-        {id:'p1w2',text:'打刻する'},
-        {id:'p1w3',text:'警備室の鍵を閉める'},
-      ],
-      hasPatrolList:true
+      subsections:[
+        {id:'p1w_bag',title:'〔持ち物〕',grid:true,items:[
+          {id:'p1wb1',text:'マスターキー2本',icon:'🗝️'},
+          {id:'p1wb2',text:'打刻機',icon:'⏱️'},
+          {id:'p1wb3',text:'懐中電灯',icon:'🔦'},
+          {id:'p1wb4',text:'チェックリスト',icon:'📋'},
+          {id:'p1wb5',text:'ペン',icon:'✏️'},
+          {id:'p1wb6',text:'看板（監視カメラ）',icon:'📷'},
+          {id:'p1wb7',text:'入口の鍵（ダイヤル式）',icon:'🔑'},
+          {id:'p1wb8',text:'車の鍵',icon:'🚗'},
+        ]},
+        {id:'p1w_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+          {id:'p1w1',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p1w2',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p1w3',text:'警備室で打刻する'},
+          {id:'p1w4',text:'警備室の鍵を閉める'},
+        ]}
+      ]
     }
   },
   {
     id:'patrol2',icon:'🔵',title:'2回目の巡回',time:'20:00',type:'simple',expanded:false,
-    hasPatrolList:true,items:[{id:'p2_1',text:'巡回実施'}]
+    subsections:[
+      {id:'p2_bag',title:'〔持ち物〕',grid:true,items:[
+        {id:'p2b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p2b2',text:'打刻機',icon:'⏱️'},
+        {id:'p2b3',text:'懐中電灯',icon:'🔦'},
+        {id:'p2b4',text:'チェックリスト',icon:'📋'},
+        {id:'p2b5',text:'ペン',icon:'✏️'},
+        {id:'p2b6',text:'車の鍵',icon:'🚗'},
+      ]},
+      {id:'p2_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+        {id:'p2d1',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p2d2',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p2d3',text:'警備室で打刻する'},
+        {id:'p2d4',text:'警備室の鍵を閉める'},
+      ]}
+    ]
   },
   {
     id:'patrol3',icon:'🔵',title:'3回目の巡回',time:'23:00',type:'simple',expanded:false,
-    hasPatrolList:true,items:[{id:'p3_1',text:'巡回実施'}]
+    subsections:[
+      {id:'p3_bag',title:'〔持ち物〕',grid:true,items:[
+        {id:'p3b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p3b2',text:'打刻機',icon:'⏱️'},
+        {id:'p3b3',text:'懐中電灯',icon:'🔦'},
+        {id:'p3b4',text:'チェックリスト',icon:'📋'},
+        {id:'p3b5',text:'ペン',icon:'✏️'},
+        {id:'p3b6',text:'車の鍵',icon:'🚗'},
+      ]},
+      {id:'p3_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+        {id:'p3d1',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p3d2',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p3d3',text:'警備室で打刻する'},
+        {id:'p3d4',text:'警備室の鍵を閉める'},
+      ]}
+    ]
   },
   {
     id:'patrol4',icon:'⏰',title:'4回目の巡回',time:'1:30',type:'simple',expanded:false,
-    hasPatrolList:true,
-    items:[{id:'p4_1',text:'FAX転送確認'},{id:'p4_2',text:'巡回実施'}]
+    subsections:[
+      {id:'p4_bag',title:'〔持ち物〕',grid:true,items:[
+        {id:'p4b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p4b2',text:'打刻機',icon:'⏱️'},
+        {id:'p4b3',text:'懐中電灯',icon:'🔦'},
+        {id:'p4b4',text:'チェックリスト',icon:'📋'},
+        {id:'p4b5',text:'ペン',icon:'✏️'},
+        {id:'p4b6',text:'車の鍵',icon:'🚗'},
+      ]},
+      {id:'p4_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+        {id:'p4d1',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p4d2',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p4d3',text:'警備室で打刻する'},
+        {id:'p4d4',text:'警備室の鍵を閉める'},
+      ]}
+    ]
   },
   {
     id:'patrol5',icon:'⏰',title:'5回目の巡回',time:'3:30',type:'simple',expanded:false,
-    hasPatrolList:true,
-    items:[{id:'p5_1',text:'FAX転送確認'},{id:'p5_2',text:'巡回実施'}]
+    subsections:[
+      {id:'p5_bag',title:'〔持ち物〕',grid:true,items:[
+        {id:'p5b1',text:'マスターキー2本',icon:'🗝️'},
+        {id:'p5b2',text:'打刻機',icon:'⏱️'},
+        {id:'p5b3',text:'懐中電灯',icon:'🔦'},
+        {id:'p5b4',text:'チェックリスト',icon:'📋'},
+        {id:'p5b5',text:'ペン',icon:'✏️'},
+        {id:'p5b6',text:'車の鍵',icon:'🚗'},
+      ]},
+      {id:'p5_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+        {id:'p5d1',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+        {id:'p5d2',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p5d3',text:'警備室で打刻する'},
+        {id:'p5d4',text:'警備室の鍵を閉める'},
+      ]}
+    ]
   },
   {
     id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:20 / 5:30',type:'pattern',expanded:false,
     selectedPattern:'holiday',
     holiday:{
       subsections:[
-        {id:'p6h_main',title:'',hasPatrolList:true,items:[
+        {id:'p6h_bag',title:'〔持ち物〕',grid:true,items:[
+          {id:'p6hb1',text:'マスターキー2本',icon:'🗝️'},
+          {id:'p6hb2',text:'打刻機',icon:'⏱️'},
+          {id:'p6hb3',text:'懐中電灯',icon:'🔦'},
+          {id:'p6hb4',text:'チェックリスト',icon:'📋'},
+          {id:'p6hb5',text:'ペン',icon:'✏️'},
+          {id:'p6hb6',text:'車の鍵',icon:'🚗'},
+        ]},
+        {id:'p6h_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+          {id:'p6hd1',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p6hd2',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6hd3',text:'警備室で打刻する'},
+          {id:'p6hd4',text:'警備室の鍵を閉める'},
+        ]},
+        {id:'p6h_main',title:'5:30 巡回後',items:[
           {id:'p6h1',text:'5:30 巡回実施（施錠状態を維持・扉は開けない）'},
           {id:'p6h2',text:'懐中電灯を充電へ'},
         ]},
@@ -367,7 +460,21 @@ const DEFAULT_SECTIONS = [
     },
     weekday:{
       subsections:[
-        {id:'p6w_main',title:'',hasPatrolList:true,items:[
+        {id:'p6w_bag',title:'〔持ち物〕',grid:true,items:[
+          {id:'p6wb1',text:'マスターキー2本',icon:'🗝️'},
+          {id:'p6wb2',text:'打刻機',icon:'⏱️'},
+          {id:'p6wb3',text:'懐中電灯',icon:'🔦'},
+          {id:'p6wb4',text:'チェックリスト',icon:'📋'},
+          {id:'p6wb5',text:'ペン',icon:'✏️'},
+          {id:'p6wb6',text:'車の鍵',icon:'🚗'},
+        ]},
+        {id:'p6w_do',title:'〔巡回前〕',hasPatrolList:true,items:[
+          {id:'p6wd1',text:'ピッチ転送: 受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
+          {id:'p6wd2',text:'FAX転送: 転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6wd3',text:'警備室で打刻する'},
+          {id:'p6wd4',text:'警備室の鍵を閉める'},
+        ]},
+        {id:'p6w_main',title:'5:20 巡回後',items:[
           {id:'p6w1',text:'5:20 巡回実施（扉を開けていく）',hint:'従業員が入口で待っているため早めに'},
           {id:'p6w2',text:'懐中電灯を充電へ'},
         ]},
@@ -377,7 +484,7 @@ const DEFAULT_SECTIONS = [
           {id:'p6waf3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
           {id:'p6waf4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
           {id:'p6waf5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
-          {id:'p6waf6',text:'業務日誌（日報）を書く'},
+          {id:'p6waf6',text:'日報（警備報告書）を書く'},
           {id:'p6waf7',text:'チェックリストを書く'},
           {id:'p6waf8',text:'月報を書く'},
         ]}
@@ -412,7 +519,7 @@ let editMode = false;
 
 function loadState(){
   try{
-    const raw = localStorage.getItem('keibi_v4');
+    const raw = localStorage.getItem('keibi_v5');
     if(raw){ S = JSON.parse(raw); migrate(); }
     else initDefault();
   }catch(e){ initDefault(); }
@@ -422,6 +529,7 @@ function migrate(){
   if(!S.kicha) S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
   if(!S.patrolNotes) S.patrolNotes = {};
   if(S.patrolPattern===undefined) S.patrolPattern = '';
+  if(!S.sections) initDefault();
 }
 
 function initDefault(){
@@ -434,17 +542,19 @@ function initDefault(){
 }
 
 function deepClone(s){
+  const cloneSub=sub=>({...sub,items:(sub.items||[]).map(i=>({...i,checked:false}))});
   const n={...s};
   if(s.items) n.items=s.items.map(i=>({...i,checked:false}));
+  if(s.subsections) n.subsections=s.subsections.map(cloneSub);
   if(s.holiday){
     n.holiday={...s.holiday};
-    if(s.holiday.subsections) n.holiday.subsections=s.holiday.subsections.map(sub=>({...sub,items:sub.items.map(i=>({...i,checked:false}))}));
+    if(s.holiday.subsections) n.holiday.subsections=s.holiday.subsections.map(cloneSub);
     if(s.holiday.items) n.holiday.items=s.holiday.items.map(i=>({...i,checked:false}));
   }
   if(s.weekday){
     n.weekday={...s.weekday};
     if(s.weekday.items) n.weekday.items=s.weekday.items.map(i=>({...i,checked:false}));
-    if(s.weekday.subsections) n.weekday.subsections=s.weekday.subsections.map(sub=>({...sub,items:sub.items.map(i=>({...i,checked:false}))}));
+    if(s.weekday.subsections) n.weekday.subsections=s.weekday.subsections.map(cloneSub);
   }
   return n;
 }
@@ -453,13 +563,14 @@ function addChecked(sections){
   sections.forEach(s=>{
     const ck=arr=>{if(arr)arr.forEach(i=>{if(i.checked===undefined)i.checked=false;});};
     ck(s.items);
+    s.subsections?.forEach(sub=>ck(sub.items));
     ck(s.holiday?.items); ck(s.weekday?.items);
     s.holiday?.subsections?.forEach(sub=>ck(sub.items));
     s.weekday?.subsections?.forEach(sub=>ck(sub.items));
   });
 }
 
-function save(){ localStorage.setItem('keibi_v4',JSON.stringify(S)); }
+function save(){ localStorage.setItem('keibi_v5',JSON.stringify(S)); }
 
 // ═══════════════════════════════════════
 // HELPERS
@@ -467,11 +578,14 @@ function save(){ localStorage.setItem('keibi_v4',JSON.stringify(S)); }
 
 function allItems(sec){
   const filter=arr=>(arr||[]).filter(i=>i.type!=='notice');
-  if(sec.type==='simple') return filter(sec.items);
+  if(sec.type==='simple'){
+    if(sec.subsections) return sec.subsections.flatMap(sub=>filter(sub.items||[]));
+    return filter(sec.items||[]);
+  }
   const p=sec[sec.selectedPattern||'holiday'];
   if(!p) return [];
-  if(p.subsections) return p.subsections.flatMap(s=>filter(s.items));
-  return filter(p.items);
+  if(p.subsections) return p.subsections.flatMap(s=>filter(s.items||[]));
+  return filter(p.items||[]);
 }
 
 function progress(sec){
@@ -533,6 +647,17 @@ function renderCard(sec){
     </div>`;
 }
 
+function renderSubs(subs,secId){
+  return subs.map(sub=>`
+    <div class="sub">
+      ${sub.title?`<div class="sub-title">${sub.title}</div>`:''}
+      ${sub.grid
+        ?`<div class="chips">${(sub.items||[]).map(i=>renderItem(i,secId,true)).join('')}</div>`
+        :(sub.items||[]).map(i=>renderItem(i,secId)).join('')}
+      ${sub.hasPatrolList?`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`:''}
+    </div>`).join('');
+}
+
 function renderBody(sec){
   let h='';
   if(sec.type==='pattern'){
@@ -544,20 +669,19 @@ function renderBody(sec){
     const pData=sec[pat];
     if(pData){
       if(pData.subsections){
-        h+=pData.subsections.map(sub=>`
-          <div class="sub">
-            ${sub.title?`<div class="sub-title">${sub.title}</div>`:''}
-            ${sub.items.map(i=>renderItem(i,sec.id)).join('')}
-            ${sub.hasPatrolList?`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`:''}
-          </div>`).join('');
+        h+=renderSubs(pData.subsections,sec.id);
       } else if(pData.items){
         h+=pData.items.map(i=>renderItem(i,sec.id)).join('');
       }
       if(pData.hasPatrolList) h+=`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
     }
   } else {
-    h+=(sec.items||[]).map(i=>renderItem(i,sec.id)).join('');
-    if(sec.hasPatrolList) h+=`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
+    if(sec.subsections){
+      h+=renderSubs(sec.subsections,sec.id);
+    } else {
+      h+=(sec.items||[]).map(i=>renderItem(i,sec.id)).join('');
+      if(sec.hasPatrolList) h+=`<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
+    }
   }
   h+=`<div class="actions">
     <button class="btn btn-sec" onclick="resetSection('${sec.id}');event.stopPropagation()">🔄 リセット</button>
@@ -566,7 +690,13 @@ function renderBody(sec){
   return h;
 }
 
-function renderItem(item,sectionId=''){
+function renderItem(item,sectionId='',isChip=false){
+  if(isChip){
+    return `<div class="chip${item.checked?' chk':''}" onclick="toggle('${item.id}')">
+      <div class="chip-icon">${item.icon||'📦'}</div>
+      <div class="chip-text">${item.text}</div>
+    </div>`;
+  }
   if(item.type==='notice'){
     return `<div class="item-notice">
       <div class="item-notice-label">${item.text}</div>
@@ -612,9 +742,8 @@ function findItem(id){
     for(const arr of [s.items,s.holiday?.items,s.weekday?.items]){
       if(arr){const i=arr.find(x=>x.id===id);if(i)return i;}
     }
-    for(const subs of [s.holiday?.subsections,s.weekday?.subsections]){
-      if(subs){for(const sub of subs){const i=sub.items?.find(x=>x.id===id);if(i)return i;}}
-    }
+    const allSubs=[...(s.subsections||[]),...(s.holiday?.subsections||[]),...(s.weekday?.subsections||[])];
+    for(const sub of allSubs){const i=sub.items?.find(x=>x.id===id);if(i)return i;}
   }
   return null;
 }
@@ -628,8 +757,7 @@ function resetSection(id){
   const s=S.sections.find(x=>x.id===id);
   if(!s)return;
   [s.items,s.holiday?.items,s.weekday?.items].forEach(arr=>arr?.forEach(i=>i.checked=false));
-  s.holiday?.subsections?.forEach(sub=>sub.items?.forEach(i=>i.checked=false));
-  s.weekday?.subsections?.forEach(sub=>sub.items?.forEach(i=>i.checked=false));
+  [...(s.subsections||[]),...(s.holiday?.subsections||[]),...(s.weekday?.subsections||[])].forEach(sub=>sub.items?.forEach(i=>i.checked=false));
   render();toast('リセットしました');
 }
 
@@ -644,8 +772,8 @@ function addItem(sectionId){
     if(p?.subsections) p.subsections[p.subsections.length-1].items.push(item);
     else if(p?.items) p.items.push(item);
   } else {
-    if(!s.items)s.items=[];
-    s.items.push(item);
+    if(s.subsections) s.subsections[s.subsections.length-1].items.push(item);
+    else{if(!s.items)s.items=[];s.items.push(item);}
   }
   render();toast('追加しました');
 }
@@ -655,8 +783,7 @@ function deleteItem(itemId,sectionId){
   if(!s)return;
   const rm=arr=>{if(arr){const idx=arr.findIndex(i=>i.id===itemId);if(idx>-1)arr.splice(idx,1);}};
   rm(s.items);rm(s.holiday?.items);rm(s.weekday?.items);
-  s.holiday?.subsections?.forEach(sub=>rm(sub.items));
-  s.weekday?.subsections?.forEach(sub=>rm(sub.items));
+  [...(s.subsections||[]),...(s.holiday?.subsections||[]),...(s.weekday?.subsections||[])].forEach(sub=>rm(sub.items));
   render();toast('削除しました');
 }
 
