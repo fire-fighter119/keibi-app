@@ -118,8 +118,8 @@
     </div>
     <div class="modal-body">
       <div class="note-item-name" id="noteItemName"></div>
-      <span class="note-label">巡回時の注意事項・メモ</span>
-      <textarea class="note-area" id="noteTextarea" placeholder="ここにメモを入力…"></textarea>
+      <span class="note-label">巡回時の注意事項・メモ（複数行OK）</span>
+      <textarea class="note-area" id="noteTextarea" placeholder="1行目のメモ&#10;2行目のメモ&#10;3行目のメモ"></textarea>
     </div>
     <div class="modal-footer" style="display:flex;gap:8px;">
       <button class="btn btn-sec" onclick="deleteNote()">削除</button>
@@ -464,6 +464,7 @@ function renderPatrolList(){
   document.getElementById('patrolProg').textContent = `${done}/${total}`;
   document.getElementById('patrolListBody').innerHTML = S.patrol.map(item=>{
     const note = S.patrolNotes[item.id]||'';
+    const noteLines = note ? note.split('\n').filter(l=>l.trim()) : [];
     return `
       <div class="item" onclick="togglePatrol('${item.id}')">
         <div class="cb${item.checked?' chk':''}"></div>
@@ -473,7 +474,7 @@ function renderPatrolList(){
           ${note?'💬':'＋'}
         </button>
       </div>
-      ${note?`<div style="font-size:12px;color:var(--orange);padding:0 0 8px 36px;margin-top:-6px;">${note}</div>`:''}
+      ${noteLines.length?`<div style="padding:0 0 8px 36px;margin-top:-4px;">${noteLines.map(l=>`<div style="font-size:12px;color:var(--orange);padding:1px 0;">・${l}</div>`).join('')}</div>`:''}
     `;
   }).join('');
 }
