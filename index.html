@@ -82,6 +82,9 @@
     .item-notice-label{font-size:13px;font-weight:600;color:var(--orange);line-height:1.4;}
     .item-notice-hint{font-size:11px;color:rgba(245,158,11,.8);padding-top:3px;line-height:1.4;}
 
+    /* LINE BUTTON */
+    .line-btn{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:7px 16px;background:#06C755;border-radius:20px;color:#fff;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+
     /* CHIP GRID */
     .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px;}
     .chip{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;text-align:center;transition:all .15s;min-height:72px;user-select:none;-webkit-user-select:none;}
@@ -271,7 +274,7 @@ const DEFAULT_SECTIONS = [
   {
     id:'arrival',icon:'🏁',title:'着替え・出勤準備',time:'17:15〜',type:'simple',expanded:false,
     items:[
-      {id:'ar1',text:'上番報告'},
+      {id:'ar1',text:'上番報告',hint:'本部にLINEで「恵下埋立地、服部、上番します。」と報告',lineMsg:'恵下埋立地、服部、上番します。'},
       {id:'ar2',text:'正装で鍵・日報をもらう',hint:'制帽と名札を付ける\nノック＋「失礼します。警備につきます。」\n鍵2本あるか確認'},
       {id:'ar3',text:'前日までの日報を確認'},
       {id:'ar4',text:'月報記入'},
@@ -713,6 +716,7 @@ function renderItem(item,sectionId='',isChip=false){
       <div class="item-main">
         <span class="item-label${item.checked?' chk':''}">${item.text}</span>
         ${item.hint?item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join(''):''}
+        ${item.lineMsg?`<a class="line-btn" href="line://msg/text/${encodeURIComponent(item.lineMsg)}" onclick="event.stopPropagation()">📨 LINEで送る</a>`:''}
       </div>
       ${del}
     </div>`;
