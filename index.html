@@ -257,7 +257,7 @@ const DEFAULT_SECTIONS = [
     id:'arrival',icon:'🏁',title:'着替え・出勤準備',time:'17:15〜',type:'simple',expanded:false,
     items:[
       {id:'ar1',text:'上番報告'},
-      {id:'ar2',text:'正装で鍵・日報をもらう',hint:'制帽と名札を付ける。ノック＋「失礼します。警備につきます。」鍵2本あるか確認'},
+      {id:'ar2',text:'正装で鍵・日報をもらう',hint:'制帽と名札を付ける\nノック＋「失礼します。警備につきます。」\n鍵2本あるか確認'},
       {id:'ar3',text:'前日までの日報を確認'},
       {id:'ar4',text:'月報記入'},
       {id:'ar5',text:'チェックリスト記入'},
@@ -555,7 +555,7 @@ function renderItem(item,sectionId=''){
       <div class="cb${item.checked?' chk':''}"></div>
       <div class="item-main">
         <span class="item-label${item.checked?' chk':''}">${item.text}</span>
-        ${item.hint?`<div class="item-hint">💬 ${item.hint}</div>`:''}
+        ${item.hint?item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join(''):''}
       </div>
       ${del}
     </div>`;
