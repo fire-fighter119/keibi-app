@@ -77,6 +77,11 @@
     .item-note-btn.has-note{opacity:1;color:var(--orange);}
     .item-del{background:none;border:none;color:var(--red);font-size:20px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.7;margin-top:-3px;line-height:1;}
 
+    /* NOTICE ITEM */
+    .item-notice{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:10px 14px;margin:6px 0;cursor:default;}
+    .item-notice-label{font-size:13px;font-weight:600;color:var(--orange);line-height:1.4;}
+    .item-notice-hint{font-size:11px;color:rgba(245,158,11,.8);padding-top:3px;line-height:1.4;}
+
     /* PATROL BTN */
     .patrol-btn{width:100%;padding:13px;margin-top:10px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:10px;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;text-align:center;}
 
@@ -268,6 +273,7 @@ const DEFAULT_SECTIONS = [
       {id:'ar10',text:'打刻機からクマ鈴を外す（任意）'},
       {id:'ar11',text:'ピッチの電源「入」、ロックする'},
       {id:'ar12',text:'備品、紙等が少なくなってないか確認'},
+      {id:'ar_key',type:'notice',text:'🔑 入口の鍵の場所を確認',hint:'警備室にある場合：業者退去後の最初の巡回で持って出て施錠'},
     ]
   },
   {
@@ -460,11 +466,12 @@ function save(){ localStorage.setItem('keibi_v4',JSON.stringify(S)); }
 // ═══════════════════════════════════════
 
 function allItems(sec){
-  if(sec.type==='simple') return sec.items||[];
+  const filter=arr=>(arr||[]).filter(i=>i.type!=='notice');
+  if(sec.type==='simple') return filter(sec.items);
   const p=sec[sec.selectedPattern||'holiday'];
   if(!p) return [];
-  if(p.subsections) return p.subsections.flatMap(s=>s.items||[]);
-  return p.items||[];
+  if(p.subsections) return p.subsections.flatMap(s=>filter(s.items));
+  return filter(p.items);
 }
 
 function progress(sec){
@@ -560,6 +567,12 @@ function renderBody(sec){
 }
 
 function renderItem(item,sectionId=''){
+  if(item.type==='notice'){
+    return `<div class="item-notice">
+      <div class="item-notice-label">${item.text}</div>
+      ${item.hint?item.hint.split('\n').map(h=>`<div class="item-notice-hint">💬 ${h}</div>`).join(''):''}
+    </div>`;
+  }
   const del=editMode&&sectionId
     ?`<button class="item-del" onclick="deleteItem('${item.id}','${sectionId}');event.stopPropagation()">×</button>`
     :'';
