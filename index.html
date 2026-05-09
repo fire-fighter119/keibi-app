@@ -88,6 +88,13 @@
     .line-preview-name{font-size:10px;color:var(--text2);margin-bottom:5px;}
     .line-preview-bubble{display:inline-block;background:#06C755;color:#fff;font-size:13px;line-height:1.55;padding:9px 13px;border-radius:14px 14px 3px 14px;max-width:90%;}
 
+    /* SECTION LABEL (within simple list) */
+    .item-section-label{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.5px;padding:12px 0 5px;border-top:1px solid var(--border);margin-top:4px;}
+
+    /* WARN ITEM */
+    .item.warn .cb:not(.chk){border-color:var(--orange);background:rgba(245,158,11,.08);}
+    .item.warn .item-label:not(.chk){color:var(--orange);font-weight:700;}
+
     /* CHIP GRID */
     .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px;}
     .chip{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;text-align:center;transition:all .15s;min-height:72px;user-select:none;-webkit-user-select:none;}
@@ -278,18 +285,20 @@ const DEFAULT_SECTIONS = [
     id:'arrival',icon:'🏁',title:'着替え・出勤準備',time:'17:15〜',type:'simple',expanded:false,
     items:[
       {id:'ar1',text:'上番報告',hint:'本部にLINEで「恵下埋立地、服部です。上番します。よろしくお願いします。」と報告',lineMsg:'恵下埋立地、服部です。上番します。よろしくお願いします。'},
-      {id:'ar2',text:'正装で鍵・日報をもらう',hint:'制帽と名札を付ける\nノック＋「失礼します。警備につきます。」\n鍵2本あるか確認'},
-      {id:'ar3',text:'前日までの日報を確認'},
-      {id:'ar4',text:'月報記入'},
-      {id:'ar5',text:'チェックリスト記入'},
-      {id:'ar6',text:'日報記入',hint:'天気を忘れない'},
-      {id:'ar7',text:'三井開発来所時間、退所時間記入'},
-      {id:'ar8',text:'打刻機時刻確認',hint:'大幅にズレていたら時刻調整・電池交換'},
-      {id:'ar9',text:'打刻機からマスターキーを必ず外す'},
-      {id:'ar10',text:'打刻機からクマ鈴を外す（任意）'},
-      {id:'ar11',text:'ピッチの電源「入」、ロックする'},
-      {id:'ar12',text:'備品、紙等が少なくなってないか確認'},
-      {id:'ar_key',type:'notice',text:'🔑 入口の鍵の場所を確認',hint:'警備室にある場合：業者退去後の最初の巡回で持って出て施錠'},
+      {id:'ar2',text:'正装で鍵・日報をもらう',icon:'📥',hint:'制帽と名札を付ける\nノック＋「失礼します。警備につきます。」\n鍵2本あるか確認'},
+      {id:'ar3',text:'前日までの日報を確認',icon:'🔍'},
+      {id:'ar4',text:'月報記入',icon:'✏️'},
+      {id:'ar5',text:'チェックリスト記入',icon:'✏️'},
+      {id:'ar6',text:'日報（警備報告書）記入',icon:'✏️',hint:'天気を忘れない'},
+      {id:'ar7',text:'三井開発の来所・退所時間を記入',icon:'🕐',hint:'来所・退所のたびに時刻を記入'},
+      {id:'ar_lbl1',type:'label',text:'⏱️ 打刻機の準備'},
+      {id:'ar8',text:'打刻機の時刻確認',hint:'大幅にズレていたら時刻調整・電池交換'},
+      {id:'ar9',text:'マスターキーを打刻機から外す',warn:true,hint:'必ず外すこと！打刻機に付けたまま巡回しない'},
+      {id:'ar10',text:'クマ鈴を打刻機から外す',hint:'任意'},
+      {id:'ar_lbl2',type:'label',text:'📱 ピッチの準備'},
+      {id:'ar11',text:'ピッチを携帯する',hint:'電源「入」にする\nロックをする'},
+      {id:'ar12',text:'備品の在庫確認',hint:'残りが少なくなっていれば本部へ報告'},
+      {id:'ar_key',type:'notice',text:'🔑 入口の鍵の場所を確認',hint:'警備室にある場合：退所後の最初の巡回で持って出て施錠'},
     ]
   },
   {
@@ -584,7 +593,7 @@ function save(){ localStorage.setItem('keibi_v5',JSON.stringify(S)); }
 // ═══════════════════════════════════════
 
 function allItems(sec){
-  const filter=arr=>(arr||[]).filter(i=>i.type!=='notice');
+  const filter=arr=>(arr||[]).filter(i=>i.type!=='notice'&&i.type!=='label');
   if(sec.type==='simple'){
     if(sec.subsections) return sec.subsections.flatMap(sub=>filter(sub.items||[]));
     return filter(sec.items||[]);
@@ -704,6 +713,9 @@ function renderItem(item,sectionId='',isChip=false){
       <div class="chip-text">${item.text}</div>
     </div>`;
   }
+  if(item.type==='label'){
+    return `<div class="item-section-label">${item.text}</div>`;
+  }
   if(item.type==='notice'){
     return `<div class="item-notice">
       <div class="item-notice-label">${item.text}</div>
@@ -714,10 +726,10 @@ function renderItem(item,sectionId='',isChip=false){
     ?`<button class="item-del" onclick="deleteItem('${item.id}','${sectionId}');event.stopPropagation()">×</button>`
     :'';
   return `
-    <div class="item" onclick="toggle('${item.id}')">
+    <div class="item${item.warn?' warn':''}" onclick="toggle('${item.id}')">
       <div class="cb${item.checked?' chk':''}"></div>
       <div class="item-main">
-        <span class="item-label${item.checked?' chk':''}">${item.text}</span>
+        <span class="item-label${item.checked?' chk':''}">${item.icon?item.icon+' ':''}${item.text}</span>
         ${item.hint?item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join(''):''}
         ${item.lineMsg?`<div class="line-preview" onclick="event.stopPropagation()">
           <div class="line-preview-name">📨 本部へ送信</div>
