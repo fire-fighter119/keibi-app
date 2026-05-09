@@ -388,7 +388,7 @@ const DEFAULT_SECTIONS = [
 // STATE
 // ═══════════════════════════════════════
 
-let S = {sections:[],patrol:[],patrolNotes:{},patrolPattern:'維持',kicha:[]};
+let S = {sections:[],patrol:[],patrolNotes:{},patrolPattern:'',kicha:[]};
 let noteTarget = null;
 let editMode = false;
 
@@ -403,13 +403,13 @@ function loadState(){
 function migrate(){
   if(!S.kicha) S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
   if(!S.patrolNotes) S.patrolNotes = {};
-  if(!S.patrolPattern) S.patrolPattern = '維持';
+  if(S.patrolPattern===undefined) S.patrolPattern = '';
 }
 
 function initDefault(){
   S.patrol = DEFAULT_PATROL.map(i=>({...i}));
   S.patrolNotes = {};
-  S.patrolPattern = '維持';
+  S.patrolPattern = '';
   S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
   S.sections = DEFAULT_SECTIONS.map(deepClone);
   addChecked(S.sections);
@@ -678,13 +678,16 @@ function setPatrolPattern(p){
 }
 
 function renderPatrolList(){
-  // update tab styles
   ['施錠','維持','開錠'].forEach(p=>{
     const el=document.getElementById('ptab-'+p);
     if(el) el.className=`patrol-tab ${p}${S.patrolPattern===p?' active':''}`;
   });
   const {done,total}=patrolProgress();
-  document.getElementById('patrolProg').textContent=`${done}/${total}`;
+  document.getElementById('patrolProg').textContent=S.patrolPattern?`${done}/${total}`:'';
+  if(!S.patrolPattern){
+    document.getElementById('patrolListBody').innerHTML=`<div style="text-align:center;color:var(--text2);padding:40px 0;font-size:14px;">パターンを選択してください</div>`;
+    return;
+  }
   document.getElementById('patrolListBody').innerHTML=S.patrol.map((item,idx)=>{
     if(item.type==='div'){
       const first=idx===0||S.patrol.slice(0,idx).every(x=>x.type);
