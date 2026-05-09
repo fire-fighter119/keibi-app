@@ -353,7 +353,7 @@ const DEFAULT_SECTIONS = [
           {id:'p6af3',text:'打刻機を開けて記録取り出し・日報に貼り付け'},
           {id:'p6af4',text:'打刻機キーとクマ鈴を取り付けて箱に収納（以降使わない）'},
           {id:'p6af5',text:'ピッチのロック解除・電源OFFで箱にしまう'},
-          {id:'p6af6',text:'業務日誌（日報）を書く'},
+          {id:'p6af6',text:'日報（警備報告書）を書く'},
           {id:'p6af7',text:'チェックリストを書く'},
           {id:'p6af8',text:'月報を書く'},
         ]}
@@ -381,14 +381,17 @@ const DEFAULT_SECTIONS = [
   {
     id:'final',icon:'🏁',title:'帰る前に',time:'8:15',type:'simple',expanded:false,
     items:[
+      {id:'fi_c1',text:'三井開発の来所・退所時間の記入漏れ確認',hint:'8:15までに来所した場合は必ず記入'},
+      {id:'fi_c2',text:'日報（警備報告書）をスマホで写真撮影'},
       {id:'fi1',text:'電気・エアコンは必ず切る'},
       {id:'fi2',text:'ケトルのコンセントは抜く'},
       {id:'fi3',text:'換気扇は弱に戻す'},
       {id:'fi4',text:'ゴミは持ち帰る'},
-      {id:'fi5',text:'鍵・日報・チェックリストを提出'},
-      {id:'fi6',text:'月末なら月報も提出'},
       {id:'fi7',text:'充電器をしまう'},
-      {id:'fi8',text:'警備報告書をLINEで送り・下番報告'},
+      {id:'fi5',text:'鍵・日報・チェックリストを事務所へ提出'},
+      {id:'fi6',text:'月末なら月報も提出'},
+      {id:'fi8',text:'LINEで日報（写真）を本社へ送信'},
+      {id:'fi9',text:'下番報告'},
     ]
   },
 ];
