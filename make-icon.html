@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="c" width="512" height="512"></canvas>
+<a id="dl" download="icon.png">ダウンロード</a>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+ctx.fillStyle = '#0F172A';
+ctx.roundRect(0, 0, 512, 512, 80);
+ctx.fill();
+ctx.beginPath();
+ctx.arc(256, 256, 180, 0, Math.PI * 2);
+ctx.fillStyle = '#1E293B';
+ctx.fill();
+ctx.strokeStyle = '#3B82F6';
+ctx.lineWidth = 8;
+ctx.stroke();
+ctx.font = '200px serif';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+ctx.fillText('🛡️', 256, 270);
+document.getElementById('dl').href = c.toDataURL('image/png');
+document.getElementById('dl').click();
+</script>
+</body>
+</html>

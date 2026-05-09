@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="警備チェック">
+  <meta name="theme-color" content="#0F172A">
+  <title>警備チェック</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    :root{
+      --bg:#0F172A;--surface:#1E293B;--surface2:#293548;--border:#334155;
+      --text:#F1F5F9;--text2:#94A3B8;--accent:#3B82F6;--green:#22C55E;
+      --orange:#F59E0B;--red:#EF4444;--radius:14px;
+    }
+    body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;min-height:100vh;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);}
+    .hdr{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 16px;padding-top:calc(env(safe-area-inset-top,0px) + 12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .hdr-title{font-size:17px;font-weight:700;letter-spacing:-.3px;}
+    .hdr-right{display:flex;align-items:center;gap:10px;}
+    .hdr-date{font-size:13px;color:var(--text2);}
+    .hdr-reset{background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;}
+    .main{padding:12px;display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto;}
+    .card{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:border-color .2s;}
+    .card.complete{border-color:var(--green);}
+    .card-hdr{display:flex;align-items:center;padding:14px 16px;gap:10px;cursor:pointer;user-select:none;-webkit-user-select:none;}
+    .card-icon{font-size:20px;width:26px;text-align:center;flex-shrink:0;}
+    .card-info{flex:1;min-width:0;}
+    .card-title{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .card-time{font-size:12px;color:var(--text2);margin-top:2px;}
+    .card-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+    .card-prog{font-size:12px;color:var(--text2);min-width:32px;text-align:right;}
+    .card-prog.done{color:var(--green);}
+    .chevron{color:var(--text2);font-size:13px;transition:transform .25s;}
+    .chevron.open{transform:rotate(180deg);}
+    .pbar-wrap{height:3px;background:var(--border);}
+    .pbar{height:100%;background:var(--accent);transition:width .35s;}
+    .pbar.done{background:var(--green);}
+    .card-body{display:none;padding:0 16px 16px;}
+    .card-body.open{display:block;}
+    .tabs{display:flex;gap:6px;margin-top:12px;margin-bottom:12px;}
+    .tab{flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;text-align:center;transition:all .15s;}
+    .tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+    .sub{margin-bottom:10px;}
+    .sub-title{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+    .item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;}
+    .item:last-child{border-bottom:none;}
+    .cb{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .cb.chk{background:var(--accent);border-color:var(--accent);}
+    .cb.chk::after{content:'✓';color:#fff;font-size:14px;font-weight:700;}
+    .item-label{flex:1;font-size:14px;line-height:1.4;transition:color .15s;}
+    .item-label.chk{color:var(--text2);text-decoration:line-through;}
+    .item-note-btn{background:none;border:none;color:var(--text2);font-size:16px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.6;}
+    .item-note-btn.has-note{opacity:1;color:var(--orange);}
+    .patrol-btn{width:100%;padding:13px;margin-top:10px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:10px;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;text-align:center;letter-spacing:.2px;}
+    .actions{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+    .btn{flex:1;padding:11px;border-radius:10px;border:none;font-size:13px;font-weight:600;cursor:pointer;text-align:center;}
+    .btn-sec{background:var(--surface2);color:var(--text2);border:1px solid var(--border);}
+    .btn-pri{background:var(--accent);color:#fff;}
+    .modal{position:fixed;inset:0;z-index:200;display:none;}
+    .modal.open{display:flex;flex-direction:column;}
+    .modal-bd{position:absolute;inset:0;background:rgba(0,0,0,.7);}
+    .modal-sheet{position:relative;margin-top:auto;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,16px);}
+    .modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 2px;}
+    .modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;border-bottom:1px solid var(--border);}
+    .modal-title{font-size:16px;font-weight:700;}
+    .modal-close{background:var(--surface2);border:none;color:var(--text);width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .modal-body{overflow-y:auto;flex:1;padding:16px;-webkit-overflow-scrolling:touch;}
+    .modal-footer{padding:12px 16px;border-top:1px solid var(--border);}
+    .note-area{width:100%;min-height:120px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:12px;resize:none;font-family:inherit;outline:none;-webkit-appearance:none;}
+    .note-label{font-size:13px;color:var(--text2);margin-bottom:8px;display:block;}
+    .note-item-name{font-size:15px;font-weight:600;margin-bottom:12px;}
+    .toast{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:400;transition:transform .3s;white-space:nowrap;pointer-events:none;}
+    .toast.show{transform:translateX(-50%) translateY(0);}
+    .empty{text-align:center;color:var(--text2);font-size:13px;padding:20px 0;}
+  </style>
+</head>
+<body>
+
+<header class="hdr">
+  <h1 class="hdr-title">🛡️ 警備チェック</h1>
+  <div class="hdr-right">
+    <span class="hdr-date" id="hdrDate"></span>
+    <button class="hdr-reset" onclick="confirmFullReset()">全リセット</button>
+  </div>
+</header>
+
+<main class="main" id="mainContent"></main>
+
+<div class="modal" id="patrolModal">
+  <div class="modal-bd" onclick="closeModal('patrolModal')"></div>
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-hdr">
+      <span class="modal-title">📋 巡回リスト</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span id="patrolProg" style="font-size:13px;color:var(--text2)"></span>
+        <button class="modal-close" onclick="closeModal('patrolModal')">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="patrolListBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-sec" style="width:100%;padding:13px;" onclick="resetPatrolList()">🔄 巡回リストをリセット</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="noteModal">
+  <div class="modal-bd" onclick="closeNoteModal()"></div>
+  <div class="modal-sheet" style="max-height:70vh;">
+    <div class="modal-handle"></div>
+    <div class="modal-hdr">
+      <span class="modal-title">📝 メモ</span>
+      <button class="modal-close" onclick="closeNoteModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="note-item-name" id="noteItemName"></div>
+      <span class="note-label">巡回時の注意事項・メモ</span>
+      <textarea class="note-area" id="noteTextarea" placeholder="ここにメモを入力…"></textarea>
+    </div>
+    <div class="modal-footer" style="display:flex;gap:8px;">
+      <button class="btn btn-sec" onclick="deleteNote()">削除</button>
+      <button class="btn btn-pri" style="flex:2;" onclick="saveNote()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DEFAULT_PATROL = [
+  {id:'pl1',text:'管理棟2階施錠確認'},{id:'pl2',text:'管理棟2階打刻'},
+  {id:'pl3',text:'管理棟1階施錠確認'},{id:'pl4',text:'管理棟1階打刻'},
+  {id:'pl5',text:'管理棟外観点検'},{id:'pl6',text:'設備棟外観点検'},
+  {id:'pl7',text:'発電設備施錠確認'},{id:'pl8',text:'設備棟内確認'},
+  {id:'pl9',text:'設備棟打刻'},{id:'pl10',text:'受付棟内確認'},
+  {id:'pl11',text:'受付棟打刻'},{id:'pl12',text:'計量棟内確認'},
+  {id:'pl13',text:'計量棟打刻'},{id:'pl14',text:'精算機施錠確認'},
+  {id:'pl15',text:'受付棟・計量棟外観点検'},{id:'pl16',text:'トイレ施錠確認'},
+  {id:'pl17',text:'倉庫施錠確認'},{id:'pl18',text:'トイレ・倉庫外観点検'},
+  {id:'pl19',text:'車庫棟外観点検'},{id:'pl20',text:'車庫棟内確認'},
+  {id:'pl21',text:'車庫棟打刻'},{id:'pl22',text:'敷地入口施錠確認'},
+  {id:'pl23',text:'敷地入口打刻'},{id:'pl24',text:'車両洗車場確認'},
+  {id:'pl25',text:'車両洗車場打刻'},{id:'pl26',text:'埋立地搬入路確認'},
+  {id:'pl27',text:'埋立地搬入路打刻'},{id:'pl28',text:'浸出水処理施設 3F確認'},
+  {id:'pl29',text:'浸出水処理施設 2F確認'},{id:'pl30',text:'浸出水処理施設 1F確認'},
+  {id:'pl31',text:'浸出水処理施設打刻'},{id:'pl32',text:'浸出水処理施設施錠確認'},
+  {id:'pl33',text:'浸出水処理施設外観点検'},{id:'pl34',text:'敷地内車両点検'},
+];
+
+const DEFAULT_SECTIONS = [
+  {
+    id:'arrival',icon:'🏁',title:'出勤〜巡回まで',time:'17:15〜',type:'simple',expanded:false,
+    items:[
+      {id:'ar1',text:'着替え・身支度'},
+      {id:'ar2',text:'持ち物確認'},
+      {id:'ar3',text:'日報記入（上番）'},
+      {id:'ar4',text:'チェックリスト記入'},
+      {id:'ar5',text:'前任者からの引き継ぎ確認'},
+      {id:'ar6',text:'各設備の状況確認'},
+    ]
+  },
+  {
+    id:'patrol1',icon:'🔵',title:'1回目の巡回',time:'18:00',type:'pattern',expanded:false,
+    selectedPattern:'holiday',
+    holiday:{
+      subsections:[
+        {id:'p1h_bag',title:'持ち物',items:[
+          {id:'p1h1',text:'懐中電灯（充電確認）'},
+          {id:'p1h2',text:'ピッチ'},
+          {id:'p1h3',text:'鍵'},
+          {id:'p1h4',text:'巡回記録簿'},
+        ]},
+        {id:'p1h_do',title:'やること',items:[
+          {id:'p1h5',text:'FAX転送設定（転送→280）'},
+          {id:'p1h6',text:'入口施錠確認'},
+        ]}
+      ],
+      hasPatrolList:true
+    },
+    weekday:{
+      items:[
+        {id:'p1w1',text:'FAX転送設定（転送→280）'},
+        {id:'p1w2',text:'入口施錠確認'},
+      ],
+      hasPatrolList:true
+    }
+  },
+  {
+    id:'patrol2',icon:'🔵',title:'2回目の巡回',time:'20:00',type:'simple',expanded:false,
+    hasPatrolList:true,
+    items:[{id:'p2_1',text:'巡回実施'}]
+  },
+  {
+    id:'patrol3',icon:'🔵',title:'3回目の巡回',time:'23:00',type:'simple',expanded:false,
+    hasPatrolList:true,
+    items:[{id:'p3_1',text:'巡回実施'}]
+  },
+  {
+    id:'patrol4',icon:'⏰',title:'4回目の巡回',time:'1:30',type:'simple',expanded:false,
+    hasPatrolList:true,
+    items:[
+      {id:'p4_1',text:'FAX転送確認'},
+      {id:'p4_2',text:'巡回実施'},
+    ]
+  },
+  {
+    id:'patrol5',icon:'⏰',title:'5回目の巡回',time:'3:30',type:'simple',expanded:false,
+    hasPatrolList:true,
+    items:[
+      {id:'p5_1',text:'FAX転送確認'},
+      {id:'p5_2',text:'巡回実施'},
+    ]
+  },
+  {
+    id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:20 / 5:30',type:'pattern',expanded:false,
+    selectedPattern:'holiday',
+    holiday:{
+      items:[
+        {id:'p6h1',text:'5:20 巡回実施'},
+        {id:'p6h2',text:'懐中電灯を充電へ'},
+      ],
+      hasPatrolList:true
+    },
+    weekday:{
+      items:[
+        {id:'p6w1',text:'5:30 巡回実施'},
+        {id:'p6w2',text:'懐中電灯を充電へ'},
+      ],
+      hasPatrolList:true
+    }
+  },
+  {
+    id:'after',icon:'✅',title:'巡回後',time:'5:20以降',type:'simple',expanded:false,
+    items:[
+      {id:'af1',text:'ピッチ転送を元に戻す'},
+      {id:'af2',text:'懐中電灯の充電確認'},
+      {id:'af3',text:'5:20後の締め業務実施'},
+    ]
+  },
+  {
+    id:'final',icon:'🏁',title:'最終確認・下番',time:'8:15',type:'simple',expanded:false,
+    items:[
+      {id:'fi1',text:'日報記入（下番）'},
+      {id:'fi2',text:'鍵・日報・チェックリスト提出'},
+      {id:'fi3',text:'LINEで下番報告'},
+      {id:'fi4',text:'警備室の鍵を閉める'},
+    ]
+  }
+];
+
+let S = { sections:[], patrol:[], patrolNotes:{} };
+let noteTarget = null;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem('keibi_v3');
+    if(raw) S = JSON.parse(raw);
+    else initDefault();
+  }catch(e){ initDefault(); }
+}
+
+function initDefault(){
+  S.patrol = DEFAULT_PATROL.map(i=>({...i,checked:false}));
+  S.patrolNotes = {};
+  S.sections = DEFAULT_SECTIONS.map(deepClone);
+  addCheckedToItems(S.sections);
+}
+
+function deepClone(s){
+  const n = {...s};
+  if(s.items) n.items = s.items.map(i=>({...i,checked:false}));
+  if(s.holiday){
+    n.holiday = {...s.holiday};
+    if(s.holiday.subsections) n.holiday.subsections = s.holiday.subsections.map(sub=>({...sub,items:sub.items.map(i=>({...i,checked:false}))}));
+    if(s.holiday.items) n.holiday.items = s.holiday.items.map(i=>({...i,checked:false}));
+  }
+  if(s.weekday){
+    n.weekday = {...s.weekday};
+    if(s.weekday.items) n.weekday.items = s.weekday.items.map(i=>({...i,checked:false}));
+  }
+  return n;
+}
+
+function addCheckedToItems(sections){
+  sections.forEach(s=>{
+    if(s.items) s.items.forEach(i=>{if(i.checked===undefined)i.checked=false;});
+    if(s.holiday?.subsections) s.holiday.subsections.forEach(sub=>sub.items?.forEach(i=>{if(i.checked===undefined)i.checked=false;}));
+    if(s.holiday?.items) s.holiday.items.forEach(i=>{if(i.checked===undefined)i.checked=false;});
+    if(s.weekday?.items) s.weekday.items.forEach(i=>{if(i.checked===undefined)i.checked=false;});
+  });
+}
+
+function save(){ localStorage.setItem('keibi_v3', JSON.stringify(S)); }
+
+function allItems(section){
+  if(section.type==='simple') return section.items||[];
+  const pat = section[section.selectedPattern||'holiday'];
+  if(!pat) return [];
+  if(pat.subsections) return pat.subsections.flatMap(s=>s.items||[]);
+  return pat.items||[];
+}
+
+function progress(section){
+  const items = allItems(section);
+  return {done:items.filter(i=>i.checked).length, total:items.length};
+}
+
+function patrolProgress(){
+  const done = S.patrol.filter(i=>i.checked).length;
+  return {done, total:S.patrol.length};
+}
+
+function uid(){ return 'i'+Date.now()+Math.random().toString(36).slice(2,6); }
+
+function render(){
+  document.getElementById('hdrDate').textContent = dateStr();
+  document.getElementById('mainContent').innerHTML = S.sections.map(renderCard).join('');
+  save();
+}
+
+function dateStr(){
+  const d=new Date(), days=['日','月','火','水','木','金','土'];
+  return `${d.getMonth()+1}/${d.getDate()}（${days[d.getDay()]}）`;
+}
+
+function renderCard(sec){
+  const {done,total} = progress(sec);
+  const pct = total>0?Math.round(done/total*100):0;
+  const isDone = total>0&&done===total;
+  return `
+    <div class="card${isDone?' complete':''}" id="card-${sec.id}">
+      <div class="card-hdr" onclick="toggleCard('${sec.id}')">
+        <span class="card-icon">${sec.icon}</span>
+        <div class="card-info">
+          <div class="card-title">${sec.title}</div>
+          <div class="card-time">${sec.time}</div>
+        </div>
+        <div class="card-right">
+          <span class="card-prog${isDone?' done':''}">${done}/${total}</span>
+          <span class="chevron${sec.expanded?' open':''}">▾</span>
+        </div>
+      </div>
+      <div class="pbar-wrap"><div class="pbar${isDone?' done':''}" style="width:${pct}%"></div></div>
+      <div class="card-body${sec.expanded?' open':''}">
+        ${renderBody(sec)}
+      </div>
+    </div>`;
+}
+
+function renderBody(sec){
+  let h = '';
+  if(sec.type==='pattern'){
+    const pat = sec.selectedPattern||'holiday';
+    h += `<div class="tabs">
+      <button class="tab${pat==='holiday'?' active':''}" onclick="setPat('${sec.id}','holiday');event.stopPropagation()">🗓 休日</button>
+      <button class="tab${pat==='weekday'?' active':''}" onclick="setPat('${sec.id}','weekday');event.stopPropagation()">💼 平日</button>
+    </div>`;
+    const pData = sec[pat];
+    if(pData){
+      if(pData.subsections){
+        h += pData.subsections.map(sub=>`
+          <div class="sub">
+            <div class="sub-title">${sub.title}</div>
+            ${sub.items.map(i=>renderItem(i)).join('')}
+          </div>`).join('');
+      } else if(pData.items){
+        h += pData.items.map(i=>renderItem(i)).join('');
+      }
+      if(pData.hasPatrolList) h += renderPatrolBtn();
+    }
+  } else {
+    h += (sec.items||[]).map(i=>renderItem(i)).join('');
+    if(sec.hasPatrolList) h += renderPatrolBtn();
+  }
+  h += `<div class="actions">
+    <button class="btn btn-sec" onclick="resetSection('${sec.id}');event.stopPropagation()">🔄 リセット</button>
+    <button class="btn btn-pri" onclick="addItem('${sec.id}');event.stopPropagation()">＋ 追加</button>
+  </div>`;
+  return h;
+}
+
+function renderItem(item){
+  return `<div class="item" onclick="toggle('${item.id}')">
+    <div class="cb${item.checked?' chk':''}"></div>
+    <span class="item-label${item.checked?' chk':''}">${item.text}</span>
+  </div>`;
+}
+
+function renderPatrolBtn(){
+  return `<button class="patrol-btn" onclick="openPatrolModal();event.stopPropagation()">📋 巡回リストを開く →</button>`;
+}
+
+function toggleCard(id){
+  const s = S.sections.find(x=>x.id===id);
+  if(s){ s.expanded=!s.expanded; render(); }
+}
+
+function setPat(id,pat){
+  const s = S.sections.find(x=>x.id===id);
+  if(s){ s.selectedPattern=pat; render(); }
+}
+
+function findItem(id){
+  for(const s of S.sections){
+    for(const arr of [s.items, s.holiday?.items, s.weekday?.items]){
+      if(arr){ const i=arr.find(x=>x.id===id); if(i)return i; }
+    }
+    if(s.holiday?.subsections){
+      for(const sub of s.holiday.subsections){
+        const i=sub.items?.find(x=>x.id===id); if(i)return i;
+      }
+    }
+  }
+  return null;
+}
+
+function toggle(id){
+  const i=findItem(id);
+  if(i){ i.checked=!i.checked; render(); }
+}
+
+function resetSection(id){
+  const s=S.sections.find(x=>x.id===id);
+  if(!s)return;
+  [s.items,s.holiday?.items,s.weekday?.items].forEach(arr=>arr?.forEach(i=>i.checked=false));
+  s.holiday?.subsections?.forEach(sub=>sub.items?.forEach(i=>i.checked=false));
+  render(); toast('リセットしました');
+}
+
+function addItem(sectionId){
+  const text = prompt('追加する項目：');
+  if(!text||!text.trim())return;
+  const s = S.sections.find(x=>x.id===sectionId);
+  if(!s)return;
+  const item = {id:uid(),text:text.trim(),checked:false};
+  if(s.type==='pattern'){
+    const pat = s[s.selectedPattern||'holiday'];
+    if(pat?.subsections) pat.subsections[pat.subsections.length-1].items.push(item);
+    else if(pat?.items) pat.items.push(item);
+  } else {
+    if(!s.items)s.items=[];
+    s.items.push(item);
+  }
+  render(); toast('追加しました');
+}
+
+function confirmFullReset(){
+  if(confirm('全セクションとフォームをリセットします。よろしいですか？')){
+    initDefault(); render(); toast('全リセット完了');
+  }
+}
+
+function openPatrolModal(){
+  renderPatrolList();
+  openModal('patrolModal');
+}
+
+function renderPatrolList(){
+  const {done,total} = patrolProgress();
+  document.getElementById('patrolProg').textContent = `${done}/${total}`;
+  document.getElementById('patrolListBody').innerHTML = S.patrol.map(item=>{
+    const note = S.patrolNotes[item.id]||'';
+    return `
+      <div class="item" onclick="togglePatrol('${item.id}')">
+        <div class="cb${item.checked?' chk':''}"></div>
+        <span class="item-label${item.checked?' chk':''}">${item.text}</span>
+        <button class="item-note-btn${note?' has-note':''}"
+          onclick="openNote('${item.id}');event.stopPropagation()">
+          ${note?'💬':'＋'}
+        </button>
+      </div>
+      ${note?`<div style="font-size:12px;color:var(--orange);padding:0 0 8px 36px;margin-top:-6px;">${note}</div>`:''}
+    `;
+  }).join('');
+}
+
+function togglePatrol(id){
+  const i=S.patrol.find(x=>x.id===id);
+  if(i){ i.checked=!i.checked; renderPatrolList(); save(); }
+}
+
+function resetPatrolList(){
+  S.patrol.forEach(i=>i.checked=false);
+  renderPatrolList(); save(); toast('巡回リストをリセットしました');
+}
+
+function addPatrolItem(){
+  const text=prompt('巡回リストに追加：');
+  if(!text||!text.trim())return;
+  S.patrol.push({id:uid(),text:text.trim(),checked:false});
+  renderPatrolList(); save(); toast('追加しました');
+}
+
+function openNote(patrolId){
+  noteTarget = patrolId;
+  const item = S.patrol.find(x=>x.id===patrolId);
+  document.getElementById('noteItemName').textContent = item?.text||'';
+  document.getElementById('noteTextarea').value = S.patrolNotes[patrolId]||'';
+  openModal('noteModal');
+  setTimeout(()=>document.getElementById('noteTextarea').focus(),300);
+}
+
+function saveNote(){
+  if(!noteTarget)return;
+  const val=document.getElementById('noteTextarea').value.trim();
+  if(val) S.patrolNotes[noteTarget]=val;
+  else delete S.patrolNotes[noteTarget];
+  closeNoteModal(); save(); toast('メモを保存しました');
+}
+
+function deleteNote(){
+  if(!noteTarget)return;
+  delete S.patrolNotes[noteTarget];
+  closeNoteModal(); save(); toast('メモを削除しました');
+}
+
+function closeNoteModal(){
+  closeModal('noteModal');
+  noteTarget=null;
+  if(document.getElementById('patrolModal').classList.contains('open')) renderPatrolList();
+}
+
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  const anyOpen = document.querySelector('.modal.open');
+  if(!anyOpen) document.body.style.overflow='';
+}
+
+let _tt;
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(_tt); _tt=setTimeout(()=>el.classList.remove('show'),2200);
+}
+
+loadState();
+render();
+setInterval(()=>document.getElementById('hdrDate').textContent=dateStr(), 60000);
+
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
