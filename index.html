@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-title" content="警備チェック">
   <meta name="theme-color" content="#070B13">
   <title>警備チェック</title>
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json?v=14">
   <link rel="apple-touch-icon" href="icon.png">
   <style>
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -1705,7 +1705,7 @@ function toast(msg){
 loadState();
 render();
 setInterval(()=>document.getElementById('hdrDate').textContent=dateStr(),60000);
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js?v=14').catch(()=>{});
 </script>
 </body>
 </html>
