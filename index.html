@@ -579,7 +579,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p1_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p1d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p1d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p1d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「FAX音」を確認。'},
         {id:'p1d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p1d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -603,7 +603,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p2_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p2d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p2d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p2d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「FAX音」を確認。'},
         {id:'p2d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p2d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -627,7 +627,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p3_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p3d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p3d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p3d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「FAX音」を確認。'},
         {id:'p3d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p3d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -651,7 +651,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p4_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p4d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p4d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p4d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「FAX音」を確認。'},
         {id:'p4d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p4d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -675,7 +675,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p5_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p5d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p5d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p5d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「FAX音」を確認。'},
         {id:'p5d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p5d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -701,16 +701,16 @@ const DEFAULT_SECTIONS = [
         ]},
         {id:'p6h_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
           {id:'p6hd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p6hd2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6hd2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「FAX音」を確認。'},
           {id:'p6hd3',text:'警備室で打刻する',icon:'⏱️'},
-          {id:'p6hd4',text:'警備室の鍵を閉める',icon:'🔒'},
+          {id:'p6hd4',text:'警備室の鍵を開ける',icon:'🔓'},
         ]},
         {id:'p6h_after_urgent',title:'〔巡回後にすること｜最優先〕',items:[
           {id:'p6h_urgent_record',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
           {id:'p6h_urgent_light',text:'懐中電灯を充電（立てて充電）',icon:'🔦',warn:true},
         ]},
         {id:'p6h_after_docs',title:'〔記入・整理〕',completeStamp:true,items:[
-          {id:'p6h_docs_pitch_transfer',text:'ピッチ転送を解除',icon:'📞'},
+          {id:'p6h_docs_pitch_transfer',text:'ピッチ転送を解除',icon:'📞',hint:'受話器を上げる → 不在転送ボタンを押す → 「完了」を確認'},
           {id:'p6h_docs_pitch_box',text:'ピッチのロック解除・充電確認・電源OFFにして箱に収納',icon:'phs'},
           {id:'p6h_docs_stamp_box',text:'打刻機に打刻機キーとクマ鈴をつけて箱に収納',icon:'📦'},
           {id:'p6h_docs_checklist',text:'チェックリストの記入（完成）',icon:'✅'},
@@ -738,16 +738,16 @@ const DEFAULT_SECTIONS = [
         ]},
         {id:'p6w_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
           {id:'p6wd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p6wd2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6wd2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「FAX音」を確認。'},
           {id:'p6wd3',text:'警備室で打刻する',icon:'⏱️'},
-          {id:'p6wd4',text:'警備室の鍵を閉める',icon:'🔒'},
+          {id:'p6wd4',text:'警備室の鍵を開ける',icon:'🔓'},
         ]},
         {id:'p6w_after_urgent',title:'〔巡回後にすること｜最優先〕',items:[
           {id:'p6w_urgent_record',text:'打刻機を開けて記録を取り出し・日報に貼り付ける',icon:'⏱️',danger:true},
           {id:'p6w_urgent_light',text:'懐中電灯を充電（立てて充電）',icon:'🔦',warn:true},
         ]},
         {id:'p6w_after_docs',title:'〔記入・整理〕',completeStamp:true,items:[
-          {id:'p6w_docs_pitch_transfer',text:'ピッチ転送を解除',icon:'📞'},
+          {id:'p6w_docs_pitch_transfer',text:'ピッチ転送を解除',icon:'📞',hint:'受話器を上げる → 不在転送ボタンを押す → 「完了」を確認'},
           {id:'p6w_docs_pitch_box',text:'ピッチのロック解除・充電確認・電源OFFにして箱に収納',icon:'phs'},
           {id:'p6w_docs_stamp_box',text:'打刻機に打刻機キーとクマ鈴をつけて箱に収納',icon:'📦'},
           {id:'p6w_docs_checklist',text:'チェックリストの記入（完成）',icon:'✅'},
@@ -788,7 +788,7 @@ let pointerDragItemId = null;
 let shareFiles = {};
 let currentAlarmSection = null;
 const PITCH_STEPS = ['受話器をあげる','不在転送を押す','「307」をダイヤル','「完了」を確認'];
-const FAX_STEPS = ['受話器をあげる','転送ボタンを押す','「280」をダイヤル','「完了」を確認'];
+const FAX_STEPS = ['受話器をあげる','転送ボタンを押す','「280」をダイヤル','「FAX音」を確認'];
 
 function loadState(){
   try{
