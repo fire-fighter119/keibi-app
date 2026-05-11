@@ -55,22 +55,26 @@
     .stat-value{font-size:15px;font-weight:850;margin-top:3px;}
 
     /* CARD */
-    .card{background:radial-gradient(circle at 96% 0%,rgba(244,199,106,.12),transparent 28%),linear-gradient(180deg,#182944,#101A2A);border-radius:10px;overflow:hidden;border:2px solid rgba(244,199,106,.38);transition:border-color .2s,transform .2s,background .2s;box-shadow:0 12px 28px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.1),inset 0 0 0 1px rgba(255,255,255,.06);}
+    .card{background:#05080F;border-radius:10px;overflow:hidden;border:2px solid rgba(255,107,94,.42);transition:border-color .2s,transform .2s,background .2s;box-shadow:0 12px 28px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.07),inset 0 0 0 1px rgba(255,255,255,.04);}
     .card.complete{position:relative;border-color:rgba(34,197,94,.82);background:linear-gradient(135deg,rgba(23,55,33,.98),rgba(27,29,24,.96));box-shadow:0 0 0 1px rgba(34,197,94,.18),0 14px 34px rgba(34,197,94,.12),0 8px 22px rgba(0,0,0,.2);}
     .card.complete::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#22C55E,#A3E635,#22C55E);}
-    .card.complete::after{content:'完了';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-11deg);padding:11px 26px;border:4px double rgba(255,72,56,.88);border-radius:12px;color:#FF4B3E;background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.1),transparent 30%),repeating-linear-gradient(-18deg,rgba(255,75,62,.12) 0 2px,rgba(255,75,62,.02) 2px 5px),rgba(55,10,8,.22);font-size:32px;font-weight:950;letter-spacing:5px;line-height:1;box-shadow:0 0 0 1px rgba(255,75,62,.16),inset 0 0 0 2px rgba(255,75,62,.16),0 10px 24px rgba(0,0,0,.22);opacity:.94;pointer-events:none;z-index:2;text-shadow:1px 1px 0 rgba(80,0,0,.18),-1px 0 0 rgba(255,120,110,.18);mix-blend-mode:screen;}
+    .card.complete::after{content:'完了';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-11deg);padding:11px 26px;border:4px double rgba(55,214,122,.9);border-radius:12px;color:#7CFFAE;background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.12),transparent 30%),repeating-linear-gradient(-18deg,rgba(55,214,122,.16) 0 2px,rgba(55,214,122,.035) 2px 5px),rgba(5,45,22,.28);font-size:32px;font-weight:950;letter-spacing:5px;line-height:1;box-shadow:0 0 0 1px rgba(55,214,122,.2),inset 0 0 0 2px rgba(55,214,122,.18),0 10px 24px rgba(0,0,0,.22),0 0 28px rgba(55,214,122,.16);opacity:.94;pointer-events:none;z-index:2;text-shadow:1px 1px 0 rgba(0,70,25,.24),0 0 14px rgba(124,255,174,.2);mix-blend-mode:screen;}
     .card.complete .card-icon{background:rgba(34,197,94,.18);box-shadow:inset 0 0 0 1px rgba(34,197,94,.22);}
     .card.complete .card-title{color:#E9FFE9;}
-    .card-hdr{display:flex;align-items:center;padding:15px 15px;gap:11px;cursor:pointer;user-select:none;-webkit-user-select:none;background:linear-gradient(90deg,rgba(255,255,255,.035),transparent 62%);}
-    .card-icon{font-size:20px;width:34px;height:34px;border-radius:8px;background:linear-gradient(145deg,#2B4772,#1C3152);border:1px solid rgba(244,199,106,.5);display:flex;align-items:center;justify-content:center;text-align:center;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 6px 14px rgba(0,0,0,.2);}
+    .card.expanded{border-color:rgba(255,107,94,.76);box-shadow:0 14px 32px rgba(0,0,0,.42),0 0 0 1px rgba(255,107,94,.18),inset 5px 0 0 rgba(255,107,94,.88);}
+    .card-hdr{display:flex;align-items:center;padding:15px 15px;gap:11px;cursor:pointer;user-select:none;-webkit-user-select:none;background:radial-gradient(circle at 100% 0%,rgba(255,209,102,.2),transparent 28%),linear-gradient(180deg,#4A1E28,#2A1420);border-bottom:2px solid rgba(255,107,94,.48);}
+    .card-icon{font-size:20px;width:34px;height:34px;border-radius:8px;background:linear-gradient(145deg,#6B2B35,#351521);border:1px solid rgba(255,177,168,.56);display:flex;align-items:center;justify-content:center;text-align:center;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 6px 14px rgba(0,0,0,.24);}
     .card-info{flex:1;min-width:0;}
-    .card-title{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0;}
-    .card-time{font-size:12px;color:#D7E4F7;margin-top:3px;white-space:normal;line-height:1.35;overflow-wrap:anywhere;}
+    .card-title{font-size:15px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0;color:#FFF4F1;}
+    .card-time{font-size:12px;color:#FFD2CC;margin-top:3px;white-space:normal;line-height:1.35;overflow-wrap:anywhere;}
     .card-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
     .card-prog{font-size:12px;color:#EAF2FF;min-width:40px;text-align:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:4px 7px;font-weight:900;}
     .card-prog.done{color:var(--green);}
     .chevron{color:var(--text2);font-size:13px;transition:transform .25s;}
     .chevron.open{transform:rotate(180deg);}
+    .alarm-pill{display:inline-flex;align-items:center;justify-content:center;gap:3px;width:74px;min-height:30px;border-radius:999px;border:1px solid rgba(255,107,94,.56);background:rgba(255,107,94,.13);color:#FFD2CC;font-size:11px;font-weight:950;line-height:1;cursor:pointer;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+    .alarm-pill.set{border-color:#FF6B5E;background:#FF6B5E;color:#1B0706;box-shadow:0 0 0 3px rgba(255,107,94,.2),0 6px 16px rgba(255,107,94,.18);}
+    .alarm-pill span{font-variant-numeric:tabular-nums;}
 
     /* PROGRESS BAR */
     .pbar-wrap{height:4px;background:rgba(255,255,255,.18);}
@@ -78,7 +82,7 @@
     .pbar.done{background:var(--green);}
 
     /* BODY */
-    .card-body{display:none;padding:0 16px 16px;}
+    .card-body{display:none;padding:0 16px 16px;background:#060B14;border-top:1px solid rgba(255,255,255,.08);box-shadow:inset 0 14px 24px rgba(0,0,0,.34);}
     .card-body.open{display:block;}
 
     /* PATTERN TABS */
@@ -92,7 +96,7 @@
     .sub.priority-docs .sub-title{color:#BFD8FF;border-color:rgba(59,130,246,.32);background:rgba(59,130,246,.1);}
     .sub.priority-report .sub-title{color:#FFE0A3;border-color:rgba(214,168,79,.36);background:rgba(214,168,79,.11);}
     .sub.stamp-complete{position:relative;border-radius:14px;background:rgba(34,197,94,.045);box-shadow:inset 0 0 0 1px rgba(34,197,94,.14);padding:8px 8px 2px;}
-    .sub.stamp-complete::after{content:'完了';position:absolute;right:18px;top:50%;transform:translateY(-50%) rotate(-10deg);padding:8px 18px;border:3px double rgba(255,72,56,.88);border-radius:10px;color:#FF4B3E;background:rgba(55,10,8,.18);font-size:24px;font-weight:950;letter-spacing:4px;line-height:1;pointer-events:none;opacity:.9;box-shadow:0 8px 18px rgba(0,0,0,.18);text-shadow:1px 1px 0 rgba(80,0,0,.14);z-index:1;}
+    .sub.stamp-complete::after{content:'完了';position:absolute;right:18px;top:50%;transform:translateY(-50%) rotate(-10deg);padding:8px 18px;border:3px double rgba(55,214,122,.9);border-radius:10px;color:#7CFFAE;background:rgba(5,45,22,.24);font-size:24px;font-weight:950;letter-spacing:4px;line-height:1;pointer-events:none;opacity:.9;box-shadow:0 8px 18px rgba(0,0,0,.18),0 0 22px rgba(55,214,122,.12);text-shadow:1px 1px 0 rgba(0,70,25,.18);z-index:1;}
     .sub-title{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:950;color:#FFF1B8;letter-spacing:0;margin:18px 0 12px;padding:12px 13px;border:1px solid rgba(244,199,106,.58);border-left:6px solid var(--accent2);border-radius:10px;background:linear-gradient(90deg,rgba(244,199,106,.24),rgba(36,56,106,.2));box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 8px 18px rgba(0,0,0,.16);}
     .sub-title::before{content:'◆';font-size:10px;color:var(--accent2);line-height:1;flex-shrink:0;}
     .sub-help{margin:8px 0 10px;padding:9px 11px;border-radius:9px;background:rgba(244,199,106,.08);border:1px solid rgba(244,199,106,.2);color:#FFE3A3;font-size:11.5px;line-height:1.65;white-space:pre-line;overflow-wrap:anywhere;}
@@ -202,6 +206,18 @@
     .modal-close{background:var(--surface2);border:none;color:var(--text);width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
     .modal-body{overflow-y:auto;flex:1;padding:16px;-webkit-overflow-scrolling:touch;}
     .modal-footer{padding:12px 16px;border-top:1px solid var(--border);}
+    .alarm-sheet{border-color:rgba(255,107,94,.34);background:linear-gradient(180deg,#261013,#141A26);}
+    .alarm-sheet .modal-hdr{border-bottom-color:rgba(255,107,94,.24);}
+    .alarm-sheet .modal-title{color:#FFD2CC;}
+    .alarm-guide{padding:4px 0 2px;}
+    .alarm-guide-title{font-size:16px;font-weight:900;color:#FFD2CC;line-height:1.45;}
+    .alarm-guide-time{width:100%;margin:12px 0 4px;padding:16px;border-radius:12px;background:rgba(255,107,94,.16);border:1px solid rgba(255,107,94,.54);color:#FFB3AA;font-size:34px;font-weight:950;text-align:center;font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 22px rgba(255,107,94,.1);font-family:inherit;-webkit-appearance:none;appearance:none;}
+    .alarm-time-caption{margin-bottom:10px;text-align:center;font-size:11px;color:#FFE3DF;font-weight:850;}
+    .alarm-guide-text{font-size:13.5px;line-height:1.7;color:#EAF2FF;}
+    .alarm-guide-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px;}
+    .alarm-action{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:var(--surface2);color:var(--text);font-size:13px;font-weight:900;cursor:pointer;}
+    .alarm-action.primary{background:#FF6B5E;border-color:#FF6B5E;color:#210807;box-shadow:0 10px 22px rgba(255,107,94,.18);}
+    .alarm-close-btn{background:rgba(255,107,94,.16);border:1px solid rgba(255,107,94,.48);color:#FFD2CC;font-weight:950;}
 
     /* PATROL PATTERN TABS (3-way) */
     .patrol-tabs{display:flex;gap:6px;margin-bottom:14px;}
@@ -330,6 +346,32 @@
     <div class="modal-footer" style="display:flex;gap:8px;">
       <button class="btn btn-red" onclick="deleteNote()">削除</button>
       <button class="btn btn-pri" style="flex:2;" onclick="saveNote()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 目覚まし案内 Modal -->
+<div class="modal" id="alarmModal">
+  <div class="modal-bd" onclick="closeModal('alarmModal')"></div>
+  <div class="modal-sheet alarm-sheet" style="max-height:62vh;">
+    <div class="modal-handle"></div>
+    <div class="modal-hdr">
+      <span class="modal-title">⏰ 目覚ましセット</span>
+      <button class="modal-close" onclick="closeModal('alarmModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alarm-guide">
+        <div class="alarm-guide-title" id="alarmGuideTitle"></div>
+        <input class="alarm-guide-time" id="alarmGuideTime" type="time" onchange="updateAlarmTimeFromPicker()">
+        <div class="alarm-time-caption">タップして時刻変更</div>
+        <div class="alarm-guide-text" id="alarmGuideText">時刻をコピーしました。時計アプリでアラームを追加し、時刻欄へ貼り付けてください。</div>
+        <div class="alarm-guide-actions">
+          <button class="alarm-action primary" id="alarmShortcutBtn" onclick="runAlarmShortcut()">ショートカットで作成</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn alarm-close-btn" style="width:100%;padding:13px;" onclick="closeModal('alarmModal')">セットしたので閉じる</button>
     </div>
   </div>
 </div>
@@ -510,7 +552,7 @@ const DEFAULT_SECTIONS = [
       {id:'no_l2',type:'label',text:'📦 在庫管理について'},
       {id:'no5',text:'用紙が少ないとき',icon:'📄',hint:'会社へLINEで連絡する\n他の人と連絡が被ってもOK'},
       {id:'no6',text:'打刻紙の残量',icon:'⏱️',hint:'残り1箱になったら報告する'},
-      {id:'no7',text:'備品の残量確認',icon:'🧴',hint:'のりなどの備品も残量を確認する'},
+      {id:'no7',text:'備品の残量確認',icon:'🧴',hint:'のり、電池、修正テープ、セロハンテープ、ホッチキスの針、シャーペンの芯、ボールペン（赤、黒）の残量を確認する'},
       {id:'no8',text:'紙を補充したとき',icon:'🗂️',hint:'持ってきた紙はパンチしてから収納する'},
       {id:'no_l3',type:'label',text:'🗑️ ごみについて'},
       {id:'no9',text:'捨ててよいゴミ',icon:'🗑️',hint:'仕事で出た紙類のみ捨ててよい'},
@@ -522,7 +564,7 @@ const DEFAULT_SECTIONS = [
     ]
   },
   {
-    id:'patrol1',icon:'🔵',title:'1回目の巡回',time:'18:00',type:'simple',expanded:false,
+    id:'patrol1',icon:'🔵',title:'1回目の巡回',time:'18:00',type:'simple',expanded:false,alarmTime:'17:59',
     subsections:[
       {id:'p1_bag',title:'〔持ち物〕',grid:true,hint:'入口看板：休日は設置済みなら不要。\n入口U字錠：警備室に回収されているときだけ持参。',items:[
         {id:'p1b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
@@ -537,7 +579,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p1_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p1d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p1d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p1d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p1d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p1d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -548,7 +590,7 @@ const DEFAULT_SECTIONS = [
     ]
   },
   {
-    id:'patrol2',icon:'🔵',title:'2回目の巡回',time:'20:00',type:'simple',expanded:false,
+    id:'patrol2',icon:'🔵',title:'2回目の巡回',time:'20:00',type:'simple',expanded:false,alarmTime:'19:59',
     subsections:[
       {id:'p2_bag',title:'〔持ち物〕',grid:true,items:[
         {id:'p2b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
@@ -561,7 +603,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p2_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p2d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p2d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p2d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p2d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p2d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -572,7 +614,7 @@ const DEFAULT_SECTIONS = [
     ]
   },
   {
-    id:'patrol3',icon:'🔵',title:'3回目の巡回',time:'23:00',type:'simple',expanded:false,
+    id:'patrol3',icon:'🔵',title:'3回目の巡回',time:'23:00',type:'simple',expanded:false,alarmTime:'22:59',
     subsections:[
       {id:'p3_bag',title:'〔持ち物〕',grid:true,items:[
         {id:'p3b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
@@ -585,7 +627,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p3_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p3d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p3d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p3d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p3d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p3d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -596,7 +638,7 @@ const DEFAULT_SECTIONS = [
     ]
   },
   {
-    id:'patrol4',icon:'⏰',title:'4回目の巡回',time:'1:30',type:'simple',expanded:false,
+    id:'patrol4',icon:'⏰',title:'4回目の巡回',time:'1:30',type:'simple',expanded:false,alarmTime:'1:29',
     subsections:[
       {id:'p4_bag',title:'〔持ち物〕',grid:true,items:[
         {id:'p4b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
@@ -609,7 +651,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p4_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p4d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p4d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p4d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p4d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p4d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -620,7 +662,7 @@ const DEFAULT_SECTIONS = [
     ]
   },
   {
-    id:'patrol5',icon:'⏰',title:'5回目の巡回',time:'3:30',type:'simple',expanded:false,
+    id:'patrol5',icon:'⏰',title:'5回目の巡回',time:'3:30',type:'simple',expanded:false,alarmTime:'3:29',
     subsections:[
       {id:'p5_bag',title:'〔持ち物〕',grid:true,items:[
         {id:'p5b1',text:'マスターキー2本',icon:'🗝️',equipment:true},
@@ -633,7 +675,7 @@ const DEFAULT_SECTIONS = [
       ]},
       {id:'p5_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
         {id:'p5d1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-        {id:'p5d2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+        {id:'p5d2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
         {id:'p5d3',text:'警備室で打刻する',icon:'⏱️'},
         {id:'p5d4',text:'警備室の鍵を閉める',icon:'🔒'},
       ]},
@@ -644,7 +686,7 @@ const DEFAULT_SECTIONS = [
     ]
   },
   {
-    id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:30 / 5:20（従業員が入口で待つため早め）',type:'pattern',expanded:false,
+    id:'patrol6',icon:'🌅',title:'6回目の巡回',time:'5:30 / 5:20（従業員が入口で待つため早め）',type:'pattern',expanded:false,alarmTime:'5:19',
     selectedPattern:'weekday',
     holiday:{
       subsections:[
@@ -659,7 +701,7 @@ const DEFAULT_SECTIONS = [
         ]},
         {id:'p6h_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
           {id:'p6hd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p6hd2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6hd2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
           {id:'p6hd3',text:'警備室で打刻する',icon:'⏱️'},
           {id:'p6hd4',text:'警備室の鍵を閉める',icon:'🔒'},
         ]},
@@ -696,7 +738,7 @@ const DEFAULT_SECTIONS = [
         ]},
         {id:'p6w_do',title:'〔巡回前にやること〕',hasPatrolList:true,items:[
           {id:'p6wd1',text:'ピッチ転送',icon:'📞',hint:'受話器をあげる・不在転送を押す・「307」をダイヤル。「完了」を確認。'},
-          {id:'p6wd2',text:'FAX転送',icon:'📠',hint:'転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
+          {id:'p6wd2',text:'FAX転送',icon:'📠',hint:'受話器をあげる・転送ボタンを押す・「280」をダイヤル。「完了」を確認。'},
           {id:'p6wd3',text:'警備室で打刻する',icon:'⏱️'},
           {id:'p6wd4',text:'警備室の鍵を閉める',icon:'🔒'},
         ]},
@@ -738,14 +780,15 @@ const DEFAULT_SECTIONS = [
 // STATE
 // ═══════════════════════════════════════
 
-let S = {sections:[],patrol:[],patrolByPattern:{},patrolNotes:{},patrolPattern:'',kicha:[]};
+let S = {sections:[],patrol:[],patrolByPattern:{},patrolNotes:{},patrolPattern:'',kicha:[],alarms:{},alarmTimes:{}};
 let noteTarget = null;
 let editMode = false;
 let dragItemId = null;
 let pointerDragItemId = null;
 let shareFiles = {};
+let currentAlarmSection = null;
 const PITCH_STEPS = ['受話器をあげる','不在転送を押す','「307」をダイヤル','「完了」を確認'];
-const FAX_STEPS = ['転送ボタンを押す','「280」をダイヤル','「完了」を確認'];
+const FAX_STEPS = ['受話器をあげる','転送ボタンを押す','「280」をダイヤル','「完了」を確認'];
 
 function loadState(){
   try{
@@ -759,6 +802,8 @@ function migrate(){
   if(!S.kicha) S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
   if(!S.patrolNotes) S.patrolNotes = {};
   if(S.patrolPattern===undefined) S.patrolPattern = '';
+  if(!S.alarms) S.alarms = {};
+  if(!S.alarmTimes) S.alarmTimes = {};
   if(!S.sections) initDefault();
   S.kicha = syncDefaultList(S.kicha, DEFAULT_KICHA);
   S.patrol = syncDefaultList(S.patrol, DEFAULT_PATROL);
@@ -771,6 +816,8 @@ function initDefault(){
   S.patrolByPattern = syncPatrolPatterns({}, S.patrol);
   S.patrolNotes = {};
   S.patrolPattern = '';
+  S.alarms = {};
+  S.alarmTimes = {};
   S.kicha = DEFAULT_KICHA.map(i=>({...i,checked:false}));
   S.sections = DEFAULT_SECTIONS.map(deepClone);
   addChecked(S.sections);
@@ -825,6 +872,8 @@ function syncSimpleSectionFromDefault(sectionId){
     if(defaults[k]!==undefined) current[k]=defaults[k];
     else delete current[k];
   });
+  if(defaults.alarmTime!==undefined) current.alarmTime=defaults.alarmTime;
+  else delete current.alarmTime;
   delete current.holiday;
   delete current.weekday;
   delete current.selectedPattern;
@@ -836,6 +885,8 @@ function syncPatternSectionFromDefault(sectionId){
   const current = S.sections.find(s=>s.id===sectionId);
   const defaults = DEFAULT_SECTIONS.find(s=>s.id===sectionId);
   if(!current || !defaults) return;
+  if(defaults.alarmTime!==undefined) current.alarmTime=defaults.alarmTime;
+  else delete current.alarmTime;
   ['holiday','weekday'].forEach(p=>{
     if(current[p] && defaults[p]){
       current[p].subsections = syncSubsections(current[p].subsections, defaults[p].subsections);
@@ -1009,7 +1060,7 @@ function renderCard(sec){
   const pct=total>0?Math.round(done/total*100):0;
   const isDone=total>0&&done===total;
   return `
-    <div class="card${isDone?' complete':''}${sec.id==='notes'?' notes-card':''}" id="card-${sec.id}">
+    <div class="card${isDone?' complete':''}${sec.expanded?' expanded':''}${sec.id==='notes'?' notes-card':''}" id="card-${sec.id}">
       <div class="card-hdr" onclick="toggleCard('${sec.id}')">
         <span class="card-icon">${sec.icon}</span>
         <div class="card-info">
@@ -1017,6 +1068,7 @@ function renderCard(sec){
           <div class="card-time">${sec.time}</div>
         </div>
         <div class="card-right">
+          ${renderAlarmControl(sec)}
           <span class="card-prog${isDone?' done':''}">${done}/${total}</span>
           <span class="chevron${sec.expanded?' open':''}">▾</span>
         </div>
@@ -1026,6 +1078,17 @@ function renderCard(sec){
         ${renderBody(sec)}
       </div>
     </div>`;
+}
+
+function renderAlarmControl(sec){
+  const alarmTime=getAlarmTime(sec);
+  if(!alarmTime) return '';
+  const isSet=!!S.alarms?.[sec.id];
+  return `<button class="alarm-pill${isSet?' set':''}" title="${sec.title} ${alarmTime}" onclick="toggleAlarm('${sec.id}');event.stopPropagation()">⏰ <span>${isSet?'✓ ':''}${alarmTime}</span></button>`;
+}
+
+function getAlarmTime(sec){
+  return S.alarmTimes?.[sec.id] || sec.alarmTime || '';
 }
 
 function renderSubs(subs,secId,sectionComplete=false){
@@ -1162,6 +1225,106 @@ function toggleCard(id){
 function setPat(id,pat){
   const s=S.sections.find(x=>x.id===id);
   if(s){s.selectedPattern=pat;render();}
+}
+
+function toggleAlarm(id){
+  const s=S.sections.find(x=>x.id===id);
+  const alarmTime=s ? getAlarmTime(s) : '';
+  if(!alarmTime) return;
+  if(!S.alarms) S.alarms = {};
+  if(S.alarms[id]){
+    delete S.alarms[id];
+    render();
+    toast(`${s.title}の目覚ましを解除しました`);
+  }else{
+    S.alarms[id] = {time:alarmTime,setAt:new Date().toISOString()};
+    render();
+    openAlarmGuide(s);
+  }
+}
+
+function openAlarmGuide(sec){
+  currentAlarmSection = sec;
+  const alarmTime=getAlarmTime(sec);
+  document.getElementById('alarmGuideTitle').textContent=`${sec.title}の目覚まし`;
+  document.getElementById('alarmGuideTime').value=toTimeInputValue(alarmTime);
+  document.getElementById('alarmGuideText').textContent='時刻をコピーしました。ショートカットで新しいアラームを作成します。時刻を変える場合は、上の時刻をタップしてください。';
+  copyText(alarmTime);
+  openModal('alarmModal');
+}
+
+function copyAlarmTime(){
+  if(!currentAlarmSection) return;
+  const alarmTime=getAlarmTime(currentAlarmSection);
+  copyText(alarmTime);
+  toast(`${alarmTime} をコピーしました`);
+}
+
+function copyText(text){
+  try{
+    if(navigator.clipboard?.writeText){
+      navigator.clipboard.writeText(text);
+      return;
+    }
+  }catch(e){}
+  try{
+    const ta=document.createElement('textarea');
+    ta.value=text;
+    ta.setAttribute('readonly','');
+    ta.style.position='fixed';
+    ta.style.left='-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }catch(e){}
+}
+
+function runAlarmShortcut(){
+  if(!currentAlarmSection) return;
+  const alarmTime=getAlarmTime(currentAlarmSection);
+  copyText(alarmTime);
+  const text=encodeURIComponent(alarmTime);
+  location.href=`shortcuts://run-shortcut?name=${encodeURIComponent('警備アラーム')}&input=text&text=${text}`;
+}
+
+function updateAlarmTimeFromPicker(){
+  if(!currentAlarmSection) return;
+  const next=document.getElementById('alarmGuideTime').value;
+  const normalized=normalizeAlarmTime(next);
+  if(!normalized){
+    toast('時刻を選び直してください');
+    return;
+  }
+  if(!S.alarmTimes) S.alarmTimes = {};
+  S.alarmTimes[currentAlarmSection.id]=normalized;
+  if(S.alarms?.[currentAlarmSection.id]) S.alarms[currentAlarmSection.id].time=normalized;
+  render();
+  openAlarmGuide(currentAlarmSection);
+  toast(`${normalized} に変更しました`);
+}
+
+function editAlarmTime(){
+  const input=document.getElementById('alarmGuideTime');
+  if(!input) return;
+  if(input.showPicker) input.showPicker();
+  else input.focus();
+}
+
+function normalizeAlarmTime(value){
+  const s=String(value).trim().replace(/[：．。]/g,':');
+  const m=s.match(/^(\d{1,2}):(\d{1,2})$/);
+  if(!m) return '';
+  const h=Number(m[1]), min=Number(m[2]);
+  if(!Number.isInteger(h) || !Number.isInteger(min) || h<0 || h>23 || min<0 || min>59) return '';
+  return `${h}:${String(min).padStart(2,'0')}`;
+}
+
+function toTimeInputValue(value){
+  const normalized=normalizeAlarmTime(value);
+  if(!normalized) return '';
+  const [h,m]=normalized.split(':');
+  return `${String(Number(h)).padStart(2,'0')}:${m}`;
 }
 
 function closeSection(id){
@@ -1314,6 +1477,7 @@ function uncheckAllItems(){
   S.patrol?.forEach(i=>{if(i.checked!==undefined)i.checked=false;});
   Object.values(S.patrolByPattern||{}).forEach(list=>list.forEach(i=>{if(i.checked!==undefined)i.checked=false;}));
   S.patrolPattern='';
+  S.alarms={};
 }
 
 function addItem(sectionId){
