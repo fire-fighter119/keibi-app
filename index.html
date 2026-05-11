@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-title" content="警備チェック">
   <meta name="theme-color" content="#070B13">
   <title>警備チェック</title>
-  <link rel="manifest" href="manifest.json?v=15">
+  <link rel="manifest" href="manifest.json?v=16">
   <link rel="apple-touch-icon" href="icon.png">
   <style>
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -115,9 +115,9 @@
     .item-label{font-size:14.5px;line-height:1.55;transition:color .15s;overflow-wrap:anywhere;word-break:break-word;}
     .item-label.chk{color:#B9C8DB;text-decoration:line-through;}
     .item-hint{font-size:12px;color:#FFE0A3;padding-top:5px;padding-left:2px;line-height:1.55;}
-    .steps{display:flex;flex-direction:column;gap:6px;margin-top:8px;padding:9px 10px;background:rgba(255,209,102,.12);border:1px solid rgba(255,209,102,.42);border-radius:10px;}
-    .step{display:flex;align-items:flex-start;gap:7px;max-width:100%;color:#FFE8B8;font-size:12px;font-weight:750;line-height:1.45;white-space:normal;overflow-wrap:anywhere;}
-    .step-num{width:18px;height:18px;border-radius:50%;background:rgba(242,169,59,.22);border:1px solid rgba(242,169,59,.28);color:#FFE08A;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;flex-shrink:0;margin-top:1px;}
+    .steps-hint{display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap;margin-top:7px;}
+    .steps{display:inline-flex;flex-wrap:wrap;gap:5px;min-width:0;flex:1;}
+    .step{display:inline-flex;align-items:center;max-width:100%;padding:5px 8px;border-radius:999px;background:rgba(242,169,59,.1);border:1px solid rgba(242,169,59,.22);color:#FFD58E;font-size:11px;font-weight:850;line-height:1.2;white-space:normal;overflow-wrap:anywhere;}
     .item-note-btn{background:none;border:none;color:var(--text2);font-size:16px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.6;margin-top:-2px;}
     .item-note-btn.has-note{opacity:1;color:var(--orange);}
     .item-del{order:4;background:none;border:none;color:var(--red);font-size:20px;padding:4px;cursor:pointer;flex-shrink:0;opacity:.7;margin-top:-3px;line-height:1;}
@@ -1613,9 +1613,9 @@ function isPunchStep(text){
 function renderHint(item){
   if(!item.hint) return '';
   if(item.steps){
-    return `<div class="steps">${item.steps.map((s,idx)=>`
-      <div class="step"><span class="step-num">${idx+1}</span><span>${s}</span></div>
-    `).join('')}</div>`;
+    return `<div class="item-hint steps-hint"><span>💬</span><span class="steps">${item.steps.map(s=>`
+      <span class="step">${s}</span>
+    `).join('')}</span></div>`;
   }
   return item.hint.split('\n').map(h=>`<div class="item-hint">💬 ${h}</div>`).join('');
 }
@@ -1705,7 +1705,7 @@ function toast(msg){
 loadState();
 render();
 setInterval(()=>document.getElementById('hdrDate').textContent=dateStr(),60000);
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js?v=15').catch(()=>{});
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js?v=16').catch(()=>{});
 </script>
 </body>
 </html>
