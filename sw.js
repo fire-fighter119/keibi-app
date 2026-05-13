@@ -1,5 +1,5 @@
-const CACHE = 'keibi-v16';
-const FILES = ['./index.html?v=16', './manifest.json?v=16', './icon.png', './icon.svg'];
+const CACHE = 'keibi-v20';
+const FILES = ['./index.html?v=20', './manifest.json?v=20', './icon.png', './icon.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));

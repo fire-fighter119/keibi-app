@@ -2,10 +2,10 @@
   "name": "警備チェック",
   "short_name": "警備",
   "description": "警備シフト管理アプリ",
-  "start_url": "./index.html?v=16",
+  "start_url": "./index.html?v=20",
   "display": "standalone",
-  "background_color": "#070B13",
-  "theme_color": "#070B13",
+  "background_color": "#07111F",
+  "theme_color": "#07111F",
   "orientation": "portrait-primary",
   "icons": [
     {
